@@ -12,7 +12,7 @@ const TimerHeader = () => {
   const { data: scramble, isLoading } = useQuery(['scramble'], fetchScramble);
 
   return (
-    <header className="py-8 px-4 font-semibold text-slate-800 border-b flex items-center justify-center text-center md:text-lg">
+    <header className="py-8 px-4 font-semibold text-slate-800 border-b flex items-center justify-center text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
       {!isLoading ? scramble?.toString() : <p>Generating Scramble...</p>}
     </header>
   );

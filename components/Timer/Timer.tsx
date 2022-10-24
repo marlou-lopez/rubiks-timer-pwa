@@ -1,8 +1,9 @@
-import { useReducer, useState } from 'react';
+import { useMemo, useReducer, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import useTestLongPress from '../../hooks/useTestLongPress';
 import TimerHeader from './TimerHeader';
 import { StopwatchReducer } from './timerReducer';
+import { formatTime, getLatestAverageFromTimeStamps } from './timerUtils';
 
 const Timer = () => {
   const queryClient = useQueryClient();
@@ -14,6 +15,8 @@ const Timer = () => {
   const [swInterval, setSwInterval] = useState<NodeJS.Timeout | null>(null);
   const [isKeyPress, setIsKeyPress] = useState(false);
   const [isLongPress, setIsLongPress] = useState(false);
+  // To be move to persistent storage
+  const [times, setTimes] = useState<number[]>([]);
 
   // Temporary: To disable context menu for testing hold event
   // useEffect(() => {
@@ -36,6 +39,7 @@ const Timer = () => {
         if (state.currentTime > 0 && state.running) {
           setIsKeyPress(false);
           dispatch({ type: 'stop' });
+          setTimes([...times, state.currentTime]);
           await queryClient.refetchQueries(['scramble']);
           if (swInterval) {
             clearInterval(swInterval);
@@ -58,18 +62,6 @@ const Timer = () => {
     },
   });
 
-  const time = (t: number) => {
-    const date = new Date(t);
-    const minutes = date.getMinutes();
-    const seconds = date.getSeconds();
-    const milli = date.getMilliseconds();
-    return {
-      minutes,
-      seconds,
-      milli,
-    };
-  };
-
   let bg;
 
   if (isLongPress && isKeyPress) {
@@ -79,23 +71,47 @@ const Timer = () => {
   } else {
     bg = 'bg-gray-50';
   }
+
+  const averageOfFive = useMemo(() => {
+    if (times.length >= 5) {
+      const result = getLatestAverageFromTimeStamps(times, 5);
+      return result;
+    }
+    return 0;
+  }, [times]);
+
+  const averageOfTwelve = useMemo(() => {
+    if (times.length >= 12) {
+      const result = getLatestAverageFromTimeStamps(times, 12);
+      return result;
+    }
+    return 0;
+  }, [times]);
+
   return (
     <main className="flex flex-col justify-center flex-grow">
       {!state.running && <TimerHeader />}
       <div
         {...longPressEvent}
-        className={`h-full w-full md:text-9xl 
-         flex items-center justify-center text-7xl font-semibold touch-none select-none
+        className={`h-full w-full 
+         flex items-center justify-center flex-col touch-none select-none
          ${bg}
          `}
         tabIndex={0}
       >
-        {time(state.currentTime).minutes >= 1
-          ? `${time(state.currentTime).minutes.toString().padStart(2, '0')}:`
-          : null}
-        {time(state.currentTime).seconds.toString()}
-        {!state.running &&
-          `.${time(state.currentTime).milli.toString().padStart(2, '0')}`}
+        <h1 className="md:text-9xl text-7xl font-semibold">
+          {formatTime(state.currentTime, { showMs: !state.running })}
+        </h1>
+        {!state.running && (
+          <h2 className="md:text-7xl text-3xl font-light">
+            Ao5: {averageOfFive > 0 ? formatTime(averageOfFive) : '-'}
+          </h2>
+        )}
+        {!state.running && (
+          <h2 className="md:text-7xl text-3xl font-light">
+            Ao12: {averageOfTwelve > 0 ? formatTime(averageOfTwelve) : '-'}
+          </h2>
+        )}
       </div>
     </main>
   );
