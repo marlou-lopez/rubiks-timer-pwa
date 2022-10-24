@@ -12,7 +12,7 @@ type TestLongPressProps = {
 
 const useTestLongPress = ({
   pressHandlers,
-  delay = 500,
+  delay = 300,
 }: TestLongPressProps) => {
   const { onHold, onRelease, onTap } = pressHandlers;
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
