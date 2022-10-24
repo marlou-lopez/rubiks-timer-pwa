@@ -49,12 +49,13 @@ export default function useLongPress<T>(
           setShouldHandleKeydown(false);
         }
         if (shouldPreventDefault && e.target) {
+          console.log('if');
           e.target.addEventListener('touchend', preventDefault, {
             passive: false,
           });
           target.current = e.target;
         }
-
+        console.log('start');
         timeout.current = setTimeout(() => {
           onLongPress(clonedEvent);
           setLongPressTriggered(true);
@@ -74,7 +75,6 @@ export default function useLongPress<T>(
         // button 0 = Left click
         (e as React.MouseEvent<T>).button === 0
       ) {
-        console.log('clieck');
         if (e.type === 'keyup' || e.type === 'mouseup') {
           setShouldHandleKeydown(true);
           onUp?.({ ...e } as React.KeyboardEvent<T>);
