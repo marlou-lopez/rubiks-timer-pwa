@@ -1,9 +1,15 @@
 import { useMemo, useReducer, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import useTestLongPress from '../../hooks/useTestLongPress';
+import { db } from '../../lib/db';
 import TimerHeader from './TimerHeader';
 import { StopwatchReducer } from './timerReducer';
 import { formatTime, getLatestAverageFromTimeStamps } from './timerUtils';
+
+type Solve = {
+  time: number;
+  scramble: string;
+};
 
 const Timer = () => {
   const queryClient = useQueryClient();
@@ -16,18 +22,8 @@ const Timer = () => {
   const [isKeyPress, setIsKeyPress] = useState(false);
   const [isLongPress, setIsLongPress] = useState(false);
   // To be move to persistent storage
-  const [times, setTimes] = useState<number[]>([]);
+  const [solves, setSolves] = useState<Solve[]>([]);
 
-  // Temporary: To disable context menu for testing hold event
-  // useEffect(() => {
-  //   window.addEventListener(
-  //     'contextmenu',
-  //     (event) => {
-  //       event?.preventDefault();
-  //     },
-  //     true
-  //   );
-  // }, []);
   const longPressEvent = useTestLongPress({
     pressHandlers: {
       onHold: () => {
@@ -39,7 +35,20 @@ const Timer = () => {
         if (state.currentTime > 0 && state.running) {
           setIsKeyPress(false);
           dispatch({ type: 'stop' });
-          setTimes([...times, state.currentTime]);
+          const currentScramble = queryClient.getQueryData<string>([
+            'scramble',
+          ]);
+          await db.solves.add({
+            time: state.currentTime,
+            scramble: currentScramble!,
+          });
+          setSolves([
+            ...solves,
+            {
+              time: state.currentTime,
+              scramble: currentScramble!,
+            },
+          ]);
           await queryClient.refetchQueries(['scramble']);
           if (swInterval) {
             clearInterval(swInterval);
@@ -73,20 +82,26 @@ const Timer = () => {
   }
 
   const averageOfFive = useMemo(() => {
-    if (times.length >= 5) {
-      const result = getLatestAverageFromTimeStamps(times, 5);
+    if (solves.length >= 5) {
+      const result = getLatestAverageFromTimeStamps(
+        solves.map((t) => t.time),
+        5
+      );
       return result;
     }
     return 0;
-  }, [times]);
+  }, [solves]);
 
   const averageOfTwelve = useMemo(() => {
-    if (times.length >= 12) {
-      const result = getLatestAverageFromTimeStamps(times, 12);
+    if (solves.length >= 12) {
+      const result = getLatestAverageFromTimeStamps(
+        solves.map((t) => t.time),
+        12
+      );
       return result;
     }
     return 0;
-  }, [times]);
+  }, [solves]);
 
   return (
     <main className="flex flex-col justify-center flex-grow">
