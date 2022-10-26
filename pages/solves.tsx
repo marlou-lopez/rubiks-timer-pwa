@@ -28,6 +28,9 @@ const Solves = () => {
             <ArrowLeftIcon className="h-6 w-6 text-center cursor-pointer" />
           </Link>
           <h1 className="font-bold text-3xl">Solves</h1>
+          <Link href={'/test'}>
+            <a>test</a>
+          </Link>
         </div>
         {!isSolvesEmpty && (
           <div className="py-2 w-full container mx-auto flex justify-end">
