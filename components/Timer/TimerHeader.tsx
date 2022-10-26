@@ -12,7 +12,6 @@ const fetchScramble = async () => {
 const TimerHeader = () => {
   const { data: scramble, isLoading } = useQuery(['scramble'], fetchScramble);
 
-  console.log(scramble);
   return (
     <>
       <header className="py-8 px-4 font-semibold text-slate-800 flex items-center justify-center text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">

@@ -22,17 +22,17 @@ const Solves = () => {
 
   return (
     <div className="h-screen w-screen flex flex-col">
-      {/* TODO: Make the header fixed. */}
-      <header className="py-6 px-4 flex items-center gap-2">
-        <Link href={'/'} className="flex items-center">
-          <ArrowLeftIcon className="h-6 w-6 text-center" />
-        </Link>
-        <h1 className="font-bold text-3xl">Solves</h1>
-      </header>
-      <main className="px-4 py-2 flex-grow">
+      <header className="fixed top-0 w-full px-4 bg-white">
+        <div className="py-6 flex items-center gap-2">
+          <Link href={'/'} className="flex items-center ">
+            <ArrowLeftIcon className="h-6 w-6 text-center cursor-pointer" />
+          </Link>
+          <h1 className="font-bold text-3xl">Solves</h1>
+        </div>
         {!isSolvesEmpty && (
-          <div className="mb-2 py-1 flex justify-end">
+          <div className="py-2 w-full container mx-auto flex justify-end">
             <button
+              type="button"
               onClick={handleDeleteAll}
               className="uppercase text-gray-600 font-semibold text-xs"
             >
@@ -40,6 +40,8 @@ const Solves = () => {
             </button>
           </div>
         )}
+      </header>
+      <main className="px-4 py-2 mt-28 flex-grow md:container md:mx-auto flex flex-col">
         {!isSolvesEmpty ? (
           <ul>
             {solves.map((solve) => {

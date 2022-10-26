@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 type PressHandlers = {
   onHold: (event: React.KeyboardEvent | React.TouchEvent) => void;
