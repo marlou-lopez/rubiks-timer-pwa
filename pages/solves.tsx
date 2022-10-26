@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { formatTime } from '../components/Timer/timerUtils';
 import { db } from '../lib/db';
+
 const Solves = () => {
   const solves = useLiveQuery(() => db.solves.toArray());
 

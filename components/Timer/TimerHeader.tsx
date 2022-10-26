@@ -25,7 +25,7 @@ const TimerHeader = () => {
           </a>
         </Link>
         <Link href={'/stats'}>
-          <a className="bg-gray-300 text-white p-3 font-semibold w-1/2 text-center pointer-events-none">
+          <a className="bg-gray-900 text-white p-3 font-semibold w-1/2 text-center pointer-events-none">
             Statistics (TBD)
           </a>
         </Link>

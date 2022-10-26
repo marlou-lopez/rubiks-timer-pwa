@@ -1,15 +1,12 @@
-import { useMemo, useReducer, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { useReducer, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import useTestLongPress from '../../hooks/useTestLongPress';
 import { db } from '../../lib/db';
 import TimerHeader from './TimerHeader';
 import { StopwatchReducer } from './timerReducer';
-import { formatTime, getLatestAverageFromTimeStamps } from './timerUtils';
-
-type Solve = {
-  time: number;
-  scramble: string;
-};
+import TimerStatPreview from './TimerStatPreview';
+import { formatTime } from './timerUtils';
 
 const Timer = () => {
   const queryClient = useQueryClient();
@@ -22,7 +19,7 @@ const Timer = () => {
   const [isKeyPress, setIsKeyPress] = useState(false);
   const [isLongPress, setIsLongPress] = useState(false);
   // To be move to persistent storage
-  const [solves, setSolves] = useState<Solve[]>([]);
+  // const [solves, setSolves] = useState<Solve[]>([]);
 
   const longPressEvent = useTestLongPress({
     pressHandlers: {
@@ -42,13 +39,6 @@ const Timer = () => {
             time: state.currentTime,
             scramble: currentScramble!,
           });
-          setSolves([
-            ...solves,
-            {
-              time: state.currentTime,
-              scramble: currentScramble!,
-            },
-          ]);
           await queryClient.refetchQueries(['scramble']);
           if (swInterval) {
             clearInterval(swInterval);
@@ -81,28 +71,6 @@ const Timer = () => {
     bg = 'bg-gray-50';
   }
 
-  const averageOfFive = useMemo(() => {
-    if (solves.length >= 5) {
-      const result = getLatestAverageFromTimeStamps(
-        solves.map((t) => t.time),
-        5
-      );
-      return result;
-    }
-    return 0;
-  }, [solves]);
-
-  const averageOfTwelve = useMemo(() => {
-    if (solves.length >= 12) {
-      const result = getLatestAverageFromTimeStamps(
-        solves.map((t) => t.time),
-        12
-      );
-      return result;
-    }
-    return 0;
-  }, [solves]);
-
   return (
     <main className="flex flex-col justify-center flex-grow">
       {!state.running && <TimerHeader />}
@@ -117,19 +85,10 @@ const Timer = () => {
         <h1 className="md:text-9xl text-7xl font-semibold">
           {formatTime(state.currentTime, { showMs: !state.running })}
         </h1>
-        {!state.running && (
-          <h2 className="md:text-7xl text-3xl font-light">
-            Ao5: {averageOfFive > 0 ? formatTime(averageOfFive) : '-'}
-          </h2>
-        )}
-        {!state.running && (
-          <h2 className="md:text-7xl text-3xl font-light">
-            Ao12: {averageOfTwelve > 0 ? formatTime(averageOfTwelve) : '-'}
-          </h2>
-        )}
+        {!state.running && <TimerStatPreview />}
       </div>
     </main>
   );
 };
 
-export default Timer;
+export default dynamic(() => Promise.resolve(Timer), { ssr: false });
