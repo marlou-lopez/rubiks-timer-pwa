@@ -2,6 +2,17 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactElement, ReactNode } from 'react';
+import { NextPage } from 'next';
+import { ThemeProvider } from 'next-themes';
+
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -11,7 +22,8 @@ const queryClient = new QueryClient({
   },
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <>
       <Head>
@@ -21,7 +33,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        <ThemeProvider attribute="class" forcedTheme="dark">
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
       </QueryClientProvider>
     </>
   );

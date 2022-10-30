@@ -1,3 +1,4 @@
+import { useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { useReducer, useState } from 'react';
 import { useQueryClient } from 'react-query';
@@ -9,6 +10,7 @@ import TimerStatPreview from './TimerStatPreview';
 import { formatTime } from './timerUtils';
 
 const Timer = () => {
+  const { theme } = useTheme();
   const queryClient = useQueryClient();
   const [state, dispatch] = useReducer(StopwatchReducer, {
     running: false,
@@ -61,15 +63,8 @@ const Timer = () => {
     },
   });
 
-  let bg;
-
-  if (isLongPress && isKeyPress) {
-    bg = 'bg-green-400';
-  } else if (isKeyPress && !isLongPress && !state.running) {
-    bg = 'bg-red-400';
-  } else {
-    bg = 'bg-gray-50';
-  }
+  const isTimerReady = isLongPress && isKeyPress;
+  const isTimerPressed = isKeyPress && !isLongPress && !state.running;
 
   return (
     <main className="flex flex-col justify-center flex-grow">
@@ -78,11 +73,17 @@ const Timer = () => {
         {...longPressEvent}
         className={`h-full w-full 
          flex items-center justify-center flex-col touch-none select-none
-         ${bg}
+         ${
+           isTimerReady
+             ? 'bg-green-400 dark:bg-green-500'
+             : isTimerPressed
+             ? 'bg-red-400 dark:bg-red-500'
+             : 'bg-white dark:bg-black'
+         }
          `}
         tabIndex={0}
       >
-        <h1 className="md:text-9xl text-7xl font-semibold">
+        <h1 className="md:text-9xl text-7xl font-semibold dark:text-white text-black">
           {formatTime(state.currentTime, { showMs: !state.running })}
         </h1>
         {!state.running && <TimerStatPreview />}

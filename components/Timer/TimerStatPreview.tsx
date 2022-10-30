@@ -29,11 +29,11 @@ const TimerStatPreview = () => {
   }, [solves]);
 
   return (
-    <div className="py-2">
-      <h2 className="md:text-7xl text-3xl font-light">
+    <div className="flex justify-center flex-col items-center py-2">
+      <h2 className="md:text-5xl sm:text-3xl text-2xl font-light">
         Ao5: {averageOfFive > 0 ? formatTime(averageOfFive) : '-'}
       </h2>
-      <h2 className="md:text-7xl text-3xl font-light">
+      <h2 className="md:text-5xl sm:text-3xl text-2xl font-light">
         Ao12: {averageOfTwelve > 0 ? formatTime(averageOfTwelve) : '-'}
       </h2>
     </div>

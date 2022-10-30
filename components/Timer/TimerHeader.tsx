@@ -10,26 +10,27 @@ const fetchScramble = async () => {
 };
 
 const TimerHeader = () => {
-  const { data: scramble, isLoading } = useQuery(['scramble'], fetchScramble);
+  const {
+    data: scramble,
+    isLoading,
+    refetch,
+  } = useQuery(['scramble'], fetchScramble);
 
   return (
-    <>
-      <header className="py-8 px-4 font-semibold text-slate-800 flex items-center justify-center text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
-        {!isLoading ? scramble : <p>Generating Scramble...</p>}
-      </header>
-      <section className="flex border-b flex-grow">
-        <Link href={'/solves'}>
-          <a className="bg-gray-900 text-white p-3 font-semibold text-center w-1/2">
-            Solves
-          </a>
-        </Link>
-        <Link href={'/stats'}>
-          <a className="bg-gray-900 text-white p-3 font-semibold w-1/2 text-center pointer-events-none">
-            Statistics (TBD)
-          </a>
-        </Link>
-      </section>
-    </>
+    <header className="fixed w-full top-0 text-black dark:text-white py-8 px-4 font-semibold flex items-center justify-center text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
+      {!isLoading ? (
+        <button
+          //  Add tooltip component(?)
+          title="Click to generate new scramble."
+          onClick={() => refetch()}
+          type={'button'}
+        >
+          {scramble}
+        </button>
+      ) : (
+        <p>Generating Scramble...</p>
+      )}
+    </header>
   );
 };
 
