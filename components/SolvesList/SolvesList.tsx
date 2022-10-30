@@ -1,17 +1,14 @@
-import { XMarkIcon } from '@heroicons/react/20/solid';
-import { useLiveQuery } from 'dexie-react-hooks';
+import { useQuery } from 'react-query';
 import { db } from '../../lib/db';
-import { formatTime } from '../Timer/timerUtils';
 import SolveItem from './SolveItem';
 
 const SolvesList = () => {
-  const solves = useLiveQuery(() => db.solves.reverse().toArray());
+  const { data } = useQuery(['solves'], () => db.solves.reverse().toArray());
 
+  const solves = data ?? [];
   const handleDeleteAll = async () => {
     await db.solves.clear();
   };
-
-  if (!solves) return null;
 
   const isSolvesEmpty = solves.length === 0;
 

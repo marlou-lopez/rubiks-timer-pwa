@@ -40,7 +40,9 @@ const TimerHeader = () => {
     data: scramble,
     isLoading,
     refetch,
-  } = useQuery(['scramble'], fetchScramble);
+  } = useQuery(['scramble'], fetchScramble, {
+    refetchOnMount: false,
+  });
 
   return (
     <header className="fixed w-full top-0 text-black dark:text-white py-6 px-4 font-semibold flex flex-col gap-2 items-center justify-center text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">

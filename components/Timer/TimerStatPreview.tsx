@@ -1,10 +1,12 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import React, { useMemo } from 'react';
+import { useQuery } from 'react-query';
 import { db } from '../../lib/db';
 import { getLatestAverageFromTimeStamps, formatTime } from './timerUtils';
 
 const TimerStatPreview = () => {
-  const solves = useLiveQuery(() => db.solves.toArray(), [], []);
+  const { data } = useQuery(['solves'], () => db.solves.toArray());
+  const solves = useMemo(() => data ?? [], [data]);
 
   const averageOfFive = useMemo(() => {
     if (solves.length >= 5) {
