@@ -4,12 +4,15 @@ import {
   ClipboardDocumentListIcon,
   TrashIcon,
 } from '@heroicons/react/20/solid';
+import { useQueryClient } from 'react-query';
 import { db, Solve } from '../../lib/db';
 import { formatTime } from '../Timer/timerUtils';
 
 const SolveItemMenu = ({ scramble, id }: Solve) => {
+  const queryClient = useQueryClient();
   const handleDelete = async (id: number) => {
     await db.solves.where({ id }).delete();
+    await queryClient.refetchQueries(['solves']);
   };
 
   const handleCopy = async () => {

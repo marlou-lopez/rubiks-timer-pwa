@@ -3,11 +3,14 @@ import { db } from '../../lib/db';
 import SolveItem from './SolveItem';
 
 const SolvesList = () => {
-  const { data } = useQuery(['solves'], () => db.solves.reverse().toArray());
+  const { data, refetch } = useQuery(['solves'], () =>
+    db.solves.reverse().toArray()
+  );
 
   const solves = data ?? [];
   const handleDeleteAll = async () => {
     await db.solves.clear();
+    await refetch();
   };
 
   const isSolvesEmpty = solves.length === 0;
