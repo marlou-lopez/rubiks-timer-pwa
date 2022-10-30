@@ -1,3 +1,5 @@
+import { Menu } from '@headlessui/react';
+import { Cog6ToothIcon } from '@heroicons/react/20/solid';
 import { randomScrambleForEvent } from 'cubing/scramble';
 import Link from 'next/link';
 import React from 'react';
@@ -9,6 +11,21 @@ const fetchScramble = async () => {
   return scramble.toString();
 };
 
+const TimerMenu = () => {
+  return (
+    <Menu>
+      <Menu.Button>
+        <Cog6ToothIcon className="h-5 w-5" />
+      </Menu.Button>
+      <Menu.Items>
+        <Menu.Item>
+          <Link href={'/about'}>About</Link>
+        </Menu.Item>
+      </Menu.Items>
+    </Menu>
+  );
+};
+
 const TimerHeader = () => {
   const {
     data: scramble,
@@ -17,19 +34,23 @@ const TimerHeader = () => {
   } = useQuery(['scramble'], fetchScramble);
 
   return (
-    <header className="fixed w-full top-0 text-black dark:text-white py-8 px-4 font-semibold flex items-center justify-center text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
-      {!isLoading ? (
-        <button
-          //  Add tooltip component(?)
-          title="Click to generate new scramble."
-          onClick={() => refetch()}
-          type={'button'}
-        >
-          {scramble}
-        </button>
-      ) : (
-        <p>Generating Scramble...</p>
-      )}
+    <header className="fixed w-full top-0 text-black dark:text-white py-6 px-4 font-semibold flex flex-col gap-2 items-center justify-center text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
+      <div>
+        {!isLoading ? (
+          <button
+            //  Add tooltip component(?)
+            title="Click to generate new scramble."
+            onClick={() => refetch()}
+            type={'button'}
+          >
+            {scramble}
+          </button>
+        ) : (
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
+            Generating Scramble...
+          </p>
+        )}
+      </div>
     </header>
   );
 };

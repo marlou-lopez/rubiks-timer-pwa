@@ -71,7 +71,7 @@ const Timer = () => {
       {!state.running && <TimerHeader />}
       <div
         {...longPressEvent}
-        className={`h-full w-full 
+        className={`h-full w-full
          flex items-center justify-center flex-col touch-none select-none
          ${
            isTimerReady
@@ -80,6 +80,7 @@ const Timer = () => {
              ? 'bg-red-400 dark:bg-red-500'
              : 'bg-white dark:bg-black'
          }
+         ${state.running ? 'z-10' : ''}
          `}
         tabIndex={0}
       >
@@ -92,4 +93,4 @@ const Timer = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Timer), { ssr: false });
+export default Timer;
