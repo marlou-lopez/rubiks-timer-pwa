@@ -24,7 +24,7 @@ const SolvesList = () => {
           </h1>
         </div>
         {!isSolvesEmpty && (
-          <div className="py-2 px-6 w-full max-w-sm md:max-w-2xl md:mx-auto flex justify-end">
+          <div className="py-2 px-6 w-full max-w-sm md:max-w-2xl mx-auto flex justify-end">
             <button
               type="button"
               onClick={handleDeleteAll}
@@ -35,7 +35,7 @@ const SolvesList = () => {
           </div>
         )}
       </header>
-      <main className="px-6 py-2 mt-28 max-w-sm md:max-w-2xl w-full md:mx-auto flex flex-col">
+      <main className="px-6 py-2 mt-28 max-w-sm md:max-w-2xl w-full mx-auto flex flex-col">
         {!isSolvesEmpty ? (
           <ul className="flex flex-col gap-2">
             {solves.map((solve) => {

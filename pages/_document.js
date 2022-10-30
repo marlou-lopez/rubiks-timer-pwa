@@ -7,8 +7,8 @@ export default function Document() {
         <meta name="application-name" content="PWA App" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="PWA App" />
-        <meta name="description" content="Best PWA App in the world" />
+        <meta name="apple-mobile-web-app-title" content="Rubik's Timer PWA" />
+        <meta name="description" content="Basic Rubik's Cube Timer" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta
@@ -63,23 +63,29 @@ export default function Document() {
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
         />
 
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:url" content="https://yourdomain.com" />
-        <meta name="twitter:title" content="PWA App" />
-        <meta name="twitter:description" content="Best PWA App in the world" />
+        <meta
+          name="twitter:card"
+          content="A basic rubik's cube timer made with NextJS"
+        />
+        <meta
+          name="twitter:url"
+          content="https://rubiks-timer-pwa.vercel.app"
+        />
+        <meta name="twitter:title" content="Rubik's Timer PWA" />
+        <meta name="twitter:description" content="Basic Rubik's Cube Timer" />
         <meta
           name="twitter:image"
           content="https://yourdomain.com/icons/android-chrome-192x192.png"
         />
-        <meta name="twitter:creator" content="@DavidWShadow" />
+        <meta name="twitter:creator" content="@_jumbosisig" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Solve" />
-        <meta property="og:description" content="Best PWA App in the world" />
-        <meta property="og:site_name" content="Solve" />
-        <meta property="og:url" content="https://yourdomain.com" />
+        <meta property="og:title" content="solb" />
+        <meta property="og:description" content="Basic Rubik's Cube Timer" />
+        <meta property="og:site_name" content="solb" />
+        <meta property="og:url" content="https://rubiks-timer-pwa.vercel.app" />
         <meta
           property="og:image"
-          content="https://yourdomain.com/icons/apple-touch-icon.png"
+          content="https://rubiks-timer-pwa.vercel.app/icons/apple-touch-icon.png"
         />
       </Head>
       <body className="bg-white dark:bg-black">

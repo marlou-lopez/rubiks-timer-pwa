@@ -4,11 +4,20 @@ import { randomScrambleForEvent } from 'cubing/scramble';
 import Link from 'next/link';
 import React from 'react';
 import { useQuery } from 'react-query';
+import { setDebug } from 'cubing/search';
+
+setDebug({
+  forceStringWorker: true,
+});
 
 const fetchScramble = async () => {
-  const scramble = await randomScrambleForEvent('333');
+  try {
+    const scramble = await randomScrambleForEvent('333');
 
-  return scramble.toString();
+    return scramble.toString();
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 const TimerMenu = () => {
