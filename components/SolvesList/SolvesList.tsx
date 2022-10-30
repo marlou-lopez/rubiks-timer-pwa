@@ -3,9 +3,7 @@ import { db } from '../../lib/db';
 import SolveItem from './SolveItem';
 
 const SolvesList = () => {
-  const { data, refetch } = useQuery(['solves'], () =>
-    db.solves.reverse().toArray()
-  );
+  const { data, refetch } = useQuery(['solves'], () => db.solves.reverse().toArray());
 
   const solves = data ?? [];
   const handleDeleteAll = async () => {
@@ -17,25 +15,23 @@ const SolvesList = () => {
 
   return (
     <>
-      <header className="fixed top-0 w-full bg-white dark:bg-black z-10">
-        <div className="px-6 py-4 flex items-center gap-2">
-          <h1 className="font-bold text-3xl text-black dark:text-white">
-            Solves
-          </h1>
+      <header className="fixed top-0 z-10 w-full bg-white dark:bg-black">
+        <div className="flex items-center gap-2 px-6 py-4">
+          <h1 className="text-3xl font-bold text-black dark:text-white">Solves</h1>
         </div>
         {!isSolvesEmpty && (
-          <div className="py-2 px-6 w-full max-w-sm md:max-w-2xl mx-auto flex justify-end">
+          <div className="mx-auto flex w-full max-w-sm justify-end py-2 px-6 md:max-w-2xl">
             <button
               type="button"
               onClick={handleDeleteAll}
-              className="uppercase text-black dark:text-white font-semibold text-xs"
+              className="text-xs font-semibold uppercase text-black dark:text-white"
             >
               Delete All
             </button>
           </div>
         )}
       </header>
-      <main className="px-6 py-2 mt-28 max-w-sm md:max-w-2xl w-full mx-auto flex flex-col">
+      <main className="mx-auto mt-28 flex w-full max-w-sm flex-col px-6 py-2 md:max-w-2xl">
         {!isSolvesEmpty ? (
           <ul className="flex flex-col gap-2">
             {solves.map((solve) => {
@@ -47,7 +43,7 @@ const SolvesList = () => {
             })}
           </ul>
         ) : (
-          <div className="flex justify-center h-full items-center flex-grow font-semibold text-gray-500">
+          <div className="flex h-full flex-grow items-center justify-center font-semibold text-gray-500">
             <h1>No recorded solves yet.</h1>
           </div>
         )}

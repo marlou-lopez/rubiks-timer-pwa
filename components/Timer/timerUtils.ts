@@ -25,14 +25,12 @@ type FormatTimeOptions = {
 
 export const formatTime = (
   timestamp: number,
-  { showMs = true }: FormatTimeOptions = {}
+  { showMs = true }: FormatTimeOptions = {},
 ): string => {
-  const { minutes, seconds, milliseconds } =
-    getTimePropertiesFromTimeStamp(timestamp);
+  const { minutes, seconds, milliseconds } = getTimePropertiesFromTimeStamp(timestamp);
 
   const m = minutes >= 1 ? minutes.toString().padStart(2, '0') : null;
-  const s =
-    minutes >= 1 ? seconds.toString().padStart(2, '0') : seconds.toString();
+  const s = minutes >= 1 ? seconds.toString().padStart(2, '0') : seconds.toString();
   const ms = Math.floor(milliseconds / 10)
     .toString()
     .padStart(2, '0');
@@ -57,10 +55,8 @@ export const formatTime = (
  */
 export const getLatestAverageFromTimeStamps = (
   timestamps: number[],
-  averageOf: number = timestamps.length
+  averageOf: number = timestamps.length,
 ): number => {
-  const timesToCalculate = averageOf
-    ? timestamps.slice(-averageOf)
-    : timestamps;
+  const timesToCalculate = averageOf ? timestamps.slice(-averageOf) : timestamps;
   return timesToCalculate.reduce((acc, curr) => acc + curr, 0) / averageOf;
 };

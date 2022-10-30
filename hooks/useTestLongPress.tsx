@@ -10,10 +10,7 @@ type TestLongPressProps = {
   delay?: number;
 };
 
-const useTestLongPress = ({
-  pressHandlers,
-  delay = 300,
-}: TestLongPressProps) => {
+const useTestLongPress = ({ pressHandlers, delay = 300 }: TestLongPressProps) => {
   const { onHold, onRelease, onTap } = pressHandlers;
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -30,7 +27,7 @@ const useTestLongPress = ({
         }
       }
     },
-    [delay, onHold, onTap]
+    [delay, onHold, onTap],
   );
 
   const handleKeyUp = useCallback(
@@ -43,18 +40,14 @@ const useTestLongPress = ({
         }
       }
     },
-    [onRelease]
+    [onRelease],
   );
 
   const handleTouchStart = useCallback(
     (event: React.TouchEvent) => {
-      event.target.addEventListener(
-        'touchend',
-        (e) => e.cancelable && event.preventDefault(),
-        {
-          passive: false,
-        }
-      );
+      event.target.addEventListener('touchend', (e) => e.cancelable && event.preventDefault(), {
+        passive: false,
+      });
       onTap(event);
       if (timeout.current === null) {
         timeout.current = setTimeout(() => {
@@ -62,7 +55,7 @@ const useTestLongPress = ({
         }, delay);
       }
     },
-    [onHold, delay, onTap]
+    [onHold, delay, onTap],
   );
 
   const handleTouchEnd = useCallback(
@@ -75,7 +68,7 @@ const useTestLongPress = ({
         timeout.current = null;
       }
     },
-    [onRelease]
+    [onRelease],
   );
 
   return {

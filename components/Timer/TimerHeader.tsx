@@ -45,7 +45,7 @@ const TimerHeader = () => {
   });
 
   return (
-    <header className="fixed w-full top-0 text-black dark:text-white py-6 px-4 font-semibold flex flex-col gap-2 items-center justify-center text-center text-lg sm:text-xl md:text-2xl lg:text-3xl">
+    <header className="fixed top-0 flex w-full flex-col items-center justify-center gap-2 py-6 px-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
       <div>
         {!isLoading ? (
           <button
@@ -57,9 +57,7 @@ const TimerHeader = () => {
             {scramble}
           </button>
         ) : (
-          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
-            Generating Scramble...
-          </p>
+          <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl">Generating Scramble...</p>
         )}
       </div>
     </header>

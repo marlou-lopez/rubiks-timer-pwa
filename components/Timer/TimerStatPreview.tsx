@@ -1,4 +1,3 @@
-import { useLiveQuery } from 'dexie-react-hooks';
 import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { db } from '../../lib/db';
@@ -12,7 +11,7 @@ const TimerStatPreview = () => {
     if (solves.length >= 5) {
       const result = getLatestAverageFromTimeStamps(
         solves.map((t) => t.time),
-        5
+        5,
       );
       return result;
     }
@@ -23,7 +22,7 @@ const TimerStatPreview = () => {
     if (solves.length >= 12) {
       const result = getLatestAverageFromTimeStamps(
         solves.map((t) => t.time),
-        12
+        12,
       );
       return result;
     }
@@ -31,11 +30,11 @@ const TimerStatPreview = () => {
   }, [solves]);
 
   return (
-    <div className="flex justify-center flex-col items-center py-2">
-      <h2 className="md:text-5xl sm:text-3xl text-2xl font-light">
+    <div className="flex flex-col items-center justify-center py-2">
+      <h2 className="text-2xl font-light sm:text-3xl md:text-5xl">
         Ao5: {averageOfFive > 0 ? formatTime(averageOfFive) : '-'}
       </h2>
-      <h2 className="md:text-5xl sm:text-3xl text-2xl font-light">
+      <h2 className="text-2xl font-light sm:text-3xl md:text-5xl">
         Ao12: {averageOfTwelve > 0 ? formatTime(averageOfTwelve) : '-'}
       </h2>
     </div>

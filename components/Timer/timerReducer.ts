@@ -3,16 +3,9 @@ interface StopwatchState {
   currentTime: number;
   lastTime: number;
 }
-type StopwatchActions =
-  | { type: 'stop' }
-  | { type: 'start' }
-  | { type: 'reset' }
-  | { type: 'tick' };
+type StopwatchActions = { type: 'stop' } | { type: 'start' } | { type: 'reset' } | { type: 'tick' };
 
-export function StopwatchReducer(
-  state: StopwatchState,
-  action: StopwatchActions
-): StopwatchState {
+export function StopwatchReducer(state: StopwatchState, action: StopwatchActions): StopwatchState {
   switch (action.type) {
     case 'reset':
       return { running: false, currentTime: 0, lastTime: 0 };

@@ -9,15 +9,15 @@ const LearnTabLayout = ({ children }: { children: React.ReactNode }) => {
   console.log(currentPath);
   return (
     <>
-      <header className="px-4 py-6 w-full">
-        <h1 className="font-bold text-3xl">{}</h1>
+      <header className="w-full px-4 py-6">
+        <h1 className="text-3xl font-bold">{}</h1>
       </header>
-      <nav className="w-full flex">
+      <nav className="flex w-full">
         {tabs.map((tab, index) => {
           return (
             <Link href={`/learn/${tab}`} key={index}>
               <a
-                className={`bg-gray-900 text-white p-3 font-semibold text-center flex-grow uppercase
+                className={`flex-grow bg-gray-900 p-3 text-center font-semibold uppercase text-white
                   ${currentPath === tab ? 'border-b-4 border-b-gray-50' : ''}
                 `}
               >
