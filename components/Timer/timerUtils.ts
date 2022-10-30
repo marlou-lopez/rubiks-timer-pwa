@@ -27,8 +27,9 @@ export const formatTime = (
   timestamp: number,
   { showMs = true }: FormatTimeOptions = {},
 ): string => {
-  const { minutes, seconds, milliseconds } = getTimePropertiesFromTimeStamp(timestamp);
+  const { hours, minutes, seconds, milliseconds } = getTimePropertiesFromTimeStamp(timestamp);
 
+  const h = hours.toString();
   const m = minutes >= 1 ? minutes.toString().padStart(2, '0') : null;
   const s = minutes >= 1 ? seconds.toString().padStart(2, '0') : seconds.toString();
   const ms = Math.floor(milliseconds / 10)
@@ -43,6 +44,9 @@ export const formatTime = (
 
   if (m) {
     timeString = `${m}:${timeString}`;
+    if (h) {
+      timeString = `${h}:${timeString}`;
+    }
   }
   return timeString;
 };

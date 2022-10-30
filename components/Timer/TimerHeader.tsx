@@ -44,6 +44,7 @@ const TimerHeader = () => {
     refetchOnMount: false,
   });
 
+  console.log('TimerHeader');
   return (
     <header className="fixed top-0 flex w-full flex-col items-center justify-center gap-2 py-6 px-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
       <div>

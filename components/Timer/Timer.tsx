@@ -1,5 +1,3 @@
-import { useTheme } from 'next-themes';
-import dynamic from 'next/dynamic';
 import { useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
@@ -48,7 +46,7 @@ const Timer = () => {
             time: state.currentTime,
             scramble: currentScramble!,
           });
-          await queryClient.refetchQueries(['scramble']);
+          await queryClient.refetchQueries(['scramble', 'solves']);
           if (swInterval) {
             clearInterval(swInterval);
             setSwInterval(null);
