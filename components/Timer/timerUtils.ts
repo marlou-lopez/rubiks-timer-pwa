@@ -31,9 +31,7 @@ export const formatTime = (
   const h = hours >= 1 ? hours.toString() : null;
   const m = minutes >= 1 ? minutes.toString().padStart(2, '0') : null;
   const s = minutes >= 1 ? seconds.toString().padStart(2, '0') : seconds.toString();
-  const ms = Math.floor(milliseconds / 10)
-    .toString()
-    .padStart(2, '0');
+  const ms = milliseconds.toString().padStart(2, '0');
 
   let timeString = `${s}`;
 
@@ -50,16 +48,29 @@ export const formatTime = (
   return timeString;
 };
 
+export const getMeanFromTimeStamps = (timestamps: number[]) => {
+  return timestamps.reduce((acc, curr) => acc + curr, 0) / timestamps.length;
+};
+
 /**
  * Gets the latest average of the timestamps starting from the number indicated by averageOf
+ * Excludes 5% of the best and worst times
  * @param timestamps array of timestamps
  * @param averageOf number of timestaps to get the average of
  * @returns timestamps average
  */
 export const getLatestAverageFromTimeStamps = (
   timestamps: number[],
-  averageOf: number = timestamps.length,
+  averageOf: number | null = timestamps.length,
 ): number => {
-  const timesToCalculate = averageOf ? timestamps.slice(-averageOf) : timestamps;
-  return timesToCalculate.reduce((acc, curr) => acc + curr, 0) / averageOf;
+  if (averageOf === null) {
+    return getMeanFromTimeStamps(timestamps);
+  }
+  const noOfTimesToBeRemoved = Math.ceil(averageOf * 0.05);
+  const timesToCalculate = timestamps
+    .slice(-averageOf)
+    .sort((a, b) => a - b)
+    .slice(noOfTimesToBeRemoved, -noOfTimesToBeRemoved);
+
+  return getMeanFromTimeStamps(timesToCalculate);
 };
