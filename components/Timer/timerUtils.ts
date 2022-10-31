@@ -6,11 +6,10 @@ type Time = {
 };
 
 export const getTimePropertiesFromTimeStamp = (timestamp: number): Time => {
-  const date = new Date(timestamp);
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-  const seconds = date.getSeconds();
-  const milliseconds = date.getMilliseconds();
+  const milliseconds = Math.floor((timestamp % 1000) / 10);
+  const seconds = Math.floor((timestamp / 1000) % 60);
+  const minutes = Math.floor((timestamp / (1000 * 60)) % 60);
+  const hours = Math.floor((timestamp / (1000 * 60 * 60)) % 24);
   return {
     hours,
     minutes,
@@ -29,7 +28,7 @@ export const formatTime = (
 ): string => {
   const { hours, minutes, seconds, milliseconds } = getTimePropertiesFromTimeStamp(timestamp);
 
-  const h = hours.toString();
+  const h = hours >= 1 ? hours.toString() : null;
   const m = minutes >= 1 ? minutes.toString().padStart(2, '0') : null;
   const s = minutes >= 1 ? seconds.toString().padStart(2, '0') : seconds.toString();
   const ms = Math.floor(milliseconds / 10)

@@ -46,7 +46,8 @@ const Timer = () => {
             time: state.currentTime,
             scramble: currentScramble!,
           });
-          await queryClient.refetchQueries(['scramble', 'solves']);
+          await queryClient.refetchQueries(['scramble']);
+          await queryClient.refetchQueries(['solves']);
           if (swInterval) {
             clearInterval(swInterval);
             setSwInterval(null);

@@ -7,7 +7,7 @@ const TimerStatPreview = () => {
   const { data } = useQuery(['solves'], () => db.solves.toArray(), {
     select: (data) => data.map((d) => d.time),
   });
-  // const solves = useMemo(() => data ?? [], [data]);
+
   const solves = data ?? [];
 
   let averageOfFive = 0;
@@ -20,23 +20,6 @@ const TimerStatPreview = () => {
     averageOfTwelve = getLatestAverageFromTimeStamps(solves);
   }
 
-  // const averageOfFive = useMemo(() => {
-  //   if (solves.length >= 5) {
-  //     const result = getLatestAverageFromTimeStamps(solves, 5);
-  //     return result;
-  //   }
-  //   return 0;
-  // }, [solves]);
-
-  // const averageOfTwelve = useMemo(() => {
-  //   if (solves.length >= 12) {
-  //     const result = getLatestAverageFromTimeStamps(solves, 12);
-  //     return result;
-  //   }
-  //   return 0;
-  // }, [solves]);
-
-  console.log('TimerStatPrev', { averageOfFive, averageOfTwelve });
   return (
     <div className="flex flex-col items-center justify-center py-2">
       <h2 className="text-2xl font-light sm:text-3xl md:text-5xl">
