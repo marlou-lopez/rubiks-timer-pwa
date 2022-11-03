@@ -6,6 +6,7 @@ import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import { ThemeProvider } from 'next-themes';
 import toast, { Toaster } from 'react-hot-toast';
+import { SessionProvider } from '../providers/SessionProvider';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -41,7 +42,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" forcedTheme="dark">
-          {getLayout(<Component {...pageProps} />)}
+          <SessionProvider>{getLayout(<Component {...pageProps} />)}</SessionProvider>
         </ThemeProvider>
         <Toaster />
       </QueryClientProvider>

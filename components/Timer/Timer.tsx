@@ -1,9 +1,10 @@
 import { useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import useTestLongPress from '../../hooks/useTestLongPress';
-import { db, Solve } from '../../lib/db';
-import TimerHeader from './TimerHeader';
+import { db, PuzzleType, Session, Solve } from '../../lib/db';
+import { useSession } from '../../providers/SessionProvider';
+import TimerHeader, { Puzzle } from './TimerHeader';
 import { StopwatchReducer } from './timerReducer';
 import TimerStatPreview from './TimerStatPreview';
 import { formatTime } from './timerUtils';
@@ -15,6 +16,8 @@ const Timer = () => {
     currentTime: 0,
     lastTime: 0,
   });
+  const { selectedPuzzle, selectedSession } = useSession();
+
   const [swInterval, setSwInterval] = useState<NodeJS.Timeout | null>(null);
   const [isKeyPress, setIsKeyPress] = useState(false);
   const [isLongPress, setIsLongPress] = useState(false);
@@ -41,10 +44,16 @@ const Timer = () => {
               });
             }
           }
-          const currentScramble = queryClient.getQueryData<string>(['scramble']);
+          const currentScramble = queryClient.getQueryData<string>([
+            'scramble',
+            selectedPuzzle.value,
+          ]);
           await db.solves.add({
             time: state.currentTime,
             scramble: currentScramble!,
+            date: Date.now(),
+            puzzleType: selectedPuzzle.value,
+            sessionId: selectedSession?.id,
           });
           await queryClient.refetchQueries(['scramble']);
           await queryClient.refetchQueries(['solves']);
