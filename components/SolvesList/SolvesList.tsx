@@ -6,8 +6,9 @@ import SolvesListHeader from './SolvesListHeader';
 import ListLoading from './ListLoading';
 
 const SolvesList = () => {
-  const { data, refetch, isLoading } = useQuery(['solves'], () => db.solves.reverse().toArray());
-
+  const { data, refetch, isLoading } = useQuery(['solves'], () => db.solves.toArray(), {
+    select: (data) => [...data].reverse(),
+  });
   const solves = data ?? [];
   const handleDeleteAll = async () => {
     await db.solves.clear();

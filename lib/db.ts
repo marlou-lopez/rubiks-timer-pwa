@@ -31,17 +31,17 @@ export class DBDexie extends Dexie {
     this.on('populate', async () => {
       await this.sessions.bulkAdd([
         {
-          name: 'default (4x4x4)',
+          name: 'default session (4x4x4)',
           puzzleType: '444',
           isDefault: true,
         },
         {
-          name: 'default (3x3x3)',
+          name: 'default session (3x3x3)',
           puzzleType: '333',
           isDefault: true,
         },
         {
-          name: 'default (2x2x2)',
+          name: 'default session (2x2x2)',
           puzzleType: '222',
           isDefault: true,
         },

@@ -59,7 +59,6 @@ const PUZZLES: Puzzle[] = [
 
 const TimerDropdown = () => {
   const { selectedPuzzle, selectedSession, onPuzzleSelect, onSessionSelect } = useSession();
-  console.log('selectedPuzzle: ', selectedPuzzle);
   const { data: sessions } = useQuery(
     ['sessions', selectedPuzzle.value],
     () =>
@@ -82,7 +81,7 @@ const TimerDropdown = () => {
   );
 
   return (
-    <div className="flex w-60 items-center gap-2 ">
+    <div className="flex w-64 items-center gap-2 ">
       <Listbox value={selectedPuzzle} onChange={onPuzzleSelect}>
         <div className="relative">
           <Listbox.Button className="relative w-full rounded-md bg-black px-3 py-1 text-sm text-white dark:bg-white dark:text-black">
@@ -112,7 +111,7 @@ const TimerDropdown = () => {
       <Listbox value={selectedSession} onChange={onSessionSelect}>
         <div className="relative flex-grow">
           <Listbox.Button className="relative w-full rounded-md bg-black px-3 py-1 text-sm text-white dark:bg-white dark:text-black">
-            {selectedSession?.name}
+            {selectedSession?.name ?? '-'}
           </Listbox.Button>
           <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-black text-sm text-white dark:bg-white dark:text-black">
             {(sessions ?? []).map((option, index) => {
@@ -148,7 +147,7 @@ const TimerHeader = () => {
   });
 
   return (
-    <header className="fixed top-0 flex w-full flex-col items-center justify-center gap-6 p-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
+    <header className="fixed top-0 flex w-full flex-col items-center justify-center gap-5 p-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
       <div className="flex w-full items-center justify-between">
         <TimerDropdown />
         <TimerMenu />
