@@ -1,10 +1,10 @@
 import { useReducer, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import useTestLongPress from '../../hooks/useTestLongPress';
-import { db, PuzzleType, Session, Solve } from '../../lib/db';
+import { db, Solve } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
-import TimerHeader, { Puzzle } from './TimerHeader';
+import TimerHeader from './TimerHeader';
 import { StopwatchReducer } from './timerReducer';
 import TimerStatPreview from './TimerStatPreview';
 import { formatTime } from './timerUtils';

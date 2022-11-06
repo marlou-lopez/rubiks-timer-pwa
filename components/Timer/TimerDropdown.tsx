@@ -5,10 +5,8 @@ import { db, Session } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
 import PuzzleDropdown from '../Dropdowns/PuzzleDropdown';
 import SessionDropdown from '../Dropdowns/SessionDropdown';
-import TimerDialog from './TimerDialog';
 
 const TimerDropdown = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const { selectedPuzzle, selectedSession, onPuzzleSelect, onSessionSelect } = useSession();
   const { data: sessions } = useQuery(
     ['sessions', selectedPuzzle.value],
@@ -46,7 +44,6 @@ const TimerDropdown = () => {
           options={sessions}
         />
       </div>
-      <TimerDialog isOpen={isOpen} closeDialog={() => setIsOpen(false)} />
     </>
   );
 };
