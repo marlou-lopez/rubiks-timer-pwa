@@ -1,4 +1,5 @@
 import { Listbox } from '@headlessui/react';
+import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { Puzzle, PUZZLES } from '../../../lib/db';
 
 type PuzzleDropdownProps = {
@@ -9,8 +10,9 @@ const PuzzleDropdown: React.FC<PuzzleDropdownProps> = ({ value, onChange }) => {
   return (
     <Listbox value={value} onChange={onChange}>
       <div className="relative">
-        <Listbox.Button className="relative w-full rounded-md border bg-black px-3 py-1 text-sm text-white dark:bg-white dark:text-black">
-          {value.name}
+        <Listbox.Button className="relative flex w-full items-center justify-between gap-1 rounded-md border bg-black px-2 py-1 text-sm text-white dark:bg-white dark:text-black">
+          <span>{value.name}</span>
+          <ChevronUpDownIcon className="h-3 w-3" />
         </Listbox.Button>
         <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md border bg-black px-2 py-1 text-sm text-white shadow-md dark:bg-white dark:text-black">
           {PUZZLES.map((option, index) => {

@@ -1,9 +1,9 @@
 import { Transition, Dialog } from '@headlessui/react';
-import { LockClosedIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid';
-import { Fragment, useRef, useState } from 'react';
+import { LockClosedIcon, PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid';
+import { Fragment, useCallback, useRef, useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { FixedSizeList } from 'react-window';
-import { db, Puzzle } from '../../lib/db';
+import { db, Puzzle, Session } from '../../lib/db';
 import AppDialog from '../AppDialog';
 import PuzzleDropdown from '../Dropdowns/PuzzleDropdown';
 import AddSessionDialog from './AddSessionDialog';
@@ -29,12 +29,16 @@ const TimerDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
   );
 
   const [addDialogOpen, setAddDialogOpen] = useState(false);
+  const [editDialogOpen, setEditOpenDialog] = useState(false);
 
+  const [sessionToEdit, setSessionToEdit] = useState<Session | null>(null);
+
+  const test = useCallback(() => {}, [sessionToEdit]);
   return (
     <>
       <AppDialog open={isOpen} onClose={closeDialog} title="Manage Sessions">
         <div className="mt-2 flex flex-grow flex-col">
-          <div>
+          <div className="font-semibold">
             <PuzzleDropdown value={puzzle} onChange={(puzzle) => setPuzzle(puzzle)} />
           </div>
           <div className="flex-grow">
@@ -58,23 +62,40 @@ const TimerDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
               >
                 {({ data, index, style }) => (
                   <li
-                    className="flex items-center justify-between"
+                    className={`flex items-center justify-between ${
+                      data[index].isDefault ? 'text-gray-400' : ''
+                    }`}
                     key={data[index].id}
                     style={style}
                   >
                     {data[index].name}
-                    <div className="flex items-center gap-1">
+                    <div className="flex items-center gap-2">
                       {data[index].isDefault ? (
                         <LockClosedIcon className="h-4 w-4" />
                       ) : (
-                        <button
-                          onClick={async () => {
-                            await db.sessions.delete(data[index].id!);
-                            await queryClient.refetchQueries(['sessions', data[index].puzzleType]);
-                          }}
-                        >
-                          <TrashIcon className="h-4 w-4" />
-                        </button>
+                        <>
+                          <button
+                            onClick={() => {
+                              setEditOpenDialog(true);
+                              setSessionToEdit(data[index]);
+                            }}
+                            title="Edit"
+                          >
+                            <PencilIcon className="h-4 w-4" />
+                          </button>
+                          <button
+                            title="Delete"
+                            onClick={async () => {
+                              await db.sessions.delete(data[index].id!);
+                              await queryClient.refetchQueries([
+                                'sessions',
+                                data[index].puzzleType,
+                              ]);
+                            }}
+                          >
+                            <TrashIcon className="h-4 w-4" />
+                          </button>
+                        </>
                       )}
                     </div>
                   </li>
@@ -98,6 +119,19 @@ const TimerDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
         isOpen={addDialogOpen}
         closeDialog={() => setAddDialogOpen(false)}
       />
+      {/* TODO: Fix transition */}
+      {sessionToEdit && (
+        <AddSessionDialog
+          isOpen={editDialogOpen}
+          closeDialog={() => {
+            setSessionToEdit(null);
+            setEditOpenDialog(false);
+          }}
+          puzzleType={sessionToEdit ? sessionToEdit.puzzleType : puzzle.value}
+          isEdit={true}
+          session={sessionToEdit}
+        />
+      )}
     </>
   );
 };

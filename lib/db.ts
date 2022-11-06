@@ -21,6 +21,7 @@ export type Session = {
   name: string;
   puzzleType: PuzzleType;
   isDefault?: boolean;
+  date: number;
 };
 
 export const PUZZLES: Puzzle[] = [
@@ -55,16 +56,19 @@ export class DBDexie extends Dexie {
           name: 'default session (4x4x4)',
           puzzleType: '444',
           isDefault: true,
+          date: Date.now(),
         },
         {
           name: 'default session (3x3x3)',
           puzzleType: '333',
           isDefault: true,
+          date: Date.now(),
         },
         {
           name: 'default session (2x2x2)',
           puzzleType: '222',
           isDefault: true,
+          date: Date.now(),
         },
       ]);
     });

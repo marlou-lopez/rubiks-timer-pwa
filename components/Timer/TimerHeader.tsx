@@ -50,18 +50,6 @@ const TimerMenu = () => {
         <Menu.Items className="absolute right-0 mt-2 w-40 rounded-md bg-black p-1 text-sm text-white dark:bg-white dark:text-black">
           <Menu.Item>
             {({ active }) => (
-              <RefForwardedLink
-                href={'/about'}
-                className={`inline-flex w-full items-center gap-1 rounded-md px-2 py-1
-              ${active ? 'bg-white/25 dark:bg-black/5' : ''}`}
-              >
-                <InformationCircleIcon className="h-4 w-4" />
-                <span>About {active}</span>
-              </RefForwardedLink>
-            )}
-          </Menu.Item>
-          <Menu.Item>
-            {({ active }) => (
               <button
                 onClick={() => setIsOpen(true)}
                 className={`inline-flex w-full items-center gap-1 rounded-md px-2 py-1
@@ -71,6 +59,18 @@ const TimerMenu = () => {
                 <FolderIcon className="h-4 w-4" />
                 <span>Manage Session</span>
               </button>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
+              <RefForwardedLink
+                href={'/about'}
+                className={`inline-flex w-full items-center gap-1 rounded-md px-2 py-1
+              ${active ? 'bg-white/25 dark:bg-black/5' : ''}`}
+              >
+                <InformationCircleIcon className="h-4 w-4" />
+                <span>About {active}</span>
+              </RefForwardedLink>
             )}
           </Menu.Item>
         </Menu.Items>

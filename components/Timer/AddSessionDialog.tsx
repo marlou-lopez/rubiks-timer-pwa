@@ -1,39 +1,63 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
-import { db, Puzzle } from '../../lib/db';
+import { db, Puzzle, Session } from '../../lib/db';
 import AppDialog from '../AppDialog';
 
+// TODO: Refactor to handle add/edit more efficiently
 type AddSessionDialogProps = {
   isOpen: boolean;
   closeDialog: () => void;
   puzzleType: Puzzle['value'];
+  isEdit?: boolean;
+  session?: Session | null;
 };
 
-const AddSessionDialog: React.FC<AddSessionDialogProps> = ({ isOpen, closeDialog, puzzleType }) => {
+const AddSessionDialog: React.FC<AddSessionDialogProps> = ({
+  isOpen,
+  closeDialog,
+  puzzleType,
+  isEdit,
+  session,
+}) => {
   const queryClient = useQueryClient();
-  const [sessionName, setSessionName] = useState('');
-
+  const [sessionName, setSessionName] = useState(session ? session.name : '');
+  console.log('sfasd: ', session);
+  console.log('iadlog: ', sessionName);
   const addSession = async (event: React.FormEvent<HTMLFormElement> | React.MouseEvent) => {
     event.preventDefault();
     setSessionName('');
-    await toast.promise(
-      db.sessions.add({
-        name: sessionName,
-        puzzleType,
-        isDefault: false,
-      }),
-      {
-        loading: 'Adding session...',
-        error: 'Something went wrong',
-        success: 'New session added!',
-      },
-    );
+    if (!isEdit) {
+      await toast.promise(
+        db.sessions.add({
+          name: sessionName,
+          puzzleType,
+          isDefault: false,
+          date: Date.now(),
+        }),
+        {
+          loading: 'Adding session...',
+          error: 'Something went wrong',
+          success: 'New session added!',
+        },
+      );
+    } else {
+      await toast.promise(
+        db.sessions.update(session?.id!, {
+          name: sessionName,
+        }),
+        {
+          loading: 'Editing session...',
+          error: 'Something went wrong',
+          success: 'Session edited!',
+        },
+      );
+    }
     await queryClient.refetchQueries(['sessions', puzzleType]);
   };
 
   return (
-    <AppDialog open={isOpen} onClose={closeDialog} title="Add Session">
+    <AppDialog open={isOpen} onClose={closeDialog} title={isEdit ? 'Edit Session' : 'Add Session'}>
       <form onSubmit={addSession} className="mt-2">
         <input
           type={'text'}
@@ -53,7 +77,7 @@ const AddSessionDialog: React.FC<AddSessionDialogProps> = ({ isOpen, closeDialog
               closeDialog();
             }}
           >
-            Add
+            {isEdit ? 'Edit' : 'Add'}
           </button>
         </div>
       </form>
