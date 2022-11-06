@@ -2,6 +2,11 @@ import Dexie, { Table } from 'dexie';
 
 export type PuzzleType = '222' | '333' | '444';
 
+export type Puzzle = {
+  name: string;
+  value: PuzzleType;
+};
+
 export type Solve = {
   id?: number;
   time: number;
@@ -17,6 +22,22 @@ export type Session = {
   puzzleType: PuzzleType;
   isDefault?: boolean;
 };
+
+export const PUZZLES: Puzzle[] = [
+  {
+    name: '2x2x2',
+    value: '222',
+  },
+  {
+    name: '3x3x3',
+    value: '333',
+  },
+  {
+    name: '4x4x4',
+    value: '444',
+  },
+];
+
 export class DBDexie extends Dexie {
   solves!: Table<Solve, number>;
   sessions!: Table<Session, number>;

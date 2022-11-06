@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
         />
+        <title>TimerNiLou</title>
       </Head>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider attribute="class" forcedTheme="dark">

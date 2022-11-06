@@ -13,11 +13,11 @@ const TimerStatPreview = () => {
   let averageOfFive = 0;
   let averageOfTwelve = 0;
   if (solves.length >= 5) {
-    averageOfFive = getLatestAverageFromTimeStamps(solves);
+    averageOfFive = getLatestAverageFromTimeStamps(solves, 5);
   }
 
   if (solves.length >= 12) {
-    averageOfTwelve = getLatestAverageFromTimeStamps(solves);
+    averageOfTwelve = getLatestAverageFromTimeStamps(solves, 12);
   }
 
   return (
