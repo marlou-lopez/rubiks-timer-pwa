@@ -1,6 +1,5 @@
 import { createContext, useCallback, useContext, useState } from 'react';
-import { Puzzle } from '../components/Timer/TimerHeader';
-import { Session } from '../lib/db';
+import { Puzzle, Session } from '../lib/db';
 
 type SessionContext = {
   selectedPuzzle: Puzzle;
