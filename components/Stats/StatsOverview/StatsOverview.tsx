@@ -47,65 +47,75 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
   const standardDeviation = getStandardDeviation(solveTimeStamps);
 
   return (
-    <div className="flex flex-col gap-2 text-black dark:text-white">
+    <div className="flex flex-col text-black dark:text-white">
       <div>
         <h1 className="mb-1 font-bold">Current</h1>
-        <div className="flex gap-3">
-          {Object.values(AVERAGE_OF).map((averageOf) => {
-            const average = getLatestAverageFromTimeStamps(solveTimeStamps, averageOf);
-            if (average === 0) return;
-            return (
-              <div key={averageOf}>
-                <StatTile stat={`ao${averageOf}`} value={formatTime(average)} />
-              </div>
-            );
-          })}
+        <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
+          {solves.length > 1 ? (
+            Object.values(AVERAGE_OF).map((averageOf) => {
+              const average = getLatestAverageFromTimeStamps(solveTimeStamps, averageOf);
+              if (average === 0) return;
+              return (
+                <div key={averageOf}>
+                  <StatTile stat={`ao${averageOf}`} value={formatTime(average)} />
+                </div>
+              );
+            })
+          ) : (
+            <div className="font-semibold text-gray-500">No current solves.</div>
+          )}
         </div>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col">
         <h1 className="font-bold">Session Statistics</h1>
-        <div>
-          <h2 className="mb-1 text-sm font-semibold">Best</h2>
-          <div className="flex gap-3">
-            {personalBest && (
-              <div>
-                <StatTile stat="single" value={formatTime(personalBest.time)} />
+        {solves.length > 1 ? (
+          <>
+            <div>
+              <h2 className="mb-1 text-sm font-semibold">Best</h2>
+              <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
+                {personalBest && (
+                  <div>
+                    <StatTile stat="single" value={formatTime(personalBest.time)} />
+                  </div>
+                )}
+                {Object.values(AVERAGE_OF).map((averageOf) => {
+                  const average = getAverages(solves, averageOf);
+                  if (average === null) return;
+                  return (
+                    <div key={averageOf}>
+                      <StatTile stat={`ao${averageOf}`} value={formatTime(average.best.time)} />
+                    </div>
+                  );
+                })}
               </div>
-            )}
-            {Object.values(AVERAGE_OF).map((averageOf) => {
-              const average = getAverages(solves, averageOf);
-              if (average === null) return;
-              return (
-                <div key={averageOf}>
-                  <StatTile stat={`ao${averageOf}`} value={formatTime(average.best.time)} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <h2 className="mb-1 text-sm font-semibold">Worst</h2>
-          <div className="flex gap-3">
-            {worstSingle && (
-              <div>
-                <StatTile stat="single" value={formatTime(worstSingle.time)} />
+            </div>
+            <div>
+              <h2 className="mb-1 text-sm font-semibold">Worst</h2>
+              <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
+                {worstSingle && (
+                  <div>
+                    <StatTile stat="single" value={formatTime(worstSingle.time)} />
+                  </div>
+                )}
+                {Object.values(AVERAGE_OF).map((averageOf) => {
+                  const average = getAverages(solves, averageOf);
+                  if (average === null) return;
+                  return (
+                    <div key={averageOf}>
+                      <StatTile stat={`ao${averageOf}`} value={formatTime(average.worst.time)} />
+                    </div>
+                  );
+                })}
               </div>
-            )}
-            {Object.values(AVERAGE_OF).map((averageOf) => {
-              const average = getAverages(solves, averageOf);
-              if (average === null) return;
-              return (
-                <div key={averageOf}>
-                  <StatTile stat={`ao${averageOf}`} value={formatTime(average.worst.time)} />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-      <div>
-        <h2 className="text-sm font-semibold">Standard Deviation</h2>
-        <span>{formatTime(standardDeviation)}</span>
+            </div>
+            <div>
+              <h2 className="text-sm font-semibold">Standard Deviation</h2>
+              <span>{formatTime(standardDeviation)}</span>
+            </div>
+          </>
+        ) : (
+          <div className="font-semibold text-gray-500">Not enought data.</div>
+        )}
       </div>
     </div>
   );

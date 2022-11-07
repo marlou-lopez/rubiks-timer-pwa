@@ -37,7 +37,7 @@ const SolvesList = () => {
         ) : !isSolvesEmpty ? (
           <FixedSizeList
             className="scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white"
-            height={isBrowser ? 224 : 140}
+            height={isBrowser ? 196 : 140}
             width="100%"
             itemCount={solves.length}
             itemData={solves}
