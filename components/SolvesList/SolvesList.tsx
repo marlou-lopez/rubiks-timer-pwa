@@ -4,9 +4,9 @@ import SolveItem from './SolveItem';
 import { FixedSizeList } from 'react-window';
 import SolvesListHeader from './SolvesListHeader';
 import ListLoading from './ListLoading';
-import StatsOverview from '../Stats/StatsOverview/StatsOverview';
-import StatsGraph from '../Stats/StatsGraph/StatsGraph';
-import { isBrowser, isMobile } from 'react-device-detect';
+import { isBrowser } from 'react-device-detect';
+import StatsGraph from '../Stats/StatsGraph';
+import StatsOverview from '../Stats/StatsOverview';
 
 const SolvesList = () => {
   const { data, refetch, isLoading } = useQuery(['solves'], () => db.solves.toArray(), {
