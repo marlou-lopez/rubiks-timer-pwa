@@ -49,7 +49,9 @@ const TimerDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
               </button>
             </div>
             {isLoading ? (
-              <p>Fetching sessions</p>
+              <div className="flex h-[200px] items-center justify-center">
+                <p>Fetching sessions</p>
+              </div>
             ) : (
               <FixedSizeList
                 className="scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md "

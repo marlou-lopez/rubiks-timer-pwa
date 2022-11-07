@@ -12,7 +12,7 @@ const SessionDropdown: React.FC<SessionDropdownProps> = ({ value, onChange, opti
   return (
     <Listbox value={value} onChange={onChange}>
       <div className="relative flex-grow">
-        <Listbox.Button className="relative flex w-full items-center justify-between gap-1 rounded-md border bg-black px-3 py-1 text-sm text-white dark:bg-white dark:text-black">
+        <Listbox.Button className="relative flex w-48 items-center justify-between gap-1 rounded-md border bg-black px-3 py-1 text-sm text-white dark:bg-white dark:text-black">
           <span>{value?.name ?? '-'}</span>
           <ChevronUpDownIcon className="h-3 w-3" />
         </Listbox.Button>

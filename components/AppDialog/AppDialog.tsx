@@ -47,7 +47,7 @@ const AppDialog: React.FC<AppDialogProps> = ({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle text-black shadow-xl transition-all">
+              <Dialog.Panel className="h-[400px] w-full max-w-md transform overflow-hidden rounded-lg bg-white p-6 text-left align-middle text-black shadow-xl transition-all">
                 {/* <div className="flex justify-end">
                   <button onClick={onClose}>
                     <XCircleIcon className="h-5 w-5" />
