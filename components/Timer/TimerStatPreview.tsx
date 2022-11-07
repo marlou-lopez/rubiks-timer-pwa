@@ -5,20 +5,14 @@ import { getLatestAverageFromTimeStamps, formatTime } from './timerUtils';
 
 const TimerStatPreview = () => {
   const { data } = useQuery(['solves'], () => db.solves.toArray(), {
-    select: (data) => data.map((d) => d.time),
+    select: (data) => [...data].reverse().map((d) => d.time),
   });
 
   const solves = data ?? [];
 
-  let averageOfFive = 0;
-  let averageOfTwelve = 0;
-  if (solves.length >= 5) {
-    averageOfFive = getLatestAverageFromTimeStamps(solves, 5);
-  }
+  const averageOfFive = getLatestAverageFromTimeStamps(solves, 5);
 
-  if (solves.length >= 12) {
-    averageOfTwelve = getLatestAverageFromTimeStamps(solves, 12);
-  }
+  const averageOfTwelve = getLatestAverageFromTimeStamps(solves, 12);
 
   return (
     <div className="flex flex-col items-center justify-center py-2">

@@ -16,14 +16,14 @@ const SessionDropdown: React.FC<SessionDropdownProps> = ({ value, onChange, opti
           <span>{value?.name ?? '-'}</span>
           <ChevronUpDownIcon className="h-3 w-3" />
         </Listbox.Button>
-        <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-black text-sm text-white dark:bg-white dark:text-black">
+        <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-black p-1 text-sm text-white dark:bg-white dark:text-black">
           {(options ?? []).map((option, index) => {
             return (
               <Listbox.Option
                 key={index}
                 value={option}
                 className={({ active }) => {
-                  return `relative cursor-default select-none py-1 px-2 text-left
+                  return `relative cursor-default select-none rounded-md p-2 text-left
                     ${active ? 'bg-white/25 dark:bg-black/5' : ''}
                     `;
                 }}

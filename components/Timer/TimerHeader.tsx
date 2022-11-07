@@ -52,12 +52,12 @@ const TimerMenu = () => {
             {({ active }) => (
               <button
                 onClick={() => setIsOpen(true)}
-                className={`inline-flex w-full items-center gap-1 rounded-md px-2 py-1
+                className={`inline-flex w-full items-center gap-1 rounded-md p-2
               ${active ? 'bg-white/25 dark:bg-black/5' : ''}
             `}
               >
                 <FolderIcon className="h-4 w-4" />
-                <span>Manage Session</span>
+                <span>Manage Sessions</span>
               </button>
             )}
           </Menu.Item>
@@ -65,7 +65,7 @@ const TimerMenu = () => {
             {({ active }) => (
               <RefForwardedLink
                 href={'/about'}
-                className={`inline-flex w-full items-center gap-1 rounded-md px-2 py-1
+                className={`inline-flex w-full items-center gap-1 rounded-md p-2
               ${active ? 'bg-white/25 dark:bg-black/5' : ''}`}
               >
                 <InformationCircleIcon className="h-4 w-4" />

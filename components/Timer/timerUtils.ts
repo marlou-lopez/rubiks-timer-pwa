@@ -1,3 +1,5 @@
+import { Solve } from '../../lib/db';
+
 type Time = {
   hours: number;
   minutes: number;
@@ -61,16 +63,55 @@ export const getMeanFromTimeStamps = (timestamps: number[]) => {
  */
 export const getLatestAverageFromTimeStamps = (
   timestamps: number[],
-  averageOf: number | null = timestamps.length,
+  averageOf: number = timestamps.length,
 ): number => {
-  if (averageOf === null) {
-    return getMeanFromTimeStamps(timestamps);
-  }
+  if (timestamps.length < averageOf) return 0;
   const noOfTimesToBeRemoved = Math.ceil(averageOf * 0.05);
   const timesToCalculate = timestamps
-    .slice(-averageOf)
+    .slice(0, averageOf)
     .sort((a, b) => a - b)
     .slice(noOfTimesToBeRemoved, -noOfTimesToBeRemoved);
 
   return getMeanFromTimeStamps(timesToCalculate);
+};
+
+type Average = {
+  solves: Solve[];
+  time: number;
+};
+
+export type AverageType = {
+  best: Average;
+  worst: Average;
+};
+
+export const getAverages = (solves: Solve[], averageOf: number): AverageType | null => {
+  if (solves.length < averageOf) return null;
+
+  let averages: Average[] = [];
+
+  for (let i = 0, j = averageOf; i <= solves.length - averageOf; i++, j++) {
+    const timestampsToAverage = solves.slice(i, j);
+
+    const average = getLatestAverageFromTimeStamps(timestampsToAverage.map((t) => t.time));
+    averages.push({
+      solves: timestampsToAverage,
+      time: average,
+    });
+  }
+
+  const sortedAverages = averages.sort((a, b) => a.time - b.time);
+  return {
+    best: sortedAverages[0],
+    worst: sortedAverages[sortedAverages.length - 1],
+  };
+};
+
+export const getStandardDeviation = (timestamps: number[]) => {
+  if (timestamps.length === 0) return 0;
+  const overAllMean = getMeanFromTimeStamps(timestamps);
+  return Math.sqrt(
+    timestamps.map((time) => Math.pow(time - overAllMean, 2)).reduce((a, b) => a + b, 0) /
+      (timestamps.length - 1),
+  );
 };
