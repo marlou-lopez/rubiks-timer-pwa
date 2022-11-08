@@ -1,5 +1,3 @@
-import { Listbox } from '@headlessui/react';
-import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { db, Session } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
