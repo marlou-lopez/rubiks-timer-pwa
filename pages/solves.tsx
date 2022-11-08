@@ -9,18 +9,10 @@ import { NextPageWithLayout } from './_app';
 // (per my understanding)
 const SolvesList = dynamic(() => import('../components/SolvesList'), {
   ssr: false,
-  // suspense: true,
 });
 
 const Solves: NextPageWithLayout = () => {
-  return (
-    <SolvesList />
-    // Suspense causes hydration mismatch error when I added a functionality
-    // where we render different ui depending on device using isBrowser
-    // <Suspense fallback={<AppLoading />}>
-    //   <SolvesList />
-    // </Suspense>
-  );
+  return <SolvesList />;
 };
 
 // Notes does not work when dynamically exporting the page
