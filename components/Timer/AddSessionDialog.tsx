@@ -22,8 +22,6 @@ const AddSessionDialog: React.FC<AddSessionDialogProps> = ({
 }) => {
   const queryClient = useQueryClient();
   const [sessionName, setSessionName] = useState(session ? session.name : '');
-  console.log('sfasd: ', session);
-  console.log('iadlog: ', sessionName);
   const addSession = async (event: React.FormEvent<HTMLFormElement> | React.MouseEvent) => {
     event.preventDefault();
     setSessionName('');
@@ -63,7 +61,6 @@ const AddSessionDialog: React.FC<AddSessionDialogProps> = ({
           type={'text'}
           value={sessionName}
           onChange={(event) => setSessionName(event.target.value)}
-          // ref={inputRef}
           id="session-name"
           placeholder="Enter session name"
           className="w-full rounded-md border-2 bg-gray-50 p-2 text-black"

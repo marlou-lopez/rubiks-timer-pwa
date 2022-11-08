@@ -7,11 +7,23 @@ import ListLoading from './ListLoading';
 import { isBrowser } from 'react-device-detect';
 import StatsGraph from '../Stats/StatsGraph';
 import StatsOverview from '../Stats/StatsOverview';
+import { useSession } from '../../providers/SessionProvider';
 
 const SolvesList = () => {
-  const { data, refetch, isLoading } = useQuery(['solves'], () => db.solves.toArray(), {
-    select: (data) => [...data].reverse(),
-  });
+  const { selectedSession } = useSession();
+  const { data, refetch, isLoading } = useQuery(
+    ['solves', selectedSession?.id],
+    () =>
+      db.solves
+        .where({
+          sessionId: selectedSession?.id,
+        })
+        .toArray(),
+    {
+      enabled: !!selectedSession,
+      select: (data) => [...data].reverse(),
+    },
+  );
   const solves = data ?? [];
   const handleDeleteAll = async () => {
     await db.solves.clear();
@@ -22,8 +34,11 @@ const SolvesList = () => {
   return (
     <>
       <header>
-        <div className="flex items-center gap-2 px-6 py-4">
+        <div className="flex items-center justify-between gap-2 px-6 py-4">
           <h1 className="text-3xl font-bold text-black dark:text-white">Solves</h1>
+          <h3 className="rounded-full bg-gray-300 px-2 text-sm font-semibold text-gray-600 dark:bg-gray-500 dark:text-gray-200 md:text-base">
+            {selectedSession?.name}
+          </h3>
         </div>
       </header>
       <section className="mx-auto flex w-full max-w-sm flex-col gap-2 px-6 md:max-w-2xl">

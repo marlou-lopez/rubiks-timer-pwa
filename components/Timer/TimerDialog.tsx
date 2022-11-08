@@ -1,6 +1,5 @@
-import { Transition, Dialog } from '@headlessui/react';
 import { LockClosedIcon, PencilIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid';
-import { Fragment, useCallback, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { FixedSizeList } from 'react-window';
 import { db, Puzzle, Session } from '../../lib/db';
@@ -33,11 +32,10 @@ const TimerDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
 
   const [sessionToEdit, setSessionToEdit] = useState<Session | null>(null);
 
-  const test = useCallback(() => {}, [sessionToEdit]);
   return (
     <>
       <AppDialog open={isOpen} onClose={closeDialog} title="Manage Sessions">
-        <div className="mt-2 flex flex-grow flex-col">
+        <div className="mt-2 flex h-[400px] flex-grow flex-col">
           <div className="font-semibold">
             <PuzzleDropdown value={puzzle} onChange={(puzzle) => setPuzzle(puzzle)} />
           </div>
@@ -55,7 +53,7 @@ const TimerDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
             ) : (
               <FixedSizeList
                 className="scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md "
-                height={200}
+                height={280}
                 width="100%"
                 itemCount={(sessions ?? []).length}
                 itemData={sessions ?? []}

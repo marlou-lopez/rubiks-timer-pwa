@@ -1,12 +1,24 @@
 import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { db } from '../../lib/db';
+import { useSession } from '../../providers/SessionProvider';
 import { getLatestAverageFromTimeStamps, formatTime } from './timerUtils';
 
 const TimerStatPreview = () => {
-  const { data } = useQuery(['solves'], () => db.solves.toArray(), {
-    select: (data) => [...data].reverse().map((d) => d.time),
-  });
+  const { selectedSession } = useSession();
+  const { data } = useQuery(
+    ['solves', selectedSession?.id],
+    () =>
+      db.solves
+        .where({
+          sessionId: selectedSession?.id,
+        })
+        .toArray(),
+    {
+      enabled: !!selectedSession,
+      select: (data) => [...data].reverse().map((d) => d.time),
+    },
+  );
 
   const solves = data ?? [];
 

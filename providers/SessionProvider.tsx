@@ -20,7 +20,13 @@ const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
     value: '333',
   });
 
-  const [selectedSession, setSelectedSession] = useState<Session | null>(null);
+  const [selectedSession, setSelectedSession] = useState<Session | null>({
+    id: 2,
+    name: 'default session (3x3x3)',
+    puzzleType: '333',
+    isDefault: true,
+    date: Date.now(),
+  });
 
   const onPuzzleSelect = useCallback(
     (puzzle: Puzzle) => {

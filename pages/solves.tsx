@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, { Suspense } from 'react';
+import AppLoading from '../components/AppLoading';
 import PrimaryLayout from '../components/layout/layout';
 import { NextPageWithLayout } from './_app';
 
@@ -8,13 +9,14 @@ import { NextPageWithLayout } from './_app';
 // (per my understanding)
 const SolvesList = dynamic(() => import('../components/SolvesList'), {
   ssr: false,
+  suspense: true,
 });
 
 const Solves: NextPageWithLayout = () => {
   return (
-    <>
+    <Suspense fallback={<AppLoading />}>
       <SolvesList />
-    </>
+    </Suspense>
   );
 };
 
