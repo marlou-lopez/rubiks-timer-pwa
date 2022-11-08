@@ -5,7 +5,6 @@ import ListPanel from './ListPanel';
 import StatsPanel from './StatsPanel';
 
 const MainPanel: React.FC<any> = ({ handleDeleteAll, solves, isLoading }) => {
-  console.log('Isasdsad: ', isBrowser);
   return (
     <main className="w-full">
       {!isBrowser ? (

@@ -34,7 +34,8 @@ const Timer = () => {
           setIsKeyPress(false);
           dispatch({ type: 'stop' });
 
-          const currentSolves = queryClient.getQueryData<Solve[]>(['solves']) ?? [];
+          const currentSolves =
+            queryClient.getQueryData<Solve[]>(['solves', selectedSession?.id]) ?? [];
           if (currentSolves?.length > 0) {
             const times = currentSolves.map((c) => c.time);
             const bestTime = Math.min(...times);
