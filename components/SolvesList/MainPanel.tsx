@@ -1,10 +1,17 @@
 import { Tab } from '@headlessui/react';
 import { Fragment } from 'react';
 import { isBrowser } from 'react-device-detect';
+import { Solve } from '../../lib/db';
 import ListPanel from './ListPanel';
 import StatsPanel from './StatsPanel';
 
-const MainPanel: React.FC<any> = ({ handleDeleteAll, solves, isLoading }) => {
+type MainPanelProps = {
+  handleDeleteAll: () => Promise<void>;
+  solves: Solve[];
+  isLoading: boolean;
+};
+
+const MainPanel: React.FC<MainPanelProps> = ({ handleDeleteAll, solves, isLoading }) => {
   return (
     <main className="w-full">
       {!isBrowser ? (

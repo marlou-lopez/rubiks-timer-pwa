@@ -3,7 +3,6 @@ import {
   formatTime,
   getAverages,
   getLatestAverage,
-  getLatestAverageFromTimeStamps,
   getMeanFromTimeStamps,
   getStandardDeviation,
 } from '../../Timer/timerUtils';
@@ -52,7 +51,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
       <div>
         <h1 className="mb-1 text-lg font-bold">Current</h1>
         <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
-          {solves.length > 1 ? (
+          {solves.length > 4 ? (
             Object.values(AVERAGE_OF).map((averageOf) => {
               const average = getLatestAverage(solves, averageOf);
               if (average === 0) return;
@@ -66,7 +65,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
               );
             })
           ) : (
-            <div className="font-semibold text-gray-500">No current solves.</div>
+            <div className="font-semibold text-gray-500">Not enough data.</div>
           )}
         </div>
       </div>
@@ -77,14 +76,17 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
             <div>
               <h2 className="mb-1 text-sm font-semibold">Best</h2>
               <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
-                {personalBest && (
+                {personalBest && personalBest.time ? (
                   <div>
                     <StatTile stat="single" value={formatTime(personalBest.time)} />
                   </div>
+                ) : (
+                  <div className="font-semibold text-gray-500">Not enough data.</div>
                 )}
                 {Object.values(AVERAGE_OF).map((averageOf) => {
                   const average = getAverages(solves, averageOf);
-                  if (average === null) return;
+                  if (average === null || average === undefined) return;
+                  if (!average.best) return;
                   return (
                     <div key={averageOf}>
                       <StatTile stat={`ao${averageOf}`} value={formatTime(average.best.time)} />
@@ -96,14 +98,17 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
             <div>
               <h2 className="mb-1 text-sm font-semibold">Worst</h2>
               <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
-                {worstSingle && (
+                {worstSingle && worstSingle.time ? (
                   <div>
                     <StatTile stat="single" value={formatTime(worstSingle.time)} />
                   </div>
+                ) : (
+                  <div className="font-semibold text-gray-500">Not enough data.</div>
                 )}
                 {Object.values(AVERAGE_OF).map((averageOf) => {
                   const average = getAverages(solves, averageOf);
-                  if (average === null) return;
+                  if (average === null || average === undefined) return;
+                  if (!average.worst) return 'Not enough data';
                   return (
                     <div key={averageOf}>
                       <StatTile stat={`ao${averageOf}`} value={formatTime(average.worst.time)} />
@@ -118,7 +123,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
             </div>
           </>
         ) : (
-          <div className="font-semibold text-gray-500">Not enought data.</div>
+          <div className="font-semibold text-gray-500">Not enough data.</div>
         )}
       </div>
     </div>
