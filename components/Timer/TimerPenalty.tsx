@@ -62,7 +62,9 @@ const TimerPenalty = () => {
         disabled={isDNF}
         onTouchStart={async (event) => {
           event.stopPropagation();
-          handlePlusTwo();
+          if (!isDNF) {
+            handlePlusTwo();
+          }
         }}
         onClick={handlePlusTwo}
         className={`
@@ -78,7 +80,9 @@ const TimerPenalty = () => {
         disabled={isPlusTwo}
         onTouchStart={async (event) => {
           event.stopPropagation();
-          handleDNF();
+          if (!isPlusTwo) {
+            handleDNF();
+          }
         }}
         onClick={handleDNF}
         className={`
