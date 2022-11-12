@@ -5,6 +5,7 @@ import useTestLongPress from '../../hooks/useTestLongPress';
 import { db, Solve } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
 import TimerHeader from './TimerHeader';
+import TimerPenalty from './TimerPenalty';
 import { StopwatchReducer } from './timerReducer';
 import TimerStatPreview from './TimerStatPreview';
 import { formatTime } from './timerUtils';
@@ -55,6 +56,7 @@ const Timer = () => {
             date: Date.now(),
             puzzleType: selectedPuzzle.value,
             sessionId: selectedSession?.id,
+            penalty: null,
           });
           await queryClient.refetchQueries(['scramble']);
           await queryClient.refetchQueries(['solves']);
@@ -83,11 +85,11 @@ const Timer = () => {
   const isTimerPressed = isKeyPress && !isLongPress && !state.running;
 
   return (
-    <main className="flex flex-grow flex-col justify-center">
+    <main className="relative flex flex-grow flex-col justify-center">
       {!state.running && <TimerHeader />}
       <div
         {...longPressEvent}
-        className={`flex h-full
+        className={`flex h-full 
          w-full touch-none select-none flex-col items-center justify-center
          ${
            isTimerReady
@@ -103,7 +105,13 @@ const Timer = () => {
         <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
           {formatTime(state.currentTime, { showMs: !state.running })}
         </h1>
+        {!state.running && state.currentTime > 0 && <TimerPenalty />}
         {!state.running && <TimerStatPreview />}
+        {!state.running && (
+          <p className="absolute bottom-1/4 hidden text-lg text-gray-500 lg:block">
+            Hold Space to start the timer.
+          </p>
+        )}
       </div>
     </main>
   );

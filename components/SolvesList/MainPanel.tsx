@@ -18,7 +18,7 @@ const MainPanel: React.FC<any> = ({ handleDeleteAll, solves, isLoading }) => {
                 `}
                   >
                     List
-                    {selected && <div className="w-1/2 rounded-full border-b-4 border-white" />}
+                    {selected && <div className="h-1 w-1/2 rounded-full bg-black dark:bg-white" />}
                   </button>
                 )}
               </Tab>
@@ -29,7 +29,7 @@ const MainPanel: React.FC<any> = ({ handleDeleteAll, solves, isLoading }) => {
                 `}
                   >
                     Stats
-                    {selected && <div className="w-1/2 rounded-full border-b-4 border-white" />}
+                    {selected && <div className="h-1 w-1/2 rounded-full bg-black dark:bg-white" />}
                   </button>
                 )}
               </Tab>

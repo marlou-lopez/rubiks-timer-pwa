@@ -1,8 +1,8 @@
 import { Solve } from '../../../lib/db';
 import {
-  AverageType,
   formatTime,
   getAverages,
+  getLatestAverage,
   getLatestAverageFromTimeStamps,
   getMeanFromTimeStamps,
   getStandardDeviation,
@@ -36,8 +36,9 @@ const StatTile: React.FC<StatTileProps> = ({ stat, value }) => {
 };
 
 const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
-  const solveTimeStamps = solves.map((solve) => solve.time);
-  const sortedSolve = [...solves].sort((a, b) => a.time - b.time);
+  const filteredSolves = solves.filter((solve) => solve.penalty !== 'DNF');
+  const solveTimeStamps = filteredSolves.map((solve) => solve.time);
+  const sortedSolve = [...filteredSolves].sort((a, b) => a.time - b.time);
 
   const personalBest = sortedSolve.length > 2 ? sortedSolve[0] : null;
   const worstSingle = sortedSolve.length > 2 ? sortedSolve[sortedSolve.length - 1] : null;
@@ -49,15 +50,18 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
   return (
     <div className="flex flex-col text-black dark:text-white">
       <div>
-        <h1 className="mb-1 font-bold">Current</h1>
+        <h1 className="mb-1 text-lg font-bold">Current</h1>
         <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
           {solves.length > 1 ? (
             Object.values(AVERAGE_OF).map((averageOf) => {
-              const average = getLatestAverageFromTimeStamps(solveTimeStamps, averageOf);
+              const average = getLatestAverage(solves, averageOf);
               if (average === 0) return;
               return (
                 <div key={averageOf}>
-                  <StatTile stat={`ao${averageOf}`} value={formatTime(average)} />
+                  <StatTile
+                    stat={`ao${averageOf}`}
+                    value={!isNaN(average) ? formatTime(average) : 'DNF'}
+                  />
                 </div>
               );
             })
@@ -67,7 +71,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <h1 className="font-bold">Session Statistics</h1>
+        <h1 className="text-lg font-bold">Session Statistics</h1>
         {solves.length > 1 ? (
           <>
             <div>

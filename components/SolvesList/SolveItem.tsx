@@ -52,12 +52,27 @@ const SolveItemMenu = ({ scramble, id }: Solve) => {
 };
 
 const SolveItem: React.FC<Solve> = (solve) => {
+  const isDNF = solve.penalty === 'DNF';
+  const isPlusTwo = solve.penalty === '+2';
   return (
     <>
-      <div className="flex items-center justify-between hover:bg-gray-200/50 hover:dark:bg-gray-500/25">
-        <span className="text-xl font-bold text-black dark:text-white">
-          {formatTime(solve.time)}
+      <div
+        className={`relative flex items-center justify-between hover:bg-gray-200/50 hover:dark:bg-gray-500/25
+        ${
+          isDNF
+            ? ' bg-gray-300 text-black/60 hover:bg-gray-300 dark:bg-gray-700 dark:text-white/50 hover:dark:bg-gray-700'
+            : ''
+        }
+      `}
+      >
+        <span
+          className={`text-xl font-bold text-black dark:text-white
+          ${isDNF ? 'text-black/60 dark:text-white/50' : ''}
+        `}
+        >
+          {`${formatTime(solve.time)}${isPlusTwo ? '+' : ''}`}
         </span>
+        {isDNF && <span>DNF</span>}
         <SolveItemMenu {...solve} />
       </div>
     </>

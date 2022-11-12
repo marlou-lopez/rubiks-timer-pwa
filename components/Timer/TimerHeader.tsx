@@ -1,5 +1,10 @@
 import { Listbox, Menu } from '@headlessui/react';
-import { Cog6ToothIcon, FolderIcon, InformationCircleIcon } from '@heroicons/react/20/solid';
+import {
+  Cog6ToothIcon,
+  FolderIcon,
+  InformationCircleIcon,
+  WrenchIcon,
+} from '@heroicons/react/20/solid';
 import { randomScrambleForEvent } from 'cubing/scramble';
 import Link, { LinkProps } from 'next/link';
 import React, { AnchorHTMLAttributes, forwardRef, useState } from 'react';
@@ -9,6 +14,7 @@ import { db, PuzzleType, Session } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
 import TimerDropdown from './TimerDropdown';
 import TimerDialog from './TimerDialog';
+import ConfigDialog from '../ConfigDialog';
 
 setDebug({
   forceStringWorker: true,
@@ -40,7 +46,8 @@ const RefForwardedLink = forwardRef<
 });
 
 const TimerMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [timerDialogOpen, setTimerDialogOpen] = useState(false);
+  const [configDialogOpen, setConfigDialogOpen] = useState(false);
   return (
     <>
       <Menu as={'div'} className="relative text-left">
@@ -51,7 +58,7 @@ const TimerMenu = () => {
           <Menu.Item>
             {({ active }) => (
               <button
-                onClick={() => setIsOpen(true)}
+                onClick={() => setTimerDialogOpen(true)}
                 className={`inline-flex w-full items-center gap-1 rounded-md p-2
               ${active ? 'bg-white/25 dark:bg-black/5' : ''}
             `}
@@ -63,19 +70,33 @@ const TimerMenu = () => {
           </Menu.Item>
           <Menu.Item>
             {({ active }) => (
+              <button
+                onClick={() => setConfigDialogOpen(true)}
+                className={`inline-flex w-full items-center gap-1 rounded-md p-2
+              ${active ? 'bg-white/25 dark:bg-black/5' : ''}
+            `}
+              >
+                <WrenchIcon className="h-4 w-4" />
+                <span>Config</span>
+              </button>
+            )}
+          </Menu.Item>
+          <Menu.Item>
+            {({ active }) => (
               <RefForwardedLink
                 href={'/about'}
                 className={`inline-flex w-full items-center gap-1 rounded-md p-2
               ${active ? 'bg-white/25 dark:bg-black/5' : ''}`}
               >
                 <InformationCircleIcon className="h-4 w-4" />
-                <span>About {active}</span>
+                <span>About</span>
               </RefForwardedLink>
             )}
           </Menu.Item>
         </Menu.Items>
       </Menu>
-      <TimerDialog isOpen={isOpen} closeDialog={() => setIsOpen(false)} />
+      <TimerDialog isOpen={timerDialogOpen} closeDialog={() => setTimerDialogOpen(false)} />
+      <ConfigDialog isOpen={configDialogOpen} closeDialog={() => setConfigDialogOpen(false)} />
     </>
   );
 };

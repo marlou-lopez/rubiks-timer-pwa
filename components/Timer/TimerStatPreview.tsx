@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { useQuery } from 'react-query';
 import { db } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
-import { getLatestAverageFromTimeStamps, formatTime } from './timerUtils';
+import { formatTime, getLatestAverage } from './timerUtils';
 
 const TimerStatPreview = () => {
   const { selectedSession } = useSession();
@@ -16,23 +16,24 @@ const TimerStatPreview = () => {
         .toArray(),
     {
       enabled: !!selectedSession,
-      select: (data) => [...data].reverse().map((d) => d.time),
+      select: (data) => [...data].reverse(),
     },
   );
 
   const solves = data ?? [];
 
-  const averageOfFive = getLatestAverageFromTimeStamps(solves, 5);
+  const averageOfFive = getLatestAverage(solves, 5);
 
-  const averageOfTwelve = getLatestAverageFromTimeStamps(solves, 12);
+  const averageOfTwelve = getLatestAverage(solves, 12);
 
   return (
     <div className="flex flex-col items-center justify-center py-2">
       <h2 className="text-2xl font-light sm:text-3xl md:text-5xl">
-        Ao5: {averageOfFive > 0 ? formatTime(averageOfFive) : '-'}
+        Ao5: {averageOfFive > 0 ? formatTime(averageOfFive) : isNaN(averageOfFive) ? 'DNF' : '-'}
       </h2>
       <h2 className="text-2xl font-light sm:text-3xl md:text-5xl">
-        Ao12: {averageOfTwelve > 0 ? formatTime(averageOfTwelve) : '-'}
+        Ao12:{' '}
+        {averageOfTwelve > 0 ? formatTime(averageOfTwelve) : isNaN(averageOfTwelve) ? 'DNF' : '-'}
       </h2>
     </div>
   );

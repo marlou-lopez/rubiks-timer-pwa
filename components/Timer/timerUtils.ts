@@ -75,6 +75,23 @@ export const getLatestAverageFromTimeStamps = (
   return getMeanFromTimeStamps(timesToCalculate);
 };
 
+export const getLatestAverage = (solves: Solve[], averageOf: number = solves.length): number => {
+  if (solves.length < averageOf) return 0;
+  const noOfTimesToBeRemoved = Math.ceil(averageOf * 0.05);
+  let timesToCalculate = solves.slice(0, averageOf).sort((a, b) => a.time - b.time);
+  const dnfs = timesToCalculate.filter((solve) => solve.penalty === 'DNF');
+  // If there are more than two DNFs, average is auto DNF
+  if (dnfs.length > 1) {
+    return NaN;
+  }
+  if (dnfs.length === 1) {
+    timesToCalculate = [...timesToCalculate.filter((solve) => solve.penalty !== 'DNF'), dnfs[0]];
+  }
+  timesToCalculate = timesToCalculate.slice(noOfTimesToBeRemoved, -noOfTimesToBeRemoved);
+
+  return getMeanFromTimeStamps(timesToCalculate.map((t) => t.time));
+};
+
 type Average = {
   solves: Solve[];
   time: number;
@@ -85,22 +102,23 @@ export type AverageType = {
   worst: Average;
 };
 
-export const getAverages = (solves: Solve[], averageOf: number): AverageType | null => {
+export const getAverages = (solves: Solve[], averageOf: number) => {
   if (solves.length < averageOf) return null;
 
   let averages: Average[] = [];
 
   for (let i = 0, j = averageOf; i <= solves.length - averageOf; i++, j++) {
-    const timestampsToAverage = solves.slice(i, j);
+    const solvesToAverage = solves.slice(i, j);
 
-    const average = getLatestAverageFromTimeStamps(timestampsToAverage.map((t) => t.time));
+    const average = getLatestAverage(solvesToAverage);
     averages.push({
-      solves: timestampsToAverage,
+      solves: solvesToAverage,
       time: average,
     });
   }
 
-  const sortedAverages = averages.sort((a, b) => a.time - b.time);
+  const filterDNFs = averages.filter((average) => !isNaN(average.time));
+  const sortedAverages = filterDNFs.sort((a, b) => a.time - b.time);
   return {
     best: sortedAverages[0],
     worst: sortedAverages[sortedAverages.length - 1],

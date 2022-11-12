@@ -16,6 +16,7 @@ const useTestLongPress = ({ pressHandlers, delay = 300 }: TestLongPressProps) =>
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
+      if (event.target !== event.currentTarget) return;
       if (event.key === ' ') {
         if (event.type === 'keydown') {
           onTap(event);

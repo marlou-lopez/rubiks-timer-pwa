@@ -7,12 +7,14 @@ export type Puzzle = {
   value: PuzzleType;
 };
 
+export type Penalty = '+2' | 'DNF';
 export type Solve = {
   id?: number;
   time: number;
   scramble: string;
   puzzleType: PuzzleType;
   sessionId?: number;
+  penalty: Penalty | null;
   date: number;
 };
 
@@ -45,8 +47,8 @@ export class DBDexie extends Dexie {
 
   constructor() {
     super('rubiksPwa');
-    this.version(3).stores({
-      solves: '++id, sessionId',
+    this.version(5).stores({
+      solves: '++id, sessionId, penalty',
       sessions: '++id, puzzleType',
     });
 
@@ -87,6 +89,7 @@ const populate = async () => {
     date: Date.now(),
     puzzleType: '333',
     sessionId: 1,
+    penalty: null,
   });
   await db.solves.bulkAdd(generatedData);
 };
