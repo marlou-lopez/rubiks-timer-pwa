@@ -1,7 +1,6 @@
 import { Listbox } from '@headlessui/react';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { useTheme } from 'next-themes';
-import { useConfig } from '../../providers/ConfigProvider';
 import AppDialog from '../AppDialog';
 
 type ConfigDialogProps = {

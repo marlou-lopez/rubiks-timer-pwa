@@ -12,9 +12,9 @@ import { useQuery } from 'react-query';
 import { setDebug } from 'cubing/search';
 import { db, PuzzleType, Session } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
-import TimerDropdown from './TimerDropdown';
-import TimerDialog from './TimerDialog';
-import ConfigDialog from '../ConfigDialog';
+import SessionSelector from './SessionSelector';
+import SessionDialog from '../Dialogs/SessionDialog';
+import ConfigDialog from '../Dialogs/ConfigDialog';
 
 setDebug({
   forceStringWorker: true,
@@ -95,7 +95,7 @@ const TimerMenu = () => {
           </Menu.Item>
         </Menu.Items>
       </Menu>
-      <TimerDialog isOpen={timerDialogOpen} closeDialog={() => setTimerDialogOpen(false)} />
+      <SessionDialog isOpen={timerDialogOpen} closeDialog={() => setTimerDialogOpen(false)} />
       <ConfigDialog isOpen={configDialogOpen} closeDialog={() => setConfigDialogOpen(false)} />
     </>
   );
@@ -114,7 +114,7 @@ const TimerHeader = () => {
   return (
     <header className="fixed top-0 flex w-full flex-col items-center justify-center gap-5 p-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
       <div className="flex w-full items-center justify-between">
-        <TimerDropdown />
+        <SessionSelector />
         <TimerMenu />
       </div>
       <div>

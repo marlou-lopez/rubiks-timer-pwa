@@ -1,17 +1,10 @@
-import dynamic from 'next/dynamic';
-import React, { Suspense } from 'react';
-import AppLoading from '../components/AppLoading';
+import React from 'react';
 import PrimaryLayout from '../components/layout/layout';
+import Timer from '../components/Timer';
 import { NextPageWithLayout } from './_app';
 
-const Timer = dynamic(() => import('../components/Timer'), { ssr: false, suspense: true });
-
 const Home: NextPageWithLayout = () => {
-  return (
-    <Suspense fallback={<AppLoading />}>
-      <Timer />
-    </Suspense>
-  );
+  return <Timer />;
 };
 
 Home.getLayout = function getLayout(page) {

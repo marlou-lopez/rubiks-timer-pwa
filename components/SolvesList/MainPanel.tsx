@@ -2,8 +2,8 @@ import { Tab } from '@headlessui/react';
 import { Fragment } from 'react';
 import { isBrowser } from 'react-device-detect';
 import { Solve } from '../../lib/db';
-import ListPanel from './ListPanel';
-import StatsPanel from './StatsPanel';
+import ListPanel from './Panels/ListPanel';
+import StatsPanel from './Panels/StatsPanel';
 
 type MainPanelProps = {
   handleDeleteAll: () => Promise<void>;

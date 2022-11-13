@@ -1,9 +1,9 @@
-type SolvesListHeaderProps = {
+type ListHeaderProps = {
   handleDeleteAll: () => Promise<void>;
   solveCount: number;
 };
 
-const SolvesListHeader: React.FC<SolvesListHeaderProps> = ({ solveCount, handleDeleteAll }) => {
+const ListHeader: React.FC<ListHeaderProps> = ({ solveCount, handleDeleteAll }) => {
   return (
     <section className="w-full bg-white dark:bg-black">
       <div className="mx-auto flex w-full max-w-sm items-center justify-between py-2 md:max-w-2xl">
@@ -22,4 +22,4 @@ const SolvesListHeader: React.FC<SolvesListHeaderProps> = ({ solveCount, handleD
   );
 };
 
-export default SolvesListHeader;
+export default ListHeader;

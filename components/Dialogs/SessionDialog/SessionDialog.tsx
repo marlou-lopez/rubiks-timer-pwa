@@ -2,9 +2,9 @@ import { LockClosedIcon, PencilIcon, PlusIcon, TrashIcon } from '@heroicons/reac
 import { useState } from 'react';
 import { useQuery, useQueryClient } from 'react-query';
 import { FixedSizeList } from 'react-window';
-import { db, Puzzle, Session } from '../../lib/db';
+import { Puzzle, db, Session } from '../../../lib/db';
+import PuzzleDropdown from '../../Dropdowns/PuzzleDropdown';
 import AppDialog from '../AppDialog';
-import PuzzleDropdown from '../Dropdowns/PuzzleDropdown';
 import AddSessionDialog from './AddSessionDialog';
 
 type TimerDialogProps = {
@@ -12,7 +12,7 @@ type TimerDialogProps = {
   closeDialog: () => void;
 };
 
-const TimerDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
+const SessionDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
   const queryClient = useQueryClient();
   const [puzzle, setPuzzle] = useState<Puzzle>({
     name: '3x3x3',
@@ -136,4 +136,4 @@ const TimerDialog: React.FC<TimerDialogProps> = ({ isOpen, closeDialog }) => {
   );
 };
 
-export default TimerDialog;
+export default SessionDialog;

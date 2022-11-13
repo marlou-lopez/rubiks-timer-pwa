@@ -4,7 +4,7 @@ import { useSession } from '../../providers/SessionProvider';
 import PuzzleDropdown from '../Dropdowns/PuzzleDropdown';
 import SessionDropdown from '../Dropdowns/SessionDropdown';
 
-const TimerDropdown = () => {
+const SessionSelector = () => {
   const { selectedPuzzle, selectedSession, onPuzzleSelect, onSessionSelect } = useSession();
   const { data: sessions } = useQuery(
     ['sessions', selectedPuzzle.value],
@@ -46,4 +46,4 @@ const TimerDropdown = () => {
   );
 };
 
-export default TimerDropdown;
+export default SessionSelector;
