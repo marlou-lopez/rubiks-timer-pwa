@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
-import { db, Puzzle, Session } from '../../lib/db';
+import { Puzzle, Session, db } from '../../../lib/db';
 import AppDialog from '../AppDialog';
 
 // TODO: Refactor to handle add/edit more efficiently

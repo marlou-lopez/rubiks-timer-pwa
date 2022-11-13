@@ -1,6 +1,6 @@
-import { Solve } from '../../lib/db';
-import StatsGraph from '../Stats/StatsGraph';
-import StatsOverview from '../Stats/StatsOverview';
+import { Solve } from '../../../lib/db';
+import StatsGraph from '../../Stats/StatsGraph';
+import StatsOverview from '../../Stats/StatsOverview';
 
 type StatsPanelProps = {
   solves: Solve[];

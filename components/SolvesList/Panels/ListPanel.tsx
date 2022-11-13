@@ -1,9 +1,9 @@
 import { isBrowser, isTablet } from 'react-device-detect';
 import { FixedSizeList } from 'react-window';
-import { Solve } from '../../lib/db';
-import ListLoading from './ListLoading';
-import SolveItem from './SolveItem';
-import SolvesListHeader from './SolvesListHeader';
+import { Solve } from '../../../lib/db';
+import ListLoading from '../ListLoading';
+import SolveItem from '../SolveItem';
+import ListHeader from '../ListHeader';
 
 type ListPanelProps = {
   solves: Solve[];
@@ -21,7 +21,7 @@ const ListPanel: React.FC<ListPanelProps> = ({ solves, isLoading, handleDeleteAl
 
   return (
     <section className="mx-auto flex w-full max-w-sm flex-col px-6 py-2 md:max-w-2xl">
-      <SolvesListHeader solveCount={solves.length} handleDeleteAll={handleDeleteAll} />
+      <ListHeader solveCount={solves.length} handleDeleteAll={handleDeleteAll} />
       {isLoading ? (
         <ListLoading />
       ) : solves.length !== 0 ? (
