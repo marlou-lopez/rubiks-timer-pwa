@@ -13,8 +13,8 @@ import { setDebug } from 'cubing/search';
 import { db, PuzzleType, Session } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
 import SessionSelector from './SessionSelector';
-import SessionDialog from '../Dialogs/SessionDialog';
 import ConfigDialog from '../Dialogs/ConfigDialog';
+import SessionDialog from '../Dialogs/SessionDialog';
 
 setDebug({
   forceStringWorker: true,
