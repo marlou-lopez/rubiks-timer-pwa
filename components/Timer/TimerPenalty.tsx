@@ -19,7 +19,6 @@ const TimerPenalty: React.FC<TimerPenaltyProps> = ({ solve }) => {
       });
     },
     onSuccess: () => {
-      console.log('succ');
       queryClient.invalidateQueries({ queryKey: ['solves', selectedSession?.id] });
     },
   });

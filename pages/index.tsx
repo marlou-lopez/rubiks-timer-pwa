@@ -1,8 +1,8 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import { useQueryClient, useQuery, useMutation } from 'react-query';
-import Timer from '../components/GenericTimer';
 import PrimaryLayout from '../components/layout/layout';
+import Timer from '../components/Timer';
 import TimerHeader from '../components/Timer/TimerHeader';
 import TimerPenalty from '../components/Timer/TimerPenalty';
 import TimerStatPreview from '../components/Timer/TimerStatPreview';
