@@ -1,58 +1,62 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { db } from '../../lib/db';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { db, Solve } from '../../lib/db';
 import { useSession } from '../../providers/SessionProvider';
 
-const TimerPenalty = () => {
+type TimerPenaltyProps = {
+  solve: Solve;
+};
+const TimerPenalty: React.FC<TimerPenaltyProps> = ({ solve }) => {
+  const queryClient = useQueryClient();
   const { selectedSession } = useSession();
-  const { data, refetch } = useQuery(
-    ['solves', selectedSession?.id],
-    () =>
-      db.solves
-        .where({
-          sessionId: selectedSession?.id,
-        })
-        .toArray(),
-    {
-      enabled: !!selectedSession,
-      select: (data) => [...data].reverse(),
-    },
-  );
 
-  const solves = data ?? [];
+  const { mutate: updateSolve } = useMutation({
+    mutationFn: (solve: Solve) => {
+      const { time, penalty, id } = solve;
+      return db.solves.update(id!, {
+        time,
+        penalty,
+      });
+    },
+    onSuccess: () => {
+      console.log('succ');
+      queryClient.invalidateQueries({ queryKey: ['solves', selectedSession?.id] });
+    },
+  });
+
   const [isPlusTwo, setIsPlusTwo] = useState(false);
   const [isDNF, setIsDNF] = useState(false);
 
-  const handlePlusTwo = async () => {
+  const handlePlusTwo = () => {
     setIsPlusTwo(!isPlusTwo);
-    const latestSolve = solves[0];
     if (isPlusTwo) {
-      await db.solves.update(latestSolve.id!, {
-        time: latestSolve.time - 2000,
+      updateSolve({
+        ...solve,
+        time: solve.time - 2000,
         penalty: null,
       });
     } else {
-      await db.solves.update(latestSolve.id!, {
-        time: latestSolve.time + 2000,
+      updateSolve({
+        ...solve,
+        time: solve.time + 2000,
         penalty: '+2',
       });
     }
-    refetch();
   };
 
-  const handleDNF = async () => {
+  const handleDNF = () => {
     setIsDNF(!isDNF);
-    const latestSolve = solves[0];
     if (isDNF) {
-      await db.solves.update(latestSolve.id!, {
+      updateSolve({
+        ...solve,
         penalty: null,
       });
     } else {
-      await db.solves.update(latestSolve.id!, {
+      updateSolve({
+        ...solve,
         penalty: 'DNF',
       });
     }
-    refetch();
   };
 
   return (
@@ -60,7 +64,7 @@ const TimerPenalty = () => {
       <button
         type="button"
         disabled={isDNF}
-        onTouchStart={async (event) => {
+        onTouchStart={(event) => {
           event.stopPropagation();
           if (!isDNF) {
             handlePlusTwo();

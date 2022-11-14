@@ -1,4 +1,3 @@
-import { Tab } from '@headlessui/react';
 import { useReducer, useState } from 'react';
 import useTestLongPress from '../../hooks/useTestLongPress';
 import { StopwatchReducer, StopwatchState } from '../Timer/timerReducer';
@@ -9,7 +8,7 @@ type TimerOptions = {
 };
 
 type TimerProps = {
-  onStop?: (timerState: StopwatchState) => Promise<void>;
+  onStop?: (timerState: Pick<StopwatchState, 'currentTime' | 'splitTimes'>) => void;
   onStart?: () => Promise<void>;
   options?: TimerOptions;
   header?: React.ReactNode;
@@ -43,7 +42,7 @@ const Timer: React.FC<TimerProps> = ({
         dispatch({ type: 'reset' });
         setIsLongPress(true);
       },
-      onTap: async () => {
+      onTap: () => {
         if (!isKeyPress) {
           console.log('onTap');
           setIsKeyPress(true);
@@ -71,16 +70,18 @@ const Timer: React.FC<TimerProps> = ({
         }
       },
       onRelease: () => {
-        console.log('onRelease');
-        setIsKeyPress(false);
-        if (isLongPress) {
-          setIsLongPress(false);
-          dispatch({ type: 'start' });
-          setSwInterval(
-            setInterval(() => {
-              dispatch({ type: 'tick' });
-            }, 1),
-          );
+        if (isKeyPress) {
+          setIsKeyPress(false);
+          console.log('onRelease');
+          if (isLongPress) {
+            setIsLongPress(false);
+            dispatch({ type: 'start' });
+            setSwInterval(
+              setInterval(() => {
+                dispatch({ type: 'tick' });
+              }, 1),
+            );
+          }
         }
       },
     },
@@ -90,9 +91,11 @@ const Timer: React.FC<TimerProps> = ({
   const isTimerPressed = isKeyPress && !isLongPress && !state.running;
 
   return (
-    <div
-      {...longPressEvent}
-      className={`flex h-full 
+    <>
+      {!state.running && header}
+      <div
+        {...longPressEvent}
+        className={`flex h-full 
          w-full touch-none select-none flex-col items-center justify-center
          ${
            isTimerReady
@@ -102,22 +105,22 @@ const Timer: React.FC<TimerProps> = ({
              : 'bg-white dark:bg-black'
          }
          `}
-      tabIndex={0}
-    >
-      {!state.running && header}
-      <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
-        {formatTime(state.currentTime, { showMs: !state.running })}
-      </h1>
-      {!state.running && state.currentTime > 0 && actions}
-      {!state.running && statPreview}
-      <div className="flex flex-col gap-2">
-        {state.splitTimes.map((p, i, arr) => (
-          <p key={i}>{`${i > 0 ? '+' : ''}${formatTime(p - (arr[i - 1] ?? 0), {
-            showMs: true,
-          })}`}</p>
-        ))}
+        tabIndex={0}
+      >
+        <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
+          {formatTime(state.currentTime, { showMs: !state.running })}
+        </h1>
+        {!state.running && state.currentTime > 0 && actions}
+        {!state.running && statPreview}
+        <div className="flex flex-col gap-2">
+          {state.splitTimes.map((p, i, arr) => (
+            <p key={i}>{`${i > 0 ? '+' : ''}${formatTime(p - (arr[i - 1] ?? 0), {
+              showMs: true,
+            })}`}</p>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
