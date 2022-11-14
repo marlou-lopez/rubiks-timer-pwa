@@ -16,6 +16,7 @@ const Timer = () => {
     running: false,
     currentTime: 0,
     lastTime: 0,
+    splitTimes: [],
   });
   const { selectedPuzzle, selectedSession } = useSession();
 
@@ -30,39 +31,41 @@ const Timer = () => {
         setIsLongPress(true);
       },
       onTap: async () => {
-        setIsKeyPress(true);
-        if (state.currentTime > 0 && state.running) {
-          setIsKeyPress(false);
-          dispatch({ type: 'stop' });
+        if (!isKeyPress) {
+          setIsKeyPress(true);
+          if (state.currentTime > 0 && state.running) {
+            setIsKeyPress(false);
+            dispatch({ type: 'stop' });
 
-          const currentSolves =
-            queryClient.getQueryData<Solve[]>(['solves', selectedSession?.id]) ?? [];
-          if (currentSolves?.length > 0) {
-            const times = currentSolves.map((c) => c.time);
-            const bestTime = Math.min(...times);
-            if (state.currentTime < bestTime) {
-              toast('New record single!', {
-                icon: '🎉',
-              });
+            const currentSolves =
+              queryClient.getQueryData<Solve[]>(['solves', selectedSession?.id]) ?? [];
+            if (currentSolves?.length > 0) {
+              const times = currentSolves.map((c) => c.time);
+              const bestTime = Math.min(...times);
+              if (state.currentTime < bestTime) {
+                toast('New record single!', {
+                  icon: '🎉',
+                });
+              }
             }
-          }
-          const currentScramble = queryClient.getQueryData<string>([
-            'scramble',
-            selectedPuzzle.value,
-          ]);
-          await db.solves.add({
-            time: state.currentTime,
-            scramble: currentScramble!,
-            date: Date.now(),
-            puzzleType: selectedPuzzle.value,
-            sessionId: selectedSession?.id,
-            penalty: null,
-          });
-          await queryClient.refetchQueries(['scramble']);
-          await queryClient.refetchQueries(['solves']);
-          if (swInterval) {
-            clearInterval(swInterval);
-            setSwInterval(null);
+            const currentScramble = queryClient.getQueryData<string>([
+              'scramble',
+              selectedPuzzle.value,
+            ]);
+            await db.solves.add({
+              time: state.currentTime,
+              scramble: currentScramble!,
+              date: Date.now(),
+              puzzleType: selectedPuzzle.value,
+              sessionId: selectedSession?.id,
+              penalty: null,
+            });
+            await queryClient.refetchQueries(['scramble']);
+            await queryClient.refetchQueries(['solves']);
+            if (swInterval) {
+              clearInterval(swInterval);
+              setSwInterval(null);
+            }
           }
         }
       },

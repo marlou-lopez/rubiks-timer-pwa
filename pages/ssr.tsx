@@ -1,13 +1,16 @@
-import { useQuery } from 'react-query';
-import { db } from '../lib/db';
+import Timer from '../components/GenericTimer';
+import TimerHeader from '../components/Timer/TimerHeader';
+import TimerPenalty from '../components/Timer/TimerPenalty';
+import TimerStatPreview from '../components/Timer/TimerStatPreview';
 
 const TestSSR = () => {
-  const { data } = useQuery(['test'], () => db.solves.toArray());
-  console.log(data);
   return (
-    <div>
-      <h1>SSR</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+    <div className="h-screen">
+      <Timer
+        header={<TimerHeader />}
+        actions={<TimerPenalty />}
+        statPreview={<TimerStatPreview />}
+      />
     </div>
   );
 };
