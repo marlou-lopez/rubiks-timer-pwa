@@ -55,7 +55,7 @@ const AppDialog: React.FC<AppDialogProps> = ({
                 </div> */}
                 <Dialog.Title
                   as="h3"
-                  className="flex items-center text-lg font-medium leading-6 text-gray-900"
+                  className="flex items-center text-xl font-bold leading-6 text-gray-900"
                 >
                   {title}
                 </Dialog.Title>

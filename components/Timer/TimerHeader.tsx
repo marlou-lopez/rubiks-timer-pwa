@@ -15,6 +15,7 @@ import { useSession } from '../../providers/SessionProvider';
 import SessionSelector from './SessionSelector';
 import ConfigDialog from '../Dialogs/ConfigDialog';
 import SessionDialog from '../Dialogs/SessionDialog';
+import AppTooltip from '../AppTooltip';
 
 setDebug({
   forceStringWorker: true,
@@ -51,8 +52,10 @@ const TimerMenu = () => {
   return (
     <>
       <Menu as={'div'} className="relative text-left">
-        <Menu.Button type="button" className="flex items-center">
-          <Cog6ToothIcon className="h-5 w-5" />
+        <Menu.Button name="settings" type="button" className="flex items-center">
+          <AppTooltip content="Settings" placement="bottom-end">
+            <Cog6ToothIcon className="h-5 w-5" />
+          </AppTooltip>
         </Menu.Button>
         <Menu.Items className="absolute right-0 mt-2 w-40 rounded-md bg-black p-1 text-sm text-white dark:bg-white dark:text-black">
           <Menu.Item>
@@ -119,14 +122,11 @@ const TimerHeader = () => {
       </div>
       <div>
         {!isLoading ? (
-          <button
-            //  Add tooltip component(?)
-            title="Click to generate new scramble."
-            onClick={() => refetch()}
-            type={'button'}
-          >
-            {scramble}
-          </button>
+          <AppTooltip content="Click to generate new scramble." placement="bottom">
+            <button onClick={() => refetch()} type={'button'}>
+              {scramble}
+            </button>
+          </AppTooltip>
         ) : (
           <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl">Generating Scramble...</p>
         )}

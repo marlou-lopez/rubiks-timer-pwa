@@ -10,6 +10,8 @@
     "prettier": "prettier --write ."
   },
   "dependencies": {
+    "@floating-ui/react-dom": "^1.0.0",
+    "@floating-ui/react-dom-interactions": "^0.10.3",
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.12",
     "cubing": "^0.31.0",
@@ -22,6 +24,7 @@
     "react-device-detect": "^2.2.2",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
+    "react-merge-refs": "^2.0.1",
     "react-query": "^3.39.2",
     "react-window": "^1.8.7",
     "recharts": "^2.1.16",
