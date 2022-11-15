@@ -7,12 +7,14 @@ import TimerHeader from '../components/Timer/TimerHeader';
 import TimerPenalty from '../components/Timer/TimerPenalty';
 import TimerStatPreview from '../components/Timer/TimerStatPreview';
 import { db, Solve } from '../lib/db';
+import { useConfig } from '../providers/ConfigProvider';
 import { useSession } from '../providers/SessionProvider';
 import { NextPageWithLayout } from './_app';
 
 const Home: NextPageWithLayout = () => {
   const queryClient = useQueryClient();
   const { selectedPuzzle, selectedSession } = useSession();
+  const { enableInspection, holdDuration, multiPhase } = useConfig();
   const { data: solves } = useQuery(
     ['solves', selectedSession?.id],
     () =>
@@ -40,9 +42,9 @@ const Home: NextPageWithLayout = () => {
   return (
     <Timer
       options={{
-        enableInspection: true,
-        multiPhase: 4,
-        holdDuration: 0,
+        enableInspection,
+        multiPhase,
+        holdDuration,
       }}
       onStop={function handleOnStop({ currentTime }) {
         if (solves) {

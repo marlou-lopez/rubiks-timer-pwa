@@ -4,10 +4,12 @@ import { StopwatchReducer, StopwatchState } from './timerReducer';
 import { formatTime } from './timerUtils';
 
 export const HOLD_DURATION = [0, 300, 550, 1000] as const;
+export type HOLD_DURATION_TYPE = typeof HOLD_DURATION[number];
+
 type TimerOptions = {
   multiPhase?: number;
   enableInspection?: boolean;
-  holdDuration?: typeof HOLD_DURATION[number];
+  holdDuration?: HOLD_DURATION_TYPE;
 };
 
 type TimerProps = {
@@ -57,7 +59,6 @@ const Timer: React.FC<TimerProps> = ({
           resetTimers();
         }
         setIsLongPress(true);
-        console.log('hold');
       },
       onTap: () => {
         if (!isKeyPress) {
@@ -170,14 +171,14 @@ const Timer: React.FC<TimerProps> = ({
             </h1>
           </div>
         ) : (
-          <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
+          <h1 className="mb-2 text-7xl font-semibold text-black dark:text-white md:text-9xl">
             {formatTime(state.currentTime, { showMs: !state.running })}
           </h1>
         )}
 
         {!isInspectionTimeRunning && !state.running && state.currentTime > 0 && actions}
         {!isInspectionTimeRunning && !state.running && statPreview}
-        {options?.multiPhase && (
+        {state.currentTime > 0 && Boolean(options?.multiPhase) && (
           <div className="mt-4 flex flex-col gap-1">
             {state.splitTimes.map((p, i, arr) => (
               <div key={i} className="flex items-center justify-between gap-2">
