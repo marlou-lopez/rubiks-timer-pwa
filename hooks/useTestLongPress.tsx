@@ -21,9 +21,11 @@ const useTestLongPress = ({ pressHandlers, delay = 300 }: TestLongPressProps) =>
         if (event.type === 'keydown') {
           onTap(event);
           if (timeout.current === null) {
-            timeout.current = setTimeout(() => {
-              onHold(event);
-            }, delay);
+            if (delay !== 0) {
+              timeout.current = setTimeout(() => {
+                onHold(event);
+              }, delay);
+            }
           }
         }
       }
@@ -51,9 +53,11 @@ const useTestLongPress = ({ pressHandlers, delay = 300 }: TestLongPressProps) =>
       });
       onTap(event);
       if (timeout.current === null) {
-        timeout.current = setTimeout(() => {
-          onHold(event);
-        }, delay);
+        if (delay !== 0) {
+          timeout.current = setTimeout(() => {
+            onHold(event);
+          }, delay);
+        }
       }
     },
     [onHold, delay, onTap],

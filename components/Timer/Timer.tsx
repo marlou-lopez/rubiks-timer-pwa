@@ -1,10 +1,13 @@
-import { useReducer, useState } from 'react';
+import { useReducer, useRef, useState } from 'react';
 import useTestLongPress from '../../hooks/useTestLongPress';
 import { StopwatchReducer, StopwatchState } from './timerReducer';
 import { formatTime } from './timerUtils';
 
+export const HOLD_DURATION = [0, 300, 550, 1000] as const;
 type TimerOptions = {
   multiPhase?: number;
+  enableInspection?: boolean;
+  holdDuration?: typeof HOLD_DURATION[number];
 };
 
 type TimerProps = {
@@ -31,19 +34,40 @@ const Timer: React.FC<TimerProps> = ({
     splitTimes: [],
   });
 
+  const DEFAULT_INSPECTION_TIME = 15000;
+
+  const [swInspectionInterval, setSwInspectionInterval] = useState<NodeJS.Timeout | null>(null);
   const [swInterval, setSwInterval] = useState<NodeJS.Timeout | null>(null);
   const [isKeyPress, setIsKeyPress] = useState(false);
   const [isLongPress, setIsLongPress] = useState(false);
 
+  const [inspectionTime, setInspectionTime] = useState(DEFAULT_INSPECTION_TIME);
+  const [isInspectionTimeRunning, setIsInspectionTimeRunning] = useState(false);
+
+  const resetTimers = () => {
+    dispatch({ type: 'reset' });
+    setInspectionTime(DEFAULT_INSPECTION_TIME);
+  };
+
   const longPressEvent = useTestLongPress({
+    delay: options?.holdDuration,
     pressHandlers: {
       onHold: () => {
-        dispatch({ type: 'reset' });
+        if (!isInspectionTimeRunning && !state.running) {
+          resetTimers();
+        }
         setIsLongPress(true);
+        console.log('hold');
       },
       onTap: () => {
         if (!isKeyPress) {
           setIsKeyPress(true);
+          if (options?.holdDuration === 0) {
+            if (!isInspectionTimeRunning && !state.running) {
+              resetTimers();
+            }
+            setIsLongPress(true);
+          }
           if (state.currentTime > 0 && state.running) {
             setIsKeyPress(false);
             if (options?.multiPhase) {
@@ -72,12 +96,45 @@ const Timer: React.FC<TimerProps> = ({
           setIsKeyPress(false);
           if (isLongPress) {
             setIsLongPress(false);
-            dispatch({ type: 'start' });
-            setSwInterval(
-              setInterval(() => {
-                dispatch({ type: 'tick' });
-              }, 1),
-            );
+            if (options?.enableInspection) {
+              if (isInspectionTimeRunning) {
+                setIsInspectionTimeRunning(false);
+                dispatch({ type: 'start' });
+                setSwInterval(
+                  setInterval(() => {
+                    dispatch({ type: 'tick' });
+                  }, 1),
+                );
+                if (swInspectionInterval) {
+                  clearInterval(swInspectionInterval);
+                  setSwInspectionInterval(null);
+                }
+              } else {
+                setIsInspectionTimeRunning(true);
+                setSwInspectionInterval(
+                  setInterval(() => {
+                    setInspectionTime((prev) => {
+                      const newTime = prev - 1000;
+                      if (newTime === 8000) {
+                        // Accessing audio directly to avoid delay issue
+                        new Audio('/assets/voice/8seconds.mp3').play();
+                      }
+                      if (newTime === 3000) {
+                        new Audio('/assets/voice/12seconds.mp3').play();
+                      }
+                      return newTime;
+                    });
+                  }, 1000),
+                );
+              }
+            } else {
+              dispatch({ type: 'start' });
+              setSwInterval(
+                setInterval(() => {
+                  dispatch({ type: 'tick' });
+                }, 1),
+              );
+            }
           }
         }
       },
@@ -88,8 +145,8 @@ const Timer: React.FC<TimerProps> = ({
   const isTimerPressed = isKeyPress && !isLongPress && !state.running;
 
   return (
-    <>
-      {!state.running && header}
+    <div className="relative flex flex-grow">
+      {!isInspectionTimeRunning && !state.running && header}
       <div
         {...longPressEvent}
         className={`flex h-full 
@@ -101,23 +158,42 @@ const Timer: React.FC<TimerProps> = ({
              ? 'bg-red-400 dark:bg-red-500'
              : 'bg-white dark:bg-black'
          }
+         ${isInspectionTimeRunning || state.running ? 'z-10' : ''}
          `}
         tabIndex={0}
       >
-        <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
-          {formatTime(state.currentTime, { showMs: !state.running })}
-        </h1>
-        {!state.running && state.currentTime > 0 && actions}
-        {!state.running && statPreview}
-        <div className="flex flex-col gap-2">
-          {state.splitTimes.map((p, i, arr) => (
-            <p key={i}>{`${i > 0 ? '+' : ''}${formatTime(p - (arr[i - 1] ?? 0), {
-              showMs: true,
-            })}`}</p>
-          ))}
-        </div>
+        {isInspectionTimeRunning ? (
+          <div>
+            <p>Inspect</p>
+            <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
+              {formatTime(inspectionTime, { showMs: false })}
+            </h1>
+          </div>
+        ) : (
+          <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
+            {formatTime(state.currentTime, { showMs: !state.running })}
+          </h1>
+        )}
+
+        {!isInspectionTimeRunning && !state.running && state.currentTime > 0 && actions}
+        {!isInspectionTimeRunning && !state.running && statPreview}
+        {options?.multiPhase && (
+          <div className="mt-4 flex flex-col gap-1">
+            {state.splitTimes.map((p, i, arr) => (
+              <div key={i} className="flex items-center justify-between gap-2">
+                <p className="text-xl md:text-2xl">{i + 1}:</p>
+                <p className="text-right text-xl md:text-2xl">{`${i > 0 ? '+' : ''}${formatTime(
+                  p - (arr[i - 1] ?? 0),
+                  {
+                    showMs: true,
+                  },
+                )}`}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

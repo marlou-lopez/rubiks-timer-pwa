@@ -38,38 +38,41 @@ const Home: NextPageWithLayout = () => {
   });
 
   return (
-    <div className="h-screen">
-      <Timer
-        onStop={function handleOnStop({ currentTime }) {
-          if (solves) {
-            const mappedSolves = solves.map((solve) => solve.time);
-            const bestTime = Math.min(...mappedSolves);
-            if (currentTime < bestTime) {
-              toast('New record single!', {
-                icon: '🎉',
-              });
-            }
+    <Timer
+      options={{
+        enableInspection: true,
+        multiPhase: 4,
+        holdDuration: 0,
+      }}
+      onStop={function handleOnStop({ currentTime }) {
+        if (solves) {
+          const mappedSolves = solves.map((solve) => solve.time);
+          const bestTime = Math.min(...mappedSolves);
+          if (currentTime < bestTime) {
+            toast('New record single!', {
+              icon: '🎉',
+            });
           }
+        }
 
-          const currentScramble = queryClient.getQueryData<string>([
-            'scramble',
-            selectedPuzzle.value,
-          ]);
+        const currentScramble = queryClient.getQueryData<string>([
+          'scramble',
+          selectedPuzzle.value,
+        ]);
 
-          addSolve({
-            time: currentTime,
-            scramble: currentScramble!,
-            date: Date.now(),
-            puzzleType: selectedPuzzle.value,
-            sessionId: selectedSession?.id,
-            penalty: null,
-          });
-        }}
-        header={<TimerHeader />}
-        actions={<TimerPenalty solve={(solves ?? [])[0]} />}
-        statPreview={<TimerStatPreview />}
-      />
-    </div>
+        addSolve({
+          time: currentTime,
+          scramble: currentScramble!,
+          date: Date.now(),
+          puzzleType: selectedPuzzle.value,
+          sessionId: selectedSession?.id,
+          penalty: null,
+        });
+      }}
+      header={<TimerHeader />}
+      actions={<TimerPenalty solve={(solves ?? [])[0]} />}
+      statPreview={<TimerStatPreview />}
+    />
   );
 };
 
