@@ -45,20 +45,12 @@ const AppTooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
           }),
         })}
         <FloatingPortal>
-          <Transition
-            as={React.Fragment}
-            show={open}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-100"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
+          {/* Add transition  */}
+          {open && (
             <div
               {...getFloatingProps({
                 ref: mergedRef,
-                className: 'text-xs bg-white border shadow-md py-1 px-3 z-10 rounded-md',
+                className: 'text-xs bg-white text-black border shadow-md py-1 px-3 z-20 rounded-md',
                 style: {
                   position: strategy,
                   top: y ?? 0,
@@ -69,7 +61,7 @@ const AppTooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
             >
               {content}
             </div>
-          </Transition>
+          )}
         </FloatingPortal>
       </>
     );

@@ -3,7 +3,7 @@ import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import React, { Fragment } from 'react';
 
 type AppDropdownProps<T> = {
-  value?: T;
+  value?: T | null;
   options: readonly T[];
   onChange: (value: T) => void;
   label?: React.ReactNode;
@@ -11,11 +11,11 @@ type AppDropdownProps<T> = {
    * This only applies to wrapper
    */
   className?: React.ComponentProps<'div'>['className'];
-  displayFormatter?: (value?: T) => string;
+  displayFormatter: (value?: T | null) => React.ReactNode;
   adaptTheme?: boolean;
 };
 
-const AppDropdown = <T extends React.ReactNode>(props: AppDropdownProps<T>) => {
+const AppDropdown = <T,>(props: AppDropdownProps<T>) => {
   const { onChange, adaptTheme = true, options, value, label, className, displayFormatter } = props;
 
   return (
@@ -27,8 +27,8 @@ const AppDropdown = <T extends React.ReactNode>(props: AppDropdownProps<T>) => {
          ${adaptTheme ? 'bg-black text-white dark:bg-white dark:text-black' : 'bg-white text-black'}
         `}
         >
-          <span className="font-semibold">
-            {displayFormatter ? displayFormatter(value) : value}
+          <span className="truncate font-semibold">
+            {displayFormatter && displayFormatter(value)}
           </span>
           <ChevronUpDownIcon className="h-3 w-3" />
         </Listbox.Button>
@@ -38,21 +38,27 @@ const AppDropdown = <T extends React.ReactNode>(props: AppDropdownProps<T>) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute z-10 mt-1 w-full overflow-auto rounded-md border bg-black py-1 text-sm text-white shadow-md dark:bg-white dark:text-black">
+          <Listbox.Options
+            className={`absolute z-10  mt-1 w-full  overflow-auto rounded-md border py-1 text-sm shadow-md
+         ${adaptTheme ? 'bg-black text-white dark:bg-white dark:text-black' : 'bg-white text-black'}
+           `}
+          >
             {options.map((option, index) => {
               return (
                 <Listbox.Option
                   key={index}
                   value={option}
                   className={({ active }) => {
-                    return `relative cursor-default select-none py-1 px-3
-                    ${active ? 'bg-white/25 dark:bg-black/10' : ''}
+                    return `relative cursor-default select-none truncate py-1 px-3 text-left
+                    ${
+                      active ? `${adaptTheme ? 'bg-white/25 dark:bg-black/10' : 'bg-black/10'}` : ''
+                    }
                     `;
                   }}
                 >
                   {({ selected }) => (
                     <span className={`${selected ? 'font-semibold' : 'font-normal'}`}>
-                      {displayFormatter ? displayFormatter(option) : option}
+                      {displayFormatter && displayFormatter(option)}
                     </span>
                   )}
                 </Listbox.Option>

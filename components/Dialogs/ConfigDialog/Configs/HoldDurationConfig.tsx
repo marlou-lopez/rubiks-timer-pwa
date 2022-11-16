@@ -1,12 +1,4 @@
-import {
-  offset,
-  useFloating,
-  useHover,
-  useInteractions,
-  useRole,
-} from '@floating-ui/react-dom-interactions';
 import { QuestionMarkCircleIcon } from '@heroicons/react/20/solid';
-import { useState } from 'react';
 import { useConfig } from '../../../../providers/ConfigProvider';
 import AppTooltip from '../../../AppTooltip';
 import AppDropdown from '../../../Dropdowns/AppDropdown';

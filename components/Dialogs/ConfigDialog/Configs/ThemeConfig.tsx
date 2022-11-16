@@ -13,6 +13,7 @@ const ThemeConfig = () => {
         value={theme}
         options={themes}
         onChange={setTheme}
+        displayFormatter={(value) => value}
         adaptTheme={false}
       />
     </div>

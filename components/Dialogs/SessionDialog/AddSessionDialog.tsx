@@ -63,7 +63,7 @@ const AddSessionDialog: React.FC<AddSessionDialogProps> = ({
           onChange={(event) => setSessionName(event.target.value)}
           id="session-name"
           placeholder="Enter session name"
-          className="w-full rounded-md border-2 bg-gray-50 p-2 text-black"
+          className="w-full rounded-md border-2 bg-white p-2 text-black"
         />
         <div className="mt-4 flex justify-end">
           <button
