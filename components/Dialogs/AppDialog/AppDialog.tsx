@@ -22,7 +22,7 @@ const AppDialog: React.FC<AppDialogProps> = ({
       <Dialog
         open={open}
         initialFocus={initialFocusRef}
-        className="relative z-10"
+        className="relative z-30"
         onClose={onClose}
       >
         <Transition.Child

@@ -6,9 +6,11 @@ import {
   offset,
   FloatingPortal,
   Placement,
+  useFocus,
+  useDismiss,
+  useClick,
 } from '@floating-ui/react-dom-interactions';
-import { Transition } from '@headlessui/react';
-import React, { CSSProperties, useState } from 'react';
+import React, { useState } from 'react';
 import { mergeRefs } from 'react-merge-refs';
 
 type TooltipProps = {
@@ -28,10 +30,14 @@ const AppTooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       middleware: [offset(5)],
     });
     const { getFloatingProps, getReferenceProps } = useInteractions([
+      useClick(context),
       useHover(context, {
         delay,
+        restMs: 500,
       }),
+      useFocus(context),
       useRole(context, { role: 'tooltip' }),
+      useDismiss(context),
     ]);
     const mergedRef = React.useMemo(() => mergeRefs([ref, floating]), [floating, ref]);
     const childMergedRef = React.useMemo(() => mergeRefs([ref, reference]), [reference, ref]);

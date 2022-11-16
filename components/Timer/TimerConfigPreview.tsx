@@ -1,10 +1,7 @@
 import {
-  Bars2Icon,
-  ChevronDoubleDownIcon,
   CursorArrowRippleIcon,
   MagnifyingGlassIcon,
   QueueListIcon,
-  Square2StackIcon,
 } from '@heroicons/react/20/solid';
 import AppTooltip from '../AppTooltip';
 import { TimerOptions } from './Timer';

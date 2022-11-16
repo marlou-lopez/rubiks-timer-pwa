@@ -53,7 +53,7 @@ const TimerMenu = () => {
     <>
       <Menu as={'div'} className="relative text-left">
         <Menu.Button name="settings" type="button" className="flex items-center">
-          <AppTooltip delay={500} content="Settings" placement="bottom-end">
+          <AppTooltip delay={500} content="Settings" placement="left">
             <Cog6ToothIcon className="h-5 w-5" />
           </AppTooltip>
         </Menu.Button>
@@ -115,7 +115,7 @@ const TimerHeader = () => {
   });
 
   return (
-    <header className="fixed top-0 flex w-full flex-col items-center justify-center gap-5 p-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
+    <header className="fixed top-0 z-10 flex w-full flex-col items-center justify-center gap-5 p-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
       <div className="flex w-full items-center justify-between">
         <SessionSelector />
         <TimerMenu />

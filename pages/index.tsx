@@ -72,7 +72,7 @@ const Home: NextPageWithLayout = () => {
           penalty: null,
         });
       }}
-      header={<TimerHeader />}
+      // header={<TimerHeader />}
       actions={<TimerPenalty solve={(solves ?? [])[0]} />}
       statPreview={<TimerStatPreview />}
     />
@@ -80,7 +80,12 @@ const Home: NextPageWithLayout = () => {
 };
 
 Home.getLayout = function getLayout(page) {
-  return <PrimaryLayout>{page}</PrimaryLayout>;
+  return (
+    <PrimaryLayout>
+      <TimerHeader />
+      {page}
+    </PrimaryLayout>
+  );
 };
 
 export default Home;
