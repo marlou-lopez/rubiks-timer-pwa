@@ -53,7 +53,7 @@ const TimerMenu = () => {
     <>
       <Menu as={'div'} className="relative text-left">
         <Menu.Button name="settings" type="button" className="flex items-center">
-          <AppTooltip content="Settings" placement="bottom-end">
+          <AppTooltip delay={500} content="Settings" placement="bottom-end">
             <Cog6ToothIcon className="h-5 w-5" />
           </AppTooltip>
         </Menu.Button>

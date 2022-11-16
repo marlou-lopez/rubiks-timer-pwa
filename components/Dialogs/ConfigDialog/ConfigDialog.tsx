@@ -1,3 +1,5 @@
+import { useConfig } from '../../../providers/ConfigProvider';
+import AppSwitch from '../../AppSwitch';
 import AppDialog from '../AppDialog';
 import HoldDurationConfig from './Configs/HoldDurationConfig';
 import InspectionConfig from './Configs/InspectionConfig';
@@ -10,6 +12,7 @@ type ConfigDialogProps = {
 };
 
 const ConfigDialog: React.FC<ConfigDialogProps> = ({ isOpen, closeDialog }) => {
+  const { showTimerConfigPreview = false, setShowTimerConfigPreview } = useConfig();
   return (
     <>
       <AppDialog open={isOpen} onClose={closeDialog} title="Config">
@@ -19,7 +22,17 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ isOpen, closeDialog }) => {
             <ThemeConfig />
           </section>
           <section>
-            <h2 className="font-semibold">Timer</h2>
+            <div className="mb-2 flex items-center justify-between">
+              <h2 className="font-semibold">Timer</h2>
+              <div className="flex items-center gap-2">
+                <AppSwitch
+                  size="small"
+                  label={<span className="text-xs text-gray-500">Show configs in preview?</span>}
+                  checked={showTimerConfigPreview}
+                  onChange={setShowTimerConfigPreview}
+                />
+              </div>
+            </div>
             <div className="flex flex-col gap-1">
               <HoldDurationConfig />
               <InspectionConfig />

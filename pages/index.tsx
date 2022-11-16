@@ -14,7 +14,7 @@ import { NextPageWithLayout } from './_app';
 const Home: NextPageWithLayout = () => {
   const queryClient = useQueryClient();
   const { selectedPuzzle, selectedSession } = useSession();
-  const { enableInspection, holdDuration, multiPhase } = useConfig();
+  const { showTimerConfigPreview, enableInspection, holdDuration, multiPhase } = useConfig();
   const { data: solves } = useQuery(
     ['solves', selectedSession?.id],
     () =>
@@ -45,6 +45,7 @@ const Home: NextPageWithLayout = () => {
         enableInspection,
         multiPhase,
         holdDuration,
+        showTimerConfigPreview,
       }}
       onStop={function handleOnStop({ currentTime }) {
         if (solves) {

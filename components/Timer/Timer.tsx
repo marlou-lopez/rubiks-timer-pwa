@@ -1,15 +1,17 @@
 import { useReducer, useRef, useState } from 'react';
 import useTestLongPress from '../../hooks/useTestLongPress';
+import TimerConfigPreview from './TimerConfigPreview';
 import { StopwatchReducer, StopwatchState } from './timerReducer';
 import { formatTime } from './timerUtils';
 
 export const HOLD_DURATION = [0, 300, 550, 1000] as const;
 export type HOLD_DURATION_TYPE = typeof HOLD_DURATION[number];
 
-type TimerOptions = {
+export type TimerOptions = {
   multiPhase?: number;
   enableInspection?: boolean;
   holdDuration?: HOLD_DURATION_TYPE;
+  showTimerConfigPreview?: boolean;
 };
 
 type TimerProps = {
@@ -163,6 +165,9 @@ const Timer: React.FC<TimerProps> = ({
          `}
         tabIndex={0}
       >
+        {options?.showTimerConfigPreview && !isInspectionTimeRunning && !state.running && (
+          <TimerConfigPreview {...options} />
+        )}
         {isInspectionTimeRunning ? (
           <div>
             <p>Inspect</p>
@@ -175,7 +180,6 @@ const Timer: React.FC<TimerProps> = ({
             {formatTime(state.currentTime, { showMs: !state.running })}
           </h1>
         )}
-
         {!isInspectionTimeRunning && !state.running && state.currentTime > 0 && actions}
         {!isInspectionTimeRunning && !state.running && statPreview}
         {state.currentTime > 0 && Boolean(options?.multiPhase) && (

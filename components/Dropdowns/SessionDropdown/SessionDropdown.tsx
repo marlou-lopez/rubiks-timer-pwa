@@ -14,7 +14,7 @@ const SessionDropdown: React.FC<SessionDropdownProps> = ({ value, onChange, opti
       value={value}
       onChange={onChange}
       options={options}
-      className="w-60"
+      className="w-56"
     />
   );
 };
