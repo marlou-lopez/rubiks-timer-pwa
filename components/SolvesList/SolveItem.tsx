@@ -1,10 +1,19 @@
 import { Menu } from '@headlessui/react';
-import { ChevronDownIcon, ClipboardDocumentListIcon, TrashIcon } from '@heroicons/react/20/solid';
+import {
+  ArrowTopRightOnSquareIcon,
+  ChevronDownIcon,
+  ClipboardDocumentListIcon,
+  TrashIcon,
+} from '@heroicons/react/20/solid';
+import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { db, Solve } from '../../lib/db';
+import SolveDialog from '../Dialogs/SolveDialog';
 import { formatTime } from '../Timer/timerUtils';
 
-const SolveItemMenu = ({ scramble, id }: Solve) => {
+const SolveItemMenu = (solve: Solve) => {
+  const { scramble, id } = solve;
+  const [openDialog, setOpenDialog] = useState(false);
   const queryClient = useQueryClient();
   const handleDelete = async (id: number) => {
     await db.solves.where({ id }).delete();
@@ -25,29 +34,40 @@ const SolveItemMenu = ({ scramble, id }: Solve) => {
   };
 
   return (
-    <Menu as={'div'} className="relative">
-      <Menu.Button className="flex items-center">
-        <ChevronDownIcon className="h-5 w-5 text-black dark:text-white" />
-      </Menu.Button>
-      <Menu.Items className="absolute right-0 z-10 flex w-44 flex-col rounded-sm border bg-white dark:bg-black">
-        <Menu.Item
-          as={'button'}
-          onClick={handleCopy}
-          className="flex items-center gap-2 py-2 px-4 text-black dark:text-white"
-        >
-          <ClipboardDocumentListIcon className="h-4 w-4" />
-          <span>Copy scramble</span>
-        </Menu.Item>
-        <Menu.Item
-          as={'button'}
-          onClick={() => handleDelete(id!)}
-          className="flex items-center gap-2 py-2 px-4 text-black dark:text-white"
-        >
-          <TrashIcon className="h-4 w-4" />
-          <span>Delete</span>
-        </Menu.Item>
-      </Menu.Items>
-    </Menu>
+    <>
+      <Menu as={'div'} className="relative">
+        <Menu.Button className="flex items-center">
+          <ChevronDownIcon className="h-5 w-5 text-black dark:text-white" />
+        </Menu.Button>
+        <Menu.Items className="absolute right-0 z-10 flex w-44 flex-col rounded-sm border bg-white dark:bg-black">
+          <Menu.Item
+            as={'button'}
+            onClick={() => setOpenDialog(true)}
+            className="flex items-center gap-2 py-2 px-4 text-black dark:text-white"
+          >
+            <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+            <span>View Solve</span>
+          </Menu.Item>
+          <Menu.Item
+            as={'button'}
+            onClick={handleCopy}
+            className="flex items-center gap-2 py-2 px-4 text-black dark:text-white"
+          >
+            <ClipboardDocumentListIcon className="h-4 w-4" />
+            <span>Copy scramble</span>
+          </Menu.Item>
+          <Menu.Item
+            as={'button'}
+            onClick={() => handleDelete(id!)}
+            className="flex items-center gap-2 py-2 px-4 text-black dark:text-white"
+          >
+            <TrashIcon className="h-4 w-4" />
+            <span>Delete</span>
+          </Menu.Item>
+        </Menu.Items>
+      </Menu>
+      <SolveDialog solve={solve} open={openDialog} closeDialog={() => setOpenDialog(false)} />
+    </>
   );
 };
 

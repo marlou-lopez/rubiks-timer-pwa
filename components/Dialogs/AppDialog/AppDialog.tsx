@@ -1,9 +1,8 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { XCircleIcon, XMarkIcon } from '@heroicons/react/20/solid';
 import { Fragment } from 'react';
 
 type AppDialogProps = {
-  title: string;
+  title: React.ReactNode;
   children: React.ReactNode;
   open: boolean;
   onClose: () => void;
@@ -53,12 +52,16 @@ const AppDialog: React.FC<AppDialogProps> = ({
                     <XCircleIcon className="h-5 w-5" />
                   </button>
                 </div> */}
-                <Dialog.Title
-                  as="h3"
-                  className="flex items-center text-xl font-bold leading-6 text-gray-900"
-                >
-                  {title}
-                </Dialog.Title>
+                {typeof title === 'string' ? (
+                  <Dialog.Title
+                    as="h3"
+                    className="flex items-center text-xl font-bold leading-6 text-gray-900"
+                  >
+                    {title}
+                  </Dialog.Title>
+                ) : (
+                  <Dialog.Title>{title}</Dialog.Title>
+                )}
                 <div className="mt-2 flex flex-grow flex-col" ref={initialFocusRef}>
                   {children}
                 </div>
