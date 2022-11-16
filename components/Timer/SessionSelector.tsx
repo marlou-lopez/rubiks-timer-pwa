@@ -39,7 +39,7 @@ const SessionSelector = () => {
         <SessionDropdown
           value={selectedSession}
           onChange={handleSessionSelect}
-          options={sessions}
+          options={sessions || []}
         />
       </div>
     </>
