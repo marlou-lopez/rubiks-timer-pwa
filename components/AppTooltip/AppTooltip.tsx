@@ -38,12 +38,22 @@ const AppTooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        {React.cloneElement(children, {
-          ...getReferenceProps({
-            ...children.props,
-            ref: childMergedRef,
-          }),
-        })}
+        {typeof children === 'string' ? (
+          <span
+            {...getReferenceProps({
+              ref: childMergedRef,
+            })}
+          >
+            {children}
+          </span>
+        ) : (
+          React.cloneElement(children, {
+            ...getReferenceProps({
+              ...children?.props,
+              ref: childMergedRef,
+            }),
+          })
+        )}
         <FloatingPortal>
           {/* Add transition  */}
           {open && (
