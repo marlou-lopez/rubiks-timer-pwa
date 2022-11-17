@@ -16,7 +16,7 @@ const PrimaryLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   return (
     <div className="flex h-screen w-full flex-col">
       {children}
-      <div className="fixed bottom-4 flex w-full items-center justify-around">
+      <div className="fixed bottom-0 flex w-full items-center justify-around py-4">
         <Link href={'/solves'}>
           <a
             title="Solves"

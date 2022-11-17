@@ -150,42 +150,6 @@ const Timer: React.FC<TimerProps> = ({
   return (
     <div className="relative flex flex-grow">
       {!isInspectionTimeRunning && !state.running && header}
-      <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 transform">
-        <div className="flex flex-col items-center justify-center">
-          {options?.showTimerConfigPreview && !isInspectionTimeRunning && !state.running && (
-            <TimerConfigPreview {...options} />
-          )}
-          {isInspectionTimeRunning ? (
-            <div>
-              <p>Inspect</p>
-              <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
-                {formatTime(inspectionTime, { showMs: false })}
-              </h1>
-            </div>
-          ) : (
-            <h1 className="mb-2 text-7xl font-semibold text-black dark:text-white md:text-9xl">
-              {formatTime(state.currentTime, { showMs: !state.running })}
-            </h1>
-          )}
-          {!isInspectionTimeRunning && !state.running && state.currentTime > 0 && actions}
-          {!isInspectionTimeRunning && !state.running && statPreview}
-          {state.currentTime > 0 && Boolean(options?.multiPhase) && (
-            <div className="mt-4 flex flex-col gap-1">
-              {state.splitTimes.map((p, i, arr) => (
-                <div key={i} className="flex items-center justify-between gap-2">
-                  <p className="text-xl md:text-2xl">{i + 1}:</p>
-                  <p className="text-right text-xl md:text-2xl">{`${i > 0 ? '+' : ''}${formatTime(
-                    p - (arr[i - 1] ?? 0),
-                    {
-                      showMs: true,
-                    },
-                  )}`}</p>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
       <div
         {...longPressEvent}
         className={`flex h-full 
@@ -200,7 +164,40 @@ const Timer: React.FC<TimerProps> = ({
          ${isInspectionTimeRunning || state.running ? 'z-10' : ''}
          `}
         tabIndex={0}
-      ></div>
+      >
+        {options?.showTimerConfigPreview && !isInspectionTimeRunning && !state.running && (
+          <TimerConfigPreview {...options} />
+        )}
+        {isInspectionTimeRunning ? (
+          <div>
+            <p>Inspect</p>
+            <h1 className="text-7xl font-semibold text-black dark:text-white md:text-9xl">
+              {formatTime(inspectionTime, { showMs: false })}
+            </h1>
+          </div>
+        ) : (
+          <h1 className="mb-2 text-7xl font-semibold text-black dark:text-white md:text-9xl">
+            {formatTime(state.currentTime, { showMs: !state.running })}
+          </h1>
+        )}
+        {!isInspectionTimeRunning && !state.running && state.currentTime > 0 && actions}
+        {!isInspectionTimeRunning && !state.running && statPreview}
+        {state.currentTime > 0 && Boolean(options?.multiPhase) && (
+          <div className="mt-4 flex flex-col gap-1">
+            {state.splitTimes.map((p, i, arr) => (
+              <div key={i} className="flex items-center justify-between gap-2">
+                <p className="text-xl md:text-2xl">{i + 1}:</p>
+                <p className="text-right text-xl md:text-2xl">{`${i > 0 ? '+' : ''}${formatTime(
+                  p - (arr[i - 1] ?? 0),
+                  {
+                    showMs: true,
+                  },
+                )}`}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

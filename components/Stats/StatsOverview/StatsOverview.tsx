@@ -108,7 +108,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
                 {Object.values(AVERAGE_OF).map((averageOf) => {
                   const average = getAverages(solves, averageOf);
                   if (average === null || average === undefined) return;
-                  if (!average.worst) return 'Not enough data';
+                  if (!average.worst) return;
                   return (
                     <div key={averageOf}>
                       <StatTile stat={`ao${averageOf}`} value={formatTime(average.worst.time)} />

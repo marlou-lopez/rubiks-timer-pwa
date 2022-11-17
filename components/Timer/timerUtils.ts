@@ -79,13 +79,16 @@ export const getLatestAverage = (solves: Solve[], averageOf: number = solves.len
   if (solves.length < averageOf) return 0;
   const noOfTimesToBeRemoved = Math.ceil(averageOf * 0.05);
   let timesToCalculate = solves.slice(0, averageOf).sort((a, b) => a.time - b.time);
-  const dnfs = timesToCalculate.filter((solve) => solve.penalty === 'DNF');
-  // If there are more than two DNFs, average is auto DNF
-  if (dnfs.length > 1) {
-    return NaN;
-  }
-  if (dnfs.length === 1) {
-    timesToCalculate = [...timesToCalculate.filter((solve) => solve.penalty !== 'DNF'), dnfs[0]];
+  // Only consider dnf for ao5 and ao12, idk the rules for higher average.
+  if (averageOf === 5 || averageOf === 12) {
+    const dnfs = timesToCalculate.filter((solve) => solve.penalty === 'DNF');
+    // If there are more than two DNFs, average is auto DNF
+    if (dnfs.length > 1) {
+      return NaN;
+    }
+    if (dnfs.length === 1) {
+      timesToCalculate = [...timesToCalculate.filter((solve) => solve.penalty !== 'DNF'), dnfs[0]];
+    }
   }
   timesToCalculate = timesToCalculate.slice(noOfTimesToBeRemoved, -noOfTimesToBeRemoved);
 

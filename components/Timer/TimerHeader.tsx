@@ -115,7 +115,7 @@ const TimerHeader = () => {
   });
 
   return (
-    <header className="fixed top-0 z-10 flex w-full flex-col items-center justify-center gap-5 p-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
+    <header className=" fixed top-0 z-10 flex w-full flex-col items-center justify-center gap-5 p-4 text-center text-lg font-semibold text-black dark:text-white sm:text-xl md:text-2xl lg:text-3xl">
       <div className="flex w-full items-center justify-between">
         <SessionSelector />
         <TimerMenu />
