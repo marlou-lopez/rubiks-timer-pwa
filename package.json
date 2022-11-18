@@ -13,7 +13,7 @@
     "@floating-ui/react-dom": "^1.0.0",
     "@floating-ui/react-dom-interactions": "^0.10.3",
     "@headlessui/react": "^1.7.3",
-    "@heroicons/react": "^2.0.12",
+    "@heroicons/react": "^2.0.13",
     "cubing": "^0.31.0",
     "dexie": "^3.2.2",
     "dexie-react-hooks": "^1.1.1",
