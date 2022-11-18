@@ -64,10 +64,10 @@ const TimerPenalty: React.FC<TimerPenaltyProps> = ({ solve }) => {
         type="button"
         disabled={isDNF}
         onTouchStart={(event) => {
-          // event.stopPropagation();
-          // if (!isDNF) {
-          //   handlePlusTwo();
-          // }
+          event.stopPropagation();
+          if (!isDNF) {
+            handlePlusTwo();
+          }
         }}
         onClick={handlePlusTwo}
         className={`
@@ -82,10 +82,10 @@ const TimerPenalty: React.FC<TimerPenaltyProps> = ({ solve }) => {
         type="button"
         disabled={isPlusTwo}
         onTouchStart={(event) => {
-          // event.stopPropagation();
-          // if (!isPlusTwo) {
-          //   handleDNF();
-          // }
+          event.stopPropagation();
+          if (!isPlusTwo) {
+            handleDNF();
+          }
         }}
         onClick={handleDNF}
         className={`
