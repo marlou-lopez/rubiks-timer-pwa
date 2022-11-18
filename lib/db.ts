@@ -48,6 +48,7 @@ export type Case = {
   id?: number;
   name: string;
   // algSet: 'f2l' | 'oll' | 'pll';
+  slug: string;
   algSet: string;
   imageSrc: string;
   algorithms: string[];
@@ -64,7 +65,7 @@ export class DBDexie extends Dexie {
     this.version(5).stores({
       solves: '++id, sessionId, penalty',
       sessions: '++id, puzzleType',
-      cases: '++id, algSet',
+      cases: '++id, algSet, slug',
     });
 
     this.on('populate', async () => {

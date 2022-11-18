@@ -1,6 +1,7 @@
 [
   {
     "name": "F2L 1",
+    "slug": "f2l-1",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-1.svg",
     "algorithms": ["R' F R F'"],
@@ -8,6 +9,7 @@
   },
   {
     "name": "F2L 2",
+    "slug": "f2l-2",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-2.svg",
     "algorithms": ["y U' L' U L"],
@@ -15,6 +17,7 @@
   },
   {
     "name": "F2L 3",
+    "slug": "f2l-3",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-3.svg",
     "algorithms": ["y L' U' L"],
@@ -22,6 +25,7 @@
   },
   {
     "name": "F2L 4",
+    "slug": "f2l-4",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-4.svg",
     "algorithms": ["R U R'"],
@@ -29,6 +33,7 @@
   },
   {
     "name": "F2L 5",
+    "slug": "f2l-5",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-5.svg",
     "algorithms": ["U' R U R' U2 R U' R'"],
@@ -36,6 +41,7 @@
   },
   {
     "name": "F2L 6",
+    "slug": "f2l-6",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-6.svg",
     "algorithms": ["d R' U' R U2 R' U R"],
@@ -43,6 +49,7 @@
   },
   {
     "name": "F2L 7",
+    "slug": "f2l-7",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-7.svg",
     "algorithms": ["U' R U2 R' U2 R U' R'"],
@@ -50,6 +57,7 @@
   },
   {
     "name": "F2L 8",
+    "slug": "f2l-8",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-8.svg",
     "algorithms": ["d R' U2 R U2 R' U R"],
@@ -57,6 +65,7 @@
   },
   {
     "name": "F2L 9",
+    "slug": "f2l-9",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-9.svg",
     "algorithms": ["U' R U' R' U F' U' F"],
@@ -64,6 +73,7 @@
   },
   {
     "name": "F2L 10",
+    "slug": "f2l-10",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-10.svg",
     "algorithms": ["U' R U R' U R U R'"],
@@ -71,6 +81,7 @@
   },
   {
     "name": "F2L 11",
+    "slug": "f2l-11",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-11.svg",
     "algorithms": ["U' R U2 R' U F' U' F"],
@@ -78,6 +89,7 @@
   },
   {
     "name": "F2L 12",
+    "slug": "f2l-12",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-12.svg",
     "algorithms": ["R U' R' U R U' R' U2 R U' R'"],
@@ -85,6 +97,7 @@
   },
   {
     "name": "F2L 13",
+    "slug": "f2l-13",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-13.svg",
     "algorithms": ["y' U R' U R U' R' U' R"],
@@ -92,6 +105,7 @@
   },
   {
     "name": "F2L 14",
+    "slug": "f2l-14",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-14.svg",
     "algorithms": ["U' R U' R' U R U R'"],
@@ -99,6 +113,7 @@
   },
   {
     "name": "F2L 15",
+    "slug": "f2l-15",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-15.svg",
     "algorithms": ["R U R' U2 R U' R' U R U' R'"],
@@ -106,6 +121,7 @@
   },
   {
     "name": "F2L 16",
+    "slug": "f2l-16",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-16.svg",
     "algorithms": ["R U' R' U2 F' U' F"],
@@ -113,6 +129,7 @@
   },
   {
     "name": "F2L 17",
+    "slug": "f2l-17",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-17.svg",
     "algorithms": ["R U2 R' U' R U R'"],
@@ -120,6 +137,7 @@
   },
   {
     "name": "F2L 18",
+    "slug": "f2l-18",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-18.svg",
     "algorithms": ["y' R' U2 R U R' U' R"],
@@ -127,6 +145,7 @@
   },
   {
     "name": "F2L 19",
+    "slug": "f2l-19",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-19.svg",
     "algorithms": ["U R U2 R' U R U' R'"],
@@ -134,6 +153,7 @@
   },
   {
     "name": "F2L 20",
+    "slug": "f2l-20",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-20.svg",
     "algorithms": ["y' U' R' U2 R U' R' U R"],
@@ -141,6 +161,7 @@
   },
   {
     "name": "F2L 21",
+    "slug": "f2l-21",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-21.svg",
     "algorithms": ["U2 R U R' U R U' R'"],
@@ -148,6 +169,7 @@
   },
   {
     "name": "F2L 22",
+    "slug": "f2l-22",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-22.svg",
     "algorithms": ["F' L' U2 L F"],
@@ -155,6 +177,7 @@
   },
   {
     "name": "F2L 23",
+    "slug": "f2l-23",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-23.svg",
     "algorithms": ["R U R' U2 R U R' U' R U R'"],
@@ -162,6 +185,7 @@
   },
   {
     "name": "F2L 24",
+    "slug": "f2l-24",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-24.svg",
     "algorithms": ["F U R U' R' F' R U' R'"],
@@ -169,6 +193,7 @@
   },
   {
     "name": "F2L 25",
+    "slug": "f2l-25",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-25.svg",
     "algorithms": ["R' F' R U R U' R' F"],
@@ -176,6 +201,7 @@
   },
   {
     "name": "F2L 26",
+    "slug": "f2l-26",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-26.svg",
     "algorithms": ["U R U' R' U' F' U F"],
@@ -183,6 +209,7 @@
   },
   {
     "name": "F2L 27",
+    "slug": "f2l-27",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-27.svg",
     "algorithms": ["R U' R' U R U' R'"],
@@ -190,6 +217,7 @@
   },
   {
     "name": "F2L 28",
+    "slug": "f2l-28",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-28.svg",
     "algorithms": ["R U R' U' F R' F' R"],
@@ -197,6 +225,7 @@
   },
   {
     "name": "F2L 29",
+    "slug": "f2l-29",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-29.svg",
     "algorithms": ["R' F R F' R' F R F'"],
@@ -204,6 +233,7 @@
   },
   {
     "name": "F2L 30",
+    "slug": "f2l-30",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-30.svg",
     "algorithms": ["R U R' U' R U R'"],
@@ -211,6 +241,7 @@
   },
   {
     "name": "F2L 31",
+    "slug": "f2l-31",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-31.svg",
     "algorithms": ["U' R' F R F' R U' R'"],
@@ -218,6 +249,7 @@
   },
   {
     "name": "F2L 32",
+    "slug": "f2l-32",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-32.svg",
     "algorithms": ["R U R' U' R U R' U' R U R'"],
@@ -225,6 +257,7 @@
   },
   {
     "name": "F2L 33",
+    "slug": "f2l-33",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-33.svg",
     "algorithms": ["U' R U' R' U2 R U' R'"],
@@ -232,6 +265,7 @@
   },
   {
     "name": "F2L 34",
+    "slug": "f2l-34",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-34.svg",
     "algorithms": ["U R U R' U2 R U R'"],
@@ -239,6 +273,7 @@
   },
   {
     "name": "F2L 35",
+    "slug": "f2l-35",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-35.svg",
     "algorithms": ["U' R U R' U F' U' F"],
@@ -246,6 +281,7 @@
   },
   {
     "name": "F2L 36",
+    "slug": "f2l-36",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-36.svg",
     "algorithms": ["U2 R' F R F' U2 R U R'"],
@@ -253,6 +289,7 @@
   },
   {
     "name": "F2L 37",
+    "slug": "f2l-37",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-37.svg",
     "algorithms": ["R2 U2 F R2 F' U2 R' U R'"],
@@ -260,6 +297,7 @@
   },
   {
     "name": "F2L 38",
+    "slug": "f2l-38",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-38.svg",
     "algorithms": ["R U R' U' R U2 R' U' R U R'"],
@@ -267,6 +305,7 @@
   },
   {
     "name": "F2L 39",
+    "slug": "f2l-39",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-39.svg",
     "algorithms": ["R U R' U2 R U' R' U R U R'"],
@@ -274,6 +313,7 @@
   },
   {
     "name": "F2L 40",
+    "slug": "f2l-40",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-40.svg",
     "algorithms": ["R U' R' F R U R' U' F' R U' R'"],
@@ -281,6 +321,7 @@
   },
   {
     "name": "F2L 41",
+    "slug": "f2l-41",
     "algSet": "f2l",
     "imageSrc": "/images/algs_set/f2l/f2l-41.svg",
     "algorithms": ["R U R' U' R U' R' U2 y' R' U' R"],

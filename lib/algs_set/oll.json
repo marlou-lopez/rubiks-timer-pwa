@@ -1,6 +1,7 @@
 [
   {
     "name": "OLL 1",
+    "slug": "oll-1",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-1.svg",
     "algorithms": ["R U2 R2 F R F' U2 R' F R F'"],
@@ -8,6 +9,7 @@
   },
   {
     "name": "OLL 2",
+    "slug": "oll-2",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-2.svg",
     "algorithms": ["r U r' U2 r U2 R' U2 R U' r'"],
@@ -15,6 +17,7 @@
   },
   {
     "name": "OLL 3",
+    "slug": "oll-3",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-3.svg",
     "algorithms": ["r' R2 U R' U r U2 r' U M'"],
@@ -22,6 +25,7 @@
   },
   {
     "name": "OLL 4",
+    "slug": "oll-4",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-4.svg",
     "algorithms": ["M U' r U2 r' U' R U' R' M'"],
@@ -29,6 +33,7 @@
   },
   {
     "name": "OLL 5",
+    "slug": "oll-5",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-5.svg",
     "algorithms": ["l' U2 L U L' U l"],
@@ -36,6 +41,7 @@
   },
   {
     "name": "OLL 6",
+    "slug": "oll-6",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-6.svg",
     "algorithms": ["r U2 R' U' R U' r'"],
@@ -43,6 +49,7 @@
   },
   {
     "name": "OLL 7",
+    "slug": "oll-7",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-7.svg",
     "algorithms": ["r U R' U R U2 r'"],
@@ -50,6 +57,7 @@
   },
   {
     "name": "OLL 8",
+    "slug": "oll-8",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-8.svg",
     "algorithms": ["l' U' L U' L' U2 l"],
@@ -57,6 +65,7 @@
   },
   {
     "name": "OLL 9",
+    "slug": "oll-9",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-9.svg",
     "algorithms": ["R U R' U' R' F R2 U R' U' F'"],
@@ -64,6 +73,7 @@
   },
   {
     "name": "OLL 10",
+    "slug": "oll-10",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-10.svg",
     "algorithms": ["R U R' U R' F R F' R U2 R'"],
@@ -71,6 +81,7 @@
   },
   {
     "name": "OLL 11",
+    "slug": "oll-11",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-11.svg",
     "algorithms": ["r U R' U R' F R F' R U2 r'"],
@@ -78,6 +89,7 @@
   },
   {
     "name": "OLL 12",
+    "slug": "oll-12",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-12.svg",
     "algorithms": ["M' R' U' R U' R' U2 R U' R r'"],
@@ -85,6 +97,7 @@
   },
   {
     "name": "OLL 13",
+    "slug": "oll-13",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-13.svg",
     "algorithms": ["F U R U' R2 F' R U R U' R'"],
@@ -92,6 +105,7 @@
   },
   {
     "name": "OLL 14",
+    "slug": "oll-14",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-14.svg",
     "algorithms": ["R' F R U R' F' R F U' F'"],
@@ -99,6 +113,7 @@
   },
   {
     "name": "OLL 15",
+    "slug": "oll-15",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-15.svg",
     "algorithms": ["l' U' l L' U' L U l' U l"],
@@ -106,6 +121,7 @@
   },
   {
     "name": "OLL 16",
+    "slug": "oll-16",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-16.svg",
     "algorithms": ["r U r' R U R' U' r U' r'"],
@@ -113,6 +129,7 @@
   },
   {
     "name": "OLL 17",
+    "slug": "oll-17",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-17.svg",
     "algorithms": ["F R' F' R2 r' U R U' R' U' M'"],
@@ -120,6 +137,7 @@
   },
   {
     "name": "OLL 18",
+    "slug": "oll-18",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-18.svg",
     "algorithms": ["r U R' U R U2 r2 U' R U' R' U2 r"],
@@ -127,6 +145,7 @@
   },
   {
     "name": "OLL 19",
+    "slug": "oll-19",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-19.svg",
     "algorithms": ["r' R U R U R' U' M' R' F R F'"],
@@ -134,6 +153,7 @@
   },
   {
     "name": "OLL 20",
+    "slug": "oll-20",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-20.svg",
     "algorithms": ["r U R' U' M2 U R U' R' U' M'"],
@@ -141,6 +161,7 @@
   },
   {
     "name": "OLL 21",
+    "slug": "oll-21",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-21.svg",
     "algorithms": ["R U2 R' U' R U R' U' R U' R'"],
@@ -148,6 +169,7 @@
   },
   {
     "name": "OLL 22",
+    "slug": "oll-22",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-22.svg",
     "algorithms": ["R U2 R2 U' R2 U' R2 U2 R"],
@@ -155,6 +177,7 @@
   },
   {
     "name": "OLL 23",
+    "slug": "oll-23",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-23.svg",
     "algorithms": ["R2 D' R U2 R' D R U2 R"],
@@ -162,6 +185,7 @@
   },
   {
     "name": "OLL 24",
+    "slug": "oll-24",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-24.svg",
     "algorithms": ["r U R' U' r' F R F'"],
@@ -169,6 +193,7 @@
   },
   {
     "name": "OLL 25",
+    "slug": "oll-25",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-25.svg",
     "algorithms": ["F' r U R' U' r' F R"],
@@ -176,6 +201,7 @@
   },
   {
     "name": "OLL 26",
+    "slug": "oll-26",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-26.svg",
     "algorithms": ["R U2 R' U' R U' R'"],
@@ -183,6 +209,7 @@
   },
   {
     "name": "OLL 27",
+    "slug": "oll-27",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-27.svg",
     "algorithms": ["R U R' U R U2 R'"],
@@ -190,6 +217,7 @@
   },
   {
     "name": "OLL 28",
+    "slug": "oll-28",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-28.svg",
     "algorithms": ["r U R' U' r' R U R U' R'"],
@@ -197,6 +225,7 @@
   },
   {
     "name": "OLL 29",
+    "slug": "oll-29",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-29.svg",
     "algorithms": ["R U R' U' R U' R' F' U' F R U R'"],
@@ -204,6 +233,7 @@
   },
   {
     "name": "OLL 30",
+    "slug": "oll-30",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-30.svg",
     "algorithms": ["F R' F R2 U' R' U' R U R' F2"],
@@ -211,6 +241,7 @@
   },
   {
     "name": "OLL 31",
+    "slug": "oll-31",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-31.svg",
     "algorithms": ["R' U' F U R U' R' F' R"],
@@ -218,6 +249,7 @@
   },
   {
     "name": "OLL 32",
+    "slug": "oll-32",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-32.svg",
     "algorithms": ["L U F' U' L' U L F L'"],
@@ -225,6 +257,7 @@
   },
   {
     "name": "OLL 33",
+    "slug": "oll-33",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-33.svg",
     "algorithms": ["R U R' U' R' F R F'"],
@@ -232,6 +265,7 @@
   },
   {
     "name": "OLL 34",
+    "slug": "oll-34",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-34.svg",
     "algorithms": ["R U R2 U' R' F R U R U' F'"],
@@ -239,6 +273,7 @@
   },
   {
     "name": "OLL 35",
+    "slug": "oll-35",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-35.svg",
     "algorithms": ["R U2 R2 F R F' R U2 R'"],
@@ -246,6 +281,7 @@
   },
   {
     "name": "OLL 36",
+    "slug": "oll-36",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-36.svg",
     "algorithms": ["L' U' L U' L' U L U L F' L' F"],
@@ -253,6 +289,7 @@
   },
   {
     "name": "OLL 37",
+    "slug": "oll-37",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-37.svg",
     "algorithms": ["F R' F' R U R U' R'"],
@@ -260,6 +297,7 @@
   },
   {
     "name": "OLL 38",
+    "slug": "oll-38",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-38.svg",
     "algorithms": ["R U R' U R U' R' U' R' F R F'"],
@@ -267,6 +305,7 @@
   },
   {
     "name": "OLL 39",
+    "slug": "oll-39",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-39.svg",
     "algorithms": ["L F' L' U' L U F U' L'"],
@@ -274,6 +313,7 @@
   },
   {
     "name": "OLL 40",
+    "slug": "oll-40",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-40.svg",
     "algorithms": ["R' F R U R' U' F' U R"],
@@ -281,6 +321,7 @@
   },
   {
     "name": "OLL 41",
+    "slug": "oll-41",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-41.svg",
     "algorithms": ["R U R' U R U2 R' F R U R' U' F'"],
@@ -288,6 +329,7 @@
   },
   {
     "name": "OLL 42",
+    "slug": "oll-42",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-42.svg",
     "algorithms": ["R' U' R U' R' U2 R F R U R' U' F'"],
@@ -295,6 +337,7 @@
   },
   {
     "name": "OLL 43",
+    "slug": "oll-43",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-43.svg",
     "algorithms": ["F' U' L' U L F"],
@@ -302,6 +345,7 @@
   },
   {
     "name": "OLL 44",
+    "slug": "oll-44",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-44.svg",
     "algorithms": ["F U R U' R' F'"],
@@ -309,6 +353,7 @@
   },
   {
     "name": "OLL 45",
+    "slug": "oll-45",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-45.svg",
     "algorithms": ["F R U R' U' F'"],
@@ -316,6 +361,7 @@
   },
   {
     "name": "OLL 46",
+    "slug": "oll-46",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-46.svg",
     "algorithms": ["R' U' R' F R F' U R"],
@@ -323,6 +369,7 @@
   },
   {
     "name": "OLL 47",
+    "slug": "oll-47",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-47.svg",
     "algorithms": ["R' U' R' F R F' R' F R F' U R"],
@@ -330,6 +377,7 @@
   },
   {
     "name": "OLL 48",
+    "slug": "oll-48",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-48.svg",
     "algorithms": ["F R U R' U' R U R' U' F'"],
@@ -337,6 +385,7 @@
   },
   {
     "name": "OLL 49",
+    "slug": "oll-49",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-49.svg",
     "algorithms": ["r U' r2 U r2 U r2 U' r"],
@@ -344,6 +393,7 @@
   },
   {
     "name": "OLL 50",
+    "slug": "oll-50",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-50.svg",
     "algorithms": ["r' U r2 U' r2 U' r2 U r'"],
@@ -351,6 +401,7 @@
   },
   {
     "name": "OLL 51",
+    "slug": "oll-51",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-51.svg",
     "algorithms": ["F U R U' R' U R U' R' F'"],
@@ -358,6 +409,7 @@
   },
   {
     "name": "OLL 52",
+    "slug": "oll-52",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-52.svg",
     "algorithms": ["R U R' U R U' B U' B' R'"],
@@ -365,6 +417,7 @@
   },
   {
     "name": "OLL 53",
+    "slug": "oll-53",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-53.svg",
     "algorithms": ["l' U2 L U L' U' L U L' U l"],
@@ -372,6 +425,7 @@
   },
   {
     "name": "OLL 54",
+    "slug": "oll-54",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-54.svg",
     "algorithms": ["r U2 R' U' R U R' U' R U' r'"],
@@ -379,6 +433,7 @@
   },
   {
     "name": "OLL 55",
+    "slug": "oll-55",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-55.svg",
     "algorithms": ["R' F R U R U' R2 F' R2 U' R' U R U R'"],
@@ -386,6 +441,7 @@
   },
   {
     "name": "OLL 56",
+    "slug": "oll-56",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-56.svg",
     "algorithms": ["r' U' r U' R' U R U' R' U R r' U r"],
@@ -393,6 +449,7 @@
   },
   {
     "name": "OLL 57",
+    "slug": "oll-57",
     "algSet": "oll",
     "imageSrc": "/images/algs_set/oll/oll-57.svg",
     "algorithms": ["R U R' U' M' U R U' r'"],
