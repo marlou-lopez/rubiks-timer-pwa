@@ -49,6 +49,16 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
   //   return p;
   // }, [algorithm]);
 
+  // useEffect(() => {
+  //   const element = document.getElementById('player');
+  //   if (element) {
+  //     if (element.childElementCount > 1) {
+  //       const child = element.firstChild;
+  //       element.removeChild(child!);
+  //     }
+  //     element.appendChild(player);
+  //   }
+  // }, [player]);
   useEffect(() => {
     const element = document.getElementById('player');
     const playerRefCopy = playerRef;
@@ -71,6 +81,10 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
           <button
             className="flex items-center gap-1 rounded-lg border bg-black px-3 py-1"
             onClick={() => {
+              // player.controller.animationController.play({
+              //   direction: Direction.Backwards,
+              //   untilBoundary: BoundaryType.Move,
+              // });
               playerRef.current.controller.animationController.play({
                 direction: Direction.Backwards,
                 untilBoundary: BoundaryType.Move,
@@ -82,6 +96,10 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
           <button
             className="flex items-center gap-1 rounded-lg border bg-black px-3 py-1"
             onClick={() => {
+              // player.controller.animationController.play({
+              //   direction: Direction.Forwards,
+              //   untilBoundary: BoundaryType.Move,
+              // });
               playerRef.current.controller.animationController.play({
                 direction: Direction.Forwards,
                 untilBoundary: BoundaryType.Move,
@@ -94,6 +112,7 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
         <div className="flex gap-4">
           <button
             onClick={() => {
+              // player.jumpToStart();
               playerRef.current.jumpToStart();
             }}
             className="flex items-center rounded-lg border bg-black px-3 py-1"
@@ -102,6 +121,7 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
           </button>
           <button
             onClick={() => {
+              // player.play();
               playerRef.current.play();
             }}
             className="flex items-center rounded-lg border bg-black px-3 py-1"
