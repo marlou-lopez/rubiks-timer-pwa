@@ -27,7 +27,7 @@ const AlgCase = () => {
     {
       enabled: !!algCase,
       onSuccess: (data) => {
-        setSelectedAlgo(data?.algorithms[0]);
+        setSelectedAlgo(data?.algorithms[0] ?? "U U'");
       },
     },
   );
