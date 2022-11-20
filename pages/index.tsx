@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useQueryClient, useQuery, useMutation } from 'react-query';
+import { useWakeLock } from 'react-screen-wake-lock';
 import PrimaryLayout from '../components/layout/layout';
 import Timer from '../components/Timer';
 import TimerHeader from '../components/Timer/TimerHeader';
