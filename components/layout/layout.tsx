@@ -21,7 +21,7 @@ const PrimaryLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   const currentPath = router.pathname;
 
   useEffect(() => {
-    if (released === false && isSupported) request();
+    if (!released && isSupported) request();
   }, [request, released, isSupported]);
 
   return (
