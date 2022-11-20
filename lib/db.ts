@@ -1,4 +1,7 @@
 import Dexie, { Table } from 'dexie';
+import f2lAlgs from './algs_set/f2l.json';
+import ollAlgs from './algs_set/oll.json';
+import pllAlgs from './algs_set/pll.json';
 
 export type PuzzleType = '222' | '333' | '444';
 
@@ -41,15 +44,28 @@ export const PUZZLES: Puzzle[] = [
   },
 ];
 
+export type Case = {
+  id?: number;
+  name: string;
+  // algSet: 'f2l' | 'oll' | 'pll';
+  slug: string;
+  algSet: string;
+  imageSrc: string;
+  algorithms: string[];
+  isBookMarked: boolean;
+};
+
 export class DBDexie extends Dexie {
   solves!: Table<Solve, number>;
   sessions!: Table<Session, number>;
+  cases!: Table<Case, number>;
 
   constructor() {
     super('rubiksPwa');
     this.version(5).stores({
       solves: '++id, sessionId, penalty',
       sessions: '++id, puzzleType',
+      cases: '++id, algSet, slug',
     });
 
     this.on('populate', async () => {
@@ -73,6 +89,7 @@ export class DBDexie extends Dexie {
           date: Date.now(),
         },
       ]);
+      await this.cases.bulkAdd([...f2lAlgs, ...ollAlgs, ...pllAlgs]);
     });
   }
 

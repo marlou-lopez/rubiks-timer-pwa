@@ -31,7 +31,7 @@ const PrimaryLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         </Link>
         <Link href={'/'}>
           <a title="Timer" className="relative flex w-28 items-center justify-center font-semibold">
-            <ClockIcon className="h-9 w-9 text-black dark:text-white" />
+            <ClockIcon className="h-9 w-9 rounded-full border-transparent bg-white text-black dark:bg-black dark:text-white" />
             {currentPath === '/' && (
               <div className="absolute -top-2 h-1 w-1/4 rounded-full bg-black dark:bg-white" />
             )}
@@ -40,7 +40,7 @@ const PrimaryLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         <Link href={'/study'}>
           <a
             title="Study"
-            className="pointer-events-none relative flex w-28 items-center justify-center gap-2 rounded-full bg-black py-2 font-semibold text-white dark:bg-white dark:text-black"
+            className="relative flex w-28 items-center justify-center gap-2 rounded-full bg-black py-2 font-semibold text-white dark:bg-white dark:text-black"
           >
             <BookOpenIcon className="h-4 w-4 text-white dark:text-black" />
             <span>Study</span>

@@ -1,0 +1,170 @@
+[
+  {
+    "name": "Aa",
+    "slug": "aa-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Aa.svg",
+    "algorithms": ["x L2 D2 L' U' L D2 L' U L'"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Ab",
+    "slug": "ab-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Ab.svg",
+    "algorithms": ["x' L2 D2 L U L' D2 L U' L"],
+    "isBookMarked": false
+  },
+  {
+    "name": "F",
+    "slug": "f-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/F.svg",
+    "algorithms": ["R' U' F' R U R' U' R' F R2 U' R' U' R U R' U R"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Ga",
+    "slug": "ga-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Ga.svg",
+    "algorithms": ["R2 U R' U R' U' R U' R2 U' D R' U R D'"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Gb",
+    "slug": "gb-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Gb.svg",
+    "algorithms": ["R' U' R U D' R2 U R' U R U' R U' R2 D"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Gc",
+    "slug": "gc-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Gc.svg",
+    "algorithms": ["R2 U' R U' R U R' U R2 U D' R U' R' D"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Gd",
+    "slug": "gd-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Gd.svg",
+    "algorithms": ["R U R' U' D R2 U' R U' R' U R' U R2 D'"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Ja",
+    "slug": "ja-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Ja.svg",
+    "algorithms": ["x R2 F R F' R U2 r' U r U2"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Jb",
+    "slug": "jb-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Jb.svg",
+    "algorithms": ["R U R' F' R U R' U' R' F R2 U' R'"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Ra",
+    "slug": "ra-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Ra.svg",
+    "algorithms": ["R U' R' U' R U R D R' U' R D' R' U2 R'"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Rb",
+    "slug": "rb-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Rb.svg",
+    "algorithms": ["R2 F R U R U' R' F' R U2 R' U2 R"],
+    "isBookMarked": false
+  },
+  {
+    "name": "T",
+    "slug": "t-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/T.svg",
+    "algorithms": ["R U R' U' R' F R2 U' R' U' R U R' F'"],
+    "isBookMarked": false
+  },
+  {
+    "name": "E",
+    "slug": "e-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/E.svg",
+    "algorithms": ["x' L' U L D' L' U' L D L' U' L D' L' U L D"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Na",
+    "slug": "na-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Na.svg",
+    "algorithms": ["R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Nb",
+    "slug": "nb-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Nb.svg",
+    "algorithms": ["R' U R U' R' F' U' F R U R' F R' F' R U' R"],
+    "isBookMarked": false
+  },
+  {
+    "name": "V",
+    "slug": "v-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/V.svg",
+    "algorithms": ["R' U R' U' y R' F' R2 U' R' U R' F R F"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Y",
+    "slug": "y-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Y.svg",
+    "algorithms": ["F R U' R' U' R U R' F' R U R' U' R' F R F'"],
+    "isBookMarked": false
+  },
+  {
+    "name": "H",
+    "slug": "h-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/H.svg",
+    "algorithms": ["M2 U M2 U2 M2 U M2"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Ua",
+    "slug": "ua-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Ua.svg",
+    "algorithms": ["M2 U M U2 M' U M2"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Ub",
+    "slug": "ub-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Ub.svg",
+    "algorithms": ["M2 U' M U2 M' U' M2"],
+    "isBookMarked": false
+  },
+  {
+    "name": "Z",
+    "slug": "z-perm",
+    "algSet": "pll",
+    "imageSrc": "/images/algs_set/pll/Z.svg",
+    "algorithms": ["M' U M2 U M2 U M' U2 M2"],
+    "isBookMarked": false
+  }
+]
