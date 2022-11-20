@@ -35,33 +35,11 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
       alg: new Alg(algorithm).toString(),
     }),
   );
-  // const player = useMemo(() => {
-  //   const p = new TwistyPlayer({
-  //     puzzle: '3x3x3',
-  //     hintFacelets: 'none',
-  //     controlPanel: 'none',
-  //     background: 'none',
-  //     // experimentalStickering: 'PLL',
-  //     experimentalSetupAlg: 'z2 y2', // To place yellow on top
-  //     experimentalSetupAnchor: 'end',
-  //     alg: new Alg(algorithm).toString(),
-  //   });
-  //   return p;
-  // }, [algorithm]);
-
-  // useEffect(() => {
-  //   const element = document.getElementById('player');
-  //   if (element) {
-  //     if (element.childElementCount > 1) {
-  //       const child = element.firstChild;
-  //       element.removeChild(child!);
-  //     }
-  //     element.appendChild(player);
-  //   }
-  // }, [player]);
   useEffect(() => {
     const element = document.getElementById('player');
     const playerRefCopy = playerRef;
+    playerRef.current.style.width = '100%';
+    playerRef.current.style.height = '100%';
     if (element && element.childElementCount < 1) {
       element.appendChild(playerRefCopy.current);
     }
@@ -74,17 +52,16 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
   }, []);
 
   return (
-    <div>
-      <div className="flex justify-center " id="player" />
+    <div className="flex h-full flex-grow flex-col">
+      <div
+        className="flex w-full flex-grow items-center justify-between rounded-md border border-black dark:border-white"
+        id="player"
+      />
       <div className="flex items-center justify-between py-2">
         <div className="flex gap-4">
           <button
             className="flex items-center gap-1 rounded-lg border bg-black px-3 py-1"
             onClick={() => {
-              // player.controller.animationController.play({
-              //   direction: Direction.Backwards,
-              //   untilBoundary: BoundaryType.Move,
-              // });
               playerRef.current.controller.animationController.play({
                 direction: Direction.Backwards,
                 untilBoundary: BoundaryType.Move,
@@ -96,10 +73,6 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
           <button
             className="flex items-center gap-1 rounded-lg border bg-black px-3 py-1"
             onClick={() => {
-              // player.controller.animationController.play({
-              //   direction: Direction.Forwards,
-              //   untilBoundary: BoundaryType.Move,
-              // });
               playerRef.current.controller.animationController.play({
                 direction: Direction.Forwards,
                 untilBoundary: BoundaryType.Move,
@@ -112,7 +85,6 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
         <div className="flex gap-4">
           <button
             onClick={() => {
-              // player.jumpToStart();
               playerRef.current.jumpToStart();
             }}
             className="flex items-center rounded-lg border bg-black px-3 py-1"
@@ -121,7 +93,6 @@ const AlgPlayer: React.FC<AlgPlayerProps> = ({ algorithm }) => {
           </button>
           <button
             onClick={() => {
-              // player.play();
               playerRef.current.play();
             }}
             className="flex items-center rounded-lg border bg-black px-3 py-1"

@@ -41,7 +41,7 @@ const AlgCase = () => {
     );
 
   return (
-    <div>
+    <div className="flex h-screen w-screen flex-col">
       <header>
         <div className="flex items-center justify-between gap-2 px-4 pt-4 pb-2">
           <div className="flex items-center gap-2">
@@ -54,11 +54,11 @@ const AlgCase = () => {
           </div>
         </div>
       </header>
-      <main className="flex flex-col gap-2 p-4">
-        <section className="rounded-md ">
+      <main className="flex w-full flex-grow flex-col gap-2 p-4 md:flex-row md:justify-center md:gap-8">
+        <section className="flex flex-grow rounded-md md:h-full md:max-w-xl">
           {data && <AlgPlayer key={selectedAlgo} algorithm={selectedAlgo} />}
         </section>
-        <section className="text-black dark:text-white">
+        <section className="flex-grow text-black dark:text-white md:max-w-md">
           <h3 className="text-xl font-semibold">Algorithms</h3>
           {data ? (
             <div>
