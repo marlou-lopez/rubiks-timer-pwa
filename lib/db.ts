@@ -62,7 +62,7 @@ export class DBDexie extends Dexie {
 
   constructor() {
     super('rubiksPwa');
-    this.version(5).stores({
+    this.version(6).stores({
       solves: '++id, sessionId, penalty',
       sessions: '++id, puzzleType',
       cases: '++id, algSet, slug',
