@@ -1,4 +1,5 @@
 import { useReducer, useRef, useState } from 'react';
+import { useWakeLock } from 'react-screen-wake-lock';
 import useTestLongPress from '../../hooks/useTestLongPress';
 import TimerConfigPreview from './TimerConfigPreview';
 import { StopwatchReducer, StopwatchState } from './timerReducer';
@@ -16,7 +17,7 @@ export type TimerOptions = {
 
 type TimerProps = {
   onStop?: (timerState: Pick<StopwatchState, 'currentTime' | 'splitTimes'>) => void;
-  onStart?: () => Promise<void>;
+  onStart?: () => void;
   options?: TimerOptions;
   header?: React.ReactNode;
   statPreview?: React.ReactNode;
@@ -103,6 +104,7 @@ const Timer: React.FC<TimerProps> = ({
               if (isInspectionTimeRunning) {
                 setIsInspectionTimeRunning(false);
                 dispatch({ type: 'start' });
+                onStart && onStart();
                 setSwInterval(
                   setInterval(() => {
                     dispatch({ type: 'tick' });
@@ -132,6 +134,7 @@ const Timer: React.FC<TimerProps> = ({
               }
             } else {
               dispatch({ type: 'start' });
+              onStart && onStart();
               setSwInterval(
                 setInterval(() => {
                   dispatch({ type: 'tick' });

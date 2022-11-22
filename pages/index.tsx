@@ -40,6 +40,8 @@ const Home: NextPageWithLayout = () => {
     },
   });
 
+  const { released, release: releaseWakeLock, request: requestWakeLock } = useWakeLock();
+
   return (
     <Timer
       options={{
@@ -48,7 +50,11 @@ const Home: NextPageWithLayout = () => {
         holdDuration,
         showTimerConfigPreview,
       }}
+      onStart={function handleOnStart() {
+        requestWakeLock();
+      }}
       onStop={function handleOnStop({ currentTime }) {
+        releaseWakeLock();
         if (solves) {
           const mappedSolves = solves.map((solve) => solve.time);
           const bestTime = Math.min(...mappedSolves);
