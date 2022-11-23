@@ -150,6 +150,7 @@ const Timer: React.FC<TimerProps> = ({
   const isTimerReady = isLongPress && isKeyPress;
   const isTimerPressed = isKeyPress && !isLongPress && !state.running;
 
+  console.log('isRun', state.running);
   return (
     <div className="relative flex flex-grow">
       {!isInspectionTimeRunning && !state.running && header}
