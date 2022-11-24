@@ -179,7 +179,7 @@ const Timer: React.FC<TimerProps> = ({
             </h1>
           </div>
         ) : (
-          <h1 className="mb-2 text-8xl font-semibold text-black dark:text-white lg:text-9xl">
+          <h1 className="mb-2 text-8xl font-semibold text-black dark:text-white lg:text-9xl mobile-ls:text-6xl">
             {formatTime(state.currentTime, { showMs: !state.running })}
           </h1>
         )}

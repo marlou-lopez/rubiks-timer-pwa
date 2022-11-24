@@ -100,14 +100,27 @@ export const db = new DBDexie();
 
 // For testing purpose
 const populate = async () => {
-  const generatedData = Array<Solve>(9000).fill({
-    scramble: "B' L B2 U2 L' U2 B2 R U2 R2 U2 B' D' R2 D' B' F' D F",
-    time: 30000,
-    date: Date.now(),
-    puzzleType: '333',
-    sessionId: 1,
-    penalty: null,
-  });
-  await db.solves.bulkAdd(generatedData);
+  let testData: Solve[] = [];
+  for (let i = 0; i <= 10000; i++) {
+    let time = Math.floor(Math.random() * (40000 - 15000 + 1) + 15000);
+
+    testData.push({
+      time,
+      scramble: "B' L B2 U2 L' U2 B2 R U2 R2 U2 B' D' R2 D' B' F' D F",
+      date: Date.now(),
+      puzzleType: '333',
+      sessionId: 2,
+      penalty: null,
+    });
+  }
+  // const generatedData = Array<Solve>(9000).fill({
+  //   scramble: "B' L B2 U2 L' U2 B2 R U2 R2 U2 B' D' R2 D' B' F' D F",
+  //   time: Math.floor(Math.random() * (40000 - 15000 + 1) + 15000),
+  //   date: Date.now(),
+  //   puzzleType: '333',
+  //   sessionId: 2,
+  //   penalty: null,
+  // });
+  await db.solves.bulkAdd(testData);
 };
 // db.on('ready', populate);

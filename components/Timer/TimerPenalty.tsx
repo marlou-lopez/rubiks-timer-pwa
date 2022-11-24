@@ -59,7 +59,7 @@ const TimerPenalty: React.FC<TimerPenaltyProps> = ({ solve }) => {
   };
 
   return (
-    <div className="flex items-center gap-4 p-2">
+    <div className="flex items-center gap-4 p-2 mobile-ls:p-1">
       <button
         type="button"
         disabled={isDNF}
@@ -71,9 +71,11 @@ const TimerPenalty: React.FC<TimerPenaltyProps> = ({ solve }) => {
         }}
         onClick={handlePlusTwo}
         className={`
-              w-16 rounded-md border border-gray-400 p-1 font-semibold
-              disabled:bg-black/20 disabled:text-black/50
+              w-16
+              rounded-md border border-gray-400 p-1 font-semibold disabled:bg-black/20
+              disabled:text-black/50
               disabled:dark:bg-white/20 disabled:dark:text-white/50
+              mobile-ls:w-12 mobile-ls:text-sm
               ${isPlusTwo ? 'bg-black text-white dark:bg-white dark:text-black' : ''}`}
       >
         +2
@@ -89,9 +91,11 @@ const TimerPenalty: React.FC<TimerPenaltyProps> = ({ solve }) => {
         }}
         onClick={handleDNF}
         className={`
-              w-16 rounded-md border border-gray-400 p-1 font-semibold
-              disabled:bg-black/20 disabled:text-black/50
+              w-16
+              rounded-md
+              border border-gray-400 p-1 font-semibold disabled:bg-black/20 disabled:text-black/50
               disabled:dark:bg-white/20 disabled:dark:text-white/50
+              mobile-ls:w-12 mobile-ls:text-sm
               ${isDNF ? 'bg-black text-white dark:bg-white dark:text-black' : ''}`}
       >
         DNF

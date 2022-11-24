@@ -34,6 +34,7 @@ const StatTile: React.FC<StatTileProps> = ({ stat, value }) => {
   );
 };
 
+// TODO: Needs performance improvement
 const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
   const filteredSolves = solves.filter((solve) => solve.penalty !== 'DNF');
   const solveTimeStamps = filteredSolves.map((solve) => solve.time);
@@ -51,6 +52,13 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
       <div>
         <h1 className="mb-1 text-lg font-bold">Current</h1>
         <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
+          {overAllMean ? (
+            <div>
+              <StatTile stat="overall" value={formatTime(overAllMean)} />
+            </div>
+          ) : (
+            <div className="font-semibold text-gray-500">Not enough data.</div>
+          )}
           {solves.length > 4 ? (
             Object.values(AVERAGE_OF).map((averageOf) => {
               const average = getLatestAverage(solves, averageOf);
