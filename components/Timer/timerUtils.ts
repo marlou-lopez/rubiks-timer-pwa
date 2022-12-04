@@ -1,4 +1,5 @@
 import { Solve } from '../../lib/db';
+import { AVERAGE_OF } from '../Stats/StatsOverview/StatsOverview';
 
 type Time = {
   hours: number;
@@ -59,6 +60,23 @@ export const getMeanFromTimeStamps = (timestamps: number[]) => {
   return timestamps.reduce((acc, curr) => acc + curr, 0) / timestamps.length;
 };
 
+let bestAverages: Record<keyof typeof AVERAGE_OF, Average | null> = {
+  FIVE: null,
+  TWELVE: null,
+  FIFTY: null,
+  ONE_HUNDRED: null,
+  FIVE_HUNDRED: null,
+  ONE_THOUSAND: null,
+};
+
+let worstAverages: Record<keyof typeof AVERAGE_OF, Average | null> = {
+  FIVE: null,
+  TWELVE: null,
+  FIFTY: null,
+  ONE_HUNDRED: null,
+  FIVE_HUNDRED: null,
+  ONE_THOUSAND: null,
+};
 /**
  * Gets the latest average of the timestamps starting from the number indicated by averageOf
  * Excludes 5% of the best and worst times
@@ -110,26 +128,58 @@ export type AverageType = {
   worst: Average;
 };
 
-export const getAverages = (solves: Solve[], averageOf: number) => {
+export const getAverages = (solves: Solve[], averageOf: number, key: keyof typeof AVERAGE_OF) => {
   if (solves.length < averageOf) return null;
 
-  let averages: Average[] = [];
+  if (bestAverages[key] === null && worstAverages[key] === null) {
+    let averages: Average[] = [];
 
-  for (let i = 0, j = averageOf; i <= solves.length - averageOf; i++, j++) {
-    const solvesToAverage = solves.slice(i, j);
+    for (let i = 0, j = averageOf; i <= solves.length - averageOf; i++, j++) {
+      const solvesToAverage = solves.slice(i, j);
 
-    const average = getLatestAverage(solvesToAverage);
-    averages.push({
-      solves: solvesToAverage,
-      time: average,
-    });
+      const average = getLatestAverage(solvesToAverage);
+      averages.push({
+        solves: solvesToAverage,
+        time: average,
+      });
+    }
+
+    const filterDNFs = averages.filter((average) => !isNaN(average.time));
+    const sortedAverages = filterDNFs.sort((a, b) => a.time - b.time);
+
+    let best = sortedAverages[0];
+    let worst = sortedAverages[sortedAverages.length - 1];
+    bestAverages[key] = best;
+    worstAverages[key] = worst;
+    return {
+      best,
+      worst,
+    };
   }
 
-  const filterDNFs = averages.filter((average) => !isNaN(average.time));
-  const sortedAverages = filterDNFs.sort((a, b) => a.time - b.time);
+  let solvestoCalculate = solves.slice(-averageOf);
+  const latestAverage = getLatestAverage(solvestoCalculate);
+
+  let best = bestAverages[key];
+  let worst = worstAverages[key];
+
+  if (latestAverage >= worstAverages[key]!.time) {
+    worst = {
+      solves: solvestoCalculate,
+      time: latestAverage,
+    };
+  }
+
+  if (latestAverage <= bestAverages[key]!.time) {
+    best = {
+      solves: solvestoCalculate,
+      time: latestAverage,
+    };
+  }
+
   return {
-    best: sortedAverages[0],
-    worst: sortedAverages[sortedAverages.length - 1],
+    best,
+    worst,
   };
 };
 

@@ -20,9 +20,9 @@ export const AVERAGE_OF = {
   FIVE: 5,
   TWELVE: 12,
   FIFTY: 50,
-  // ONE_HUNDRED: 100,
-  // FIVE_HUNDRED: 500,
-  // ONE_THOUSAND: 1000,
+  ONE_HUNDRED: 100,
+  FIVE_HUNDRED: 500,
+  ONE_THOUSAND: 1000,
 } as const;
 
 const StatTile: React.FC<StatTileProps> = ({ stat, value }) => {
@@ -54,7 +54,7 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
         <div className="flex gap-3 overflow-auto pb-3 scrollbar-thin scrollbar-track-black/10 scrollbar-thumb-black scrollbar-track-rounded-md scrollbar-thumb-rounded-md dark:scrollbar-track-white/25 dark:scrollbar-thumb-white">
           {overAllMean ? (
             <div>
-              <StatTile stat="overall" value={formatTime(overAllMean)} />
+              <StatTile stat="overall mean" value={formatTime(overAllMean)} />
             </div>
           ) : (
             <div className="font-semibold text-gray-500">Not enough data.</div>
@@ -91,8 +91,12 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
                 ) : (
                   <div className="font-semibold text-gray-500">Not enough data.</div>
                 )}
-                {Object.values(AVERAGE_OF).map((averageOf) => {
-                  const average = getAverages(solves, averageOf);
+                {Object.entries(AVERAGE_OF).map(([averageOfKey, averageOf]) => {
+                  const average = getAverages(
+                    solves,
+                    averageOf,
+                    averageOfKey as keyof typeof AVERAGE_OF,
+                  );
                   if (average === null || average === undefined) return;
                   if (!average.best) return;
                   return (
@@ -113,8 +117,12 @@ const StatsOverview: React.FC<StatsOverviewProps> = ({ solves }) => {
                 ) : (
                   <div className="font-semibold text-gray-500">Not enough data.</div>
                 )}
-                {Object.values(AVERAGE_OF).map((averageOf) => {
-                  const average = getAverages(solves, averageOf);
+                {Object.entries(AVERAGE_OF).map(([averageOfKey, averageOf]) => {
+                  const average = getAverages(
+                    solves,
+                    averageOf,
+                    averageOfKey as keyof typeof AVERAGE_OF,
+                  );
                   if (average === null || average === undefined) return;
                   if (!average.worst) return;
                   return (
