@@ -7,10 +7,12 @@ type ConfigContextProps = {
   holdDuration: HOLD_DURATION_TYPE;
   multiPhase: number;
   showTimerConfigPreview: boolean;
+  showHands: boolean;
   setEnableInspection: (flag: boolean) => void;
   setHoldDuration: (duration: HOLD_DURATION_TYPE) => void;
   setMultiPhase: (phase: number) => void;
   setShowTimerConfigPreview: (flag: boolean) => void;
+  setShowHands: (flag: boolean) => void;
 };
 const ConfigContext = createContext<ConfigContextProps | undefined>(undefined);
 
@@ -30,6 +32,9 @@ const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
       defaultValue: false,
     },
   );
+  const [showHands, setShowHandsState] = useLocalStorage('showHands', {
+    defaultValue: false,
+  });
 
   const setEnableInspection = useCallback(
     (flag: boolean) => {
@@ -59,6 +64,13 @@ const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
     [setShowTimerConfigPreviewState],
   );
 
+  const setShowHands = useCallback(
+    (flag: boolean) => {
+      setShowHandsState(flag);
+    },
+    [setShowHandsState],
+  );
+
   return (
     <ConfigContext.Provider
       value={{
@@ -66,10 +78,12 @@ const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
         multiPhase,
         holdDuration,
         showTimerConfigPreview,
+        showHands,
         setEnableInspection,
         setHoldDuration,
         setMultiPhase,
         setShowTimerConfigPreview,
+        setShowHands,
       }}
     >
       {children}

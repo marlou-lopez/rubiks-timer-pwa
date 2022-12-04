@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import { useReducer, useRef, useState } from 'react';
 import { useWakeLock } from 'react-screen-wake-lock';
 import useTestLongPress from '../../hooks/useTestLongPress';
 import TimerConfigPreview from './TimerConfigPreview';
+import TimerHands from './TimerHands';
 import { StopwatchReducer, StopwatchState } from './timerReducer';
 import { formatTime } from './timerUtils';
 
@@ -13,6 +15,7 @@ export type TimerOptions = {
   enableInspection?: boolean;
   holdDuration?: HOLD_DURATION_TYPE;
   showTimerConfigPreview?: boolean;
+  showHands?: boolean;
 };
 
 type TimerProps = {
@@ -150,24 +153,9 @@ const Timer: React.FC<TimerProps> = ({
   const isTimerReady = isLongPress && isKeyPress;
   const isTimerPressed = isKeyPress && !isLongPress && !state.running;
 
-  return (
-    <div className="relative flex flex-grow">
-      {!isInspectionTimeRunning && !state.running && header}
-      <div
-        {...longPressEvent}
-        className={`flex h-full 
-         w-full touch-none select-none flex-col items-center justify-center
-         ${
-           isTimerReady
-             ? 'bg-green-400 dark:bg-green-500'
-             : isTimerPressed
-             ? 'bg-red-400 dark:bg-red-500'
-             : 'bg-white dark:bg-black'
-         }
-         ${isInspectionTimeRunning || state.running ? 'z-10' : ''}
-         `}
-        tabIndex={0}
-      >
+  const renderTimerUI = () => {
+    return (
+      <>
         {options?.showTimerConfigPreview && !isInspectionTimeRunning && !state.running && (
           <TimerConfigPreview {...options} />
         )}
@@ -200,6 +188,28 @@ const Timer: React.FC<TimerProps> = ({
             ))}
           </div>
         )}
+      </>
+    );
+  };
+  return (
+    <div className="relative flex flex-grow">
+      {!isInspectionTimeRunning && !state.running && header}
+      <div
+        {...longPressEvent}
+        className={`flex h-full 
+         w-full touch-none select-none flex-col items-center justify-center
+         ${
+           isTimerReady
+             ? 'bg-green-400 dark:bg-green-500'
+             : isTimerPressed
+             ? 'bg-red-400 dark:bg-red-500'
+             : 'bg-white dark:bg-black'
+         }
+         ${isInspectionTimeRunning || state.running ? 'z-10' : ''}
+         `}
+        tabIndex={0}
+      >
+        {options?.showHands ? <TimerHands>{renderTimerUI()}</TimerHands> : renderTimerUI()}
       </div>
     </div>
   );

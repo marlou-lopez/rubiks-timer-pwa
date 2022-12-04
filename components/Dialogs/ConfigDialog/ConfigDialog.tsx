@@ -4,6 +4,7 @@ import AppDialog from '../AppDialog';
 import HoldDurationConfig from './Configs/HoldDurationConfig';
 import InspectionConfig from './Configs/InspectionConfig';
 import MultiPhaseConfig from './Configs/MultiPhaseConfig';
+import ShowHands from './Configs/ShowHands';
 import ThemeConfig from './Configs/ThemeConfig';
 
 type ConfigDialogProps = {
@@ -37,6 +38,7 @@ const ConfigDialog: React.FC<ConfigDialogProps> = ({ isOpen, closeDialog }) => {
               <HoldDurationConfig />
               <InspectionConfig />
               <MultiPhaseConfig />
+              <ShowHands />
             </div>
           </section>
         </div>
