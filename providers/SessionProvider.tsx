@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useState } from 'react';
+import useLocalStorageState from 'use-local-storage-state';
 import { Puzzle, Session } from '../lib/db';
 
 type SessionContext = {
@@ -15,17 +16,21 @@ type SessionProviderProps = {
 const SessionContext = createContext<SessionContext | undefined>(undefined);
 
 const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
-  const [selectedPuzzle, setSelectedPuzzle] = useState<Puzzle>({
-    name: '3x3x3',
-    value: '333',
+  const [selectedPuzzle, setSelectedPuzzle] = useLocalStorageState<Puzzle>('puzzleType', {
+    defaultValue: {
+      name: '3x3x3',
+      value: '333',
+    },
   });
 
-  const [selectedSession, setSelectedSession] = useState<Session | null>({
-    id: 2,
-    name: 'default session (3x3x3)',
-    puzzleType: '333',
-    isDefault: true,
-    date: Date.now(),
+  const [selectedSession, setSelectedSession] = useLocalStorageState<Session | null>('session', {
+    defaultValue: {
+      id: 2,
+      name: 'default session (3x3x3)',
+      puzzleType: '333',
+      isDefault: true,
+      date: Date.now(),
+    },
   });
 
   const onPuzzleSelect = useCallback(
@@ -35,12 +40,15 @@ const SessionProvider: React.FC<SessionProviderProps> = ({ children }) => {
         setSelectedSession(null);
       }
     },
-    [selectedPuzzle],
+    [selectedPuzzle.value, setSelectedPuzzle, setSelectedSession],
   );
 
-  const onSessionSelect = useCallback((session: Session) => {
-    setSelectedSession(session);
-  }, []);
+  const onSessionSelect = useCallback(
+    (session: Session) => {
+      setSelectedSession(session);
+    },
+    [setSelectedSession],
+  );
 
   return (
     <SessionContext.Provider

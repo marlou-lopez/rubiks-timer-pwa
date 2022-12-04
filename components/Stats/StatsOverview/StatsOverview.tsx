@@ -29,7 +29,7 @@ const StatTile: React.FC<StatTileProps> = ({ stat, value }) => {
   return (
     <div className="flex flex-col rounded-md bg-black text-white dark:bg-white dark:text-black">
       <p className="p-1 text-xs font-semibold">{stat}</p>
-      <h3 className="px-4 pb-1 font-bold">{value}</h3>
+      <h3 className="px-4 pb-1 text-center font-bold">{value}</h3>
     </div>
   );
 };
