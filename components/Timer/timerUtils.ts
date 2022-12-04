@@ -157,7 +157,7 @@ export const getAverages = (solves: Solve[], averageOf: number, key: keyof typeo
     };
   }
 
-  let solvestoCalculate = solves.slice(-averageOf);
+  let solvestoCalculate = solves.slice(0, averageOf);
   const latestAverage = getLatestAverage(solvestoCalculate);
 
   let best = bestAverages[key];
