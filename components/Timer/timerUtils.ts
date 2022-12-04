@@ -31,7 +31,7 @@ export const formatTime = (
   const { hours, minutes, seconds, milliseconds } = getTimePropertiesFromTimeStamp(timestamp);
 
   const h = hours >= 1 ? hours.toString() : null;
-  const m = minutes.toString().padStart(2, '0');
+  const m = minutes.toString();
   const s = minutes >= 1 || hours >= 1 ? seconds.toString().padStart(2, '0') : seconds.toString();
   const ms = milliseconds.toString().padStart(2, '0');
 

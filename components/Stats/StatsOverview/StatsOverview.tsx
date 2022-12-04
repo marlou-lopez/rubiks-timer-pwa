@@ -20,9 +20,9 @@ export const AVERAGE_OF = {
   FIVE: 5,
   TWELVE: 12,
   FIFTY: 50,
-  ONE_HUNDRED: 100,
-  FIVE_HUNDRED: 500,
-  ONE_THOUSAND: 1000,
+  // ONE_HUNDRED: 100,
+  // FIVE_HUNDRED: 500,
+  // ONE_THOUSAND: 1000,
 } as const;
 
 const StatTile: React.FC<StatTileProps> = ({ stat, value }) => {

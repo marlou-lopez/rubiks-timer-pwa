@@ -12,7 +12,7 @@ type ConfigDialogProps = {
 };
 
 const ConfigDialog: React.FC<ConfigDialogProps> = ({ isOpen, closeDialog }) => {
-  const { showTimerConfigPreview = false, setShowTimerConfigPreview } = useConfig();
+  const { showTimerConfigPreview, setShowTimerConfigPreview } = useConfig();
   return (
     <>
       <AppDialog open={isOpen} onClose={closeDialog} title="Config">

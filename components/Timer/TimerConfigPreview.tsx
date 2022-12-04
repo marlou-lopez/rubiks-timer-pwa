@@ -44,7 +44,7 @@ const TimerConfigPreview: React.FC<TimerOptions> = (options) => {
   return (
     <div className="mb-2 flex gap-4">
       {Object.entries(options).map(([key, value]) => {
-        return renderPill(key as keyof TimerOptions, value);
+        return <span key={key}>{renderPill(key as keyof TimerOptions, value)}</span>;
       })}
     </div>
   );

@@ -1,11 +1,12 @@
 import { createContext, useCallback, useContext, useState } from 'react';
+import useLocalStorage from 'use-local-storage-state';
 import { HOLD_DURATION_TYPE } from '../components/Timer/Timer';
 
 type ConfigContextProps = {
-  enableInspection?: boolean;
-  holdDuration?: HOLD_DURATION_TYPE;
-  multiPhase?: number;
-  showTimerConfigPreview?: boolean;
+  enableInspection: boolean;
+  holdDuration: HOLD_DURATION_TYPE;
+  multiPhase: number;
+  showTimerConfigPreview: boolean;
   setEnableInspection: (flag: boolean) => void;
   setHoldDuration: (duration: HOLD_DURATION_TYPE) => void;
   setMultiPhase: (phase: number) => void;
@@ -14,26 +15,49 @@ type ConfigContextProps = {
 const ConfigContext = createContext<ConfigContextProps | undefined>(undefined);
 
 const ConfigProvider = ({ children }: { children: React.ReactNode }) => {
-  const [enableInspection, setEnableInspectionState] = useState(false);
-  const [holdDuration, setHoldDurationState] = useState<HOLD_DURATION_TYPE>(300);
-  const [multiPhase, setMultiPhaseState] = useState(0);
-  const [showTimerConfigPreview, setShowTimerConfigPreviewState] = useState(false);
+  const [enableInspection, setEnableInspectionState] = useLocalStorage('enableInspection', {
+    defaultValue: false,
+  });
+  const [holdDuration, setHoldDurationState] = useLocalStorage<HOLD_DURATION_TYPE>('holdDuration', {
+    defaultValue: 300,
+  });
+  const [multiPhase, setMultiPhaseState] = useLocalStorage('multiPhase', {
+    defaultValue: 0,
+  });
+  const [showTimerConfigPreview, setShowTimerConfigPreviewState] = useLocalStorage(
+    'showTimerConfigPreview',
+    {
+      defaultValue: false,
+    },
+  );
 
-  const setEnableInspection = useCallback((flag: boolean) => {
-    setEnableInspectionState(flag);
-  }, []);
+  const setEnableInspection = useCallback(
+    (flag: boolean) => {
+      setEnableInspectionState(flag);
+    },
+    [setEnableInspectionState],
+  );
 
-  const setHoldDuration = useCallback((duration: HOLD_DURATION_TYPE) => {
-    setHoldDurationState(duration);
-  }, []);
+  const setHoldDuration = useCallback(
+    (duration: HOLD_DURATION_TYPE) => {
+      setHoldDurationState(duration);
+    },
+    [setHoldDurationState],
+  );
 
-  const setMultiPhase = useCallback((phase: number) => {
-    setMultiPhaseState(phase);
-  }, []);
+  const setMultiPhase = useCallback(
+    (phase: number) => {
+      setMultiPhaseState(phase);
+    },
+    [setMultiPhaseState],
+  );
 
-  const setShowTimerConfigPreview = useCallback((flag: boolean) => {
-    setShowTimerConfigPreviewState(flag);
-  }, []);
+  const setShowTimerConfigPreview = useCallback(
+    (flag: boolean) => {
+      setShowTimerConfigPreviewState(flag);
+    },
+    [setShowTimerConfigPreviewState],
+  );
 
   return (
     <ConfigContext.Provider
